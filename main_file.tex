@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[legalpaper, textwidth=426pt]{geometry}
+\usepackage[legalpaper, textwidth=450pt]{geometry}
 \usepackage{amsmath,amssymb}
 \DeclareMathOperator{\E}{\mathbb{E}}
 \usepackage[utf8]{inputenc}
@@ -18,8 +18,7 @@
 \usepackage{graphicx}
 
 
-\title{Newsvendor Problems: A New Way to Integrate Forecasting and
-Optimisation}
+\title{Newsvendor Problems: A New Way to Integrated Forecasting and Optimisation}
 
 \author{Congzheng Liu\thanks{Department of Management Science,
 Lancaster University, Lancaster LA1 4YX, UK.
@@ -289,42 +288,19 @@ We expect to see the performance of both the proposed method and benchmark metho
 
 \subsection{Simulation results}
 
-\begin{wrapfigure}{l}{0.6\textwidth}
-    \caption{Percentage profit loss vs. data length}
-    \includegraphics[width=0.6\textwidth]{ppl.png}
-    \label{ppl}
-\end{wrapfigure}
 
-In Figure \ref{ppl}, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the benchmark disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. We can see both the proposed method and the quantile regression method outperform the disjoint method. Besides, a clear trend of convergence between QR and CF can be seen when data length grows. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Moreover, the performance of our proposed method keep moving toward the upper-bound as data length grows, which is due to the approximation of profit function we used in our method approaching the real expected profit function as data length grows. Overall, the proposed method generated an acceptable performance in the metric of percentage profit loss.
 
-\begin{figure}[ht]
-    \centering
-    \caption{Beanplot of absolute inventory error}
-    \includegraphics[width=0.8\textwidth]{beanplot aie.png}
-    \label{aie}
-\end{figure}
+In Figure, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the benchmark disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. We can see both the proposed method and the quantile regression method outperform the disjoint method. Besides, a clear trend of convergence between QR and CF can be seen when data length grows. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Moreover, the performance of our proposed method keep moving toward the upper-bound as data length grows, which is due to the approximation of profit function we used in our method approaching the real expected profit function as data length grows. Overall, the proposed method generated an acceptable performance in the metric of percentage profit loss.
 
-Figure \ref{aie} is the beanplot of absolute inventory error with data length equal to 480. We choose this particular data length since all methods are stabled when length equal or bigger than it as we can see from Figure \ref{ppl}. Actually, the plot looks similar in other data lengths, but we don't show them all in line. We can see all methods perform similarly on the metric of absolute inventory error either in mean value or distribution shape. 
 
-\begin{figure}[h]
 
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=1.1\linewidth, height=4cm]{sl.png} 
-\caption{Service level vs. data length}
-\label{sl}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=0.9\linewidth, height=4cm]{fr.png}
-\caption{Beanplot of fill rate}
-\label{fr}
-\end{subfigure}
-\caption{Service level and fill rate}
-\end{figure}
+Figure is the beanplot of absolute inventory error with data length equal to 480. We choose this particular data length since all methods are stabled when length equal or bigger than it as we can see from Figure. Actually, the plot looks similar in other data lengths, but we don't show them all in line. We can see all methods perform similarly on the metric of absolute inventory error either in mean value or distribution shape. 
 
-Regarding to service level, we can see that, in Figure \ref{sl}, the trend is similar to the one we observed in 'percentage profit loss'. Both the proposed method and the quantile regression method become stable when data length grows to a 'normal' value. The disjoint method, on the other hand, seems not to be very sensitive to the data length. However, if we pay attention to the scale, the different is not too much, and we can say that all methods generated acceptable results.
 
-However, the service level only present if the demand was meet or not, but it doesn't show how how big the gap is if the demand was not successfully meet. For this propose, we can use the beanplot of fill rate at data length equal to 480 to see that (see Figure \ref{fr}). Once again, the plot looks similar in other data lengths. It is clear that the disjoint method has smaller mean fill rate, which is in line with the observation we have from Figure \ref{sl}. Besides, the beanplot also demonstrates that given the circumstance demand was not meet, the proposed method is more likely to have a smaller gap than the disjoint method.  
+
+Regarding to service level, we can see that, in Figure, the trend is similar to the one we observed in 'percentage profit loss'. Both the proposed method and the quantile regression method become stable when data length grows to a 'normal' value. The disjoint method, on the other hand, seems not to be very sensitive to the data length. However, if we pay attention to the scale, the different is not too much, and we can say that all methods generated acceptable results.
+
+However, the service level only present if the demand was meet or not, but it doesn't show how how big the gap is if the demand was not successfully meet. For this propose, we can use the beanplot of fill rate at data length equal to 480 to see that (see Figure ). Once again, the plot looks similar in other data lengths. It is clear that the disjoint method has smaller mean fill rate, which is in line with the observation we have from Figure . Besides, the beanplot also demonstrates that given the circumstance demand was not meet, the proposed method is more likely to have a smaller gap than the disjoint method.  
 \subsection{Nonlinear profit function}
 In this subsection, we consider the simulation where, as before, the error term of the demand follows normal distribution, and we know the model of the data generating process, but the underlying profit function is nonlinear\footnote{$
         \pi(Q,y)=
@@ -407,19 +383,5 @@ Shift equivalence:
     \end{aligned}
 \]
 
-\begin{tabular}{r|r}
-\hline
-speed & dist\\
-\hline
-4 & 2\\
-\hline
-4 & 10\\
-\hline
-7 & 4\\
-\hline
-7 & 22\\
-\hline
-8 & 16\\
-\hline
-\end{tabular}
+
 \end{document}
