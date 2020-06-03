@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\begin{document}
+
+\begin{table}[]
+\begin{tabular}{@{}lllllllll@{}}
+\toprule
+\multirow{2}{*}{n}         & \multicolumn{4}{c}{percentage profit loss}                                                                                                                      & \multicolumn{4}{c}{service level}                                                                                                   \\ \cmidrule(l){2-9} 
+                           & \multicolumn{1}{l|}{dgp}                             & \multicolumn{1}{l|}{disjoint} & \multicolumn{1}{l|}{quantile regression} & \multicolumn{1}{l|}{proposed} & \multicolumn{1}{l|}{dgp} & \multicolumn{1}{l|}{disjoint} & \multicolumn{1}{l|}{quantile regression} & \multicolumn{1}{l|}{proposed} \\ \midrule
+\multicolumn{1}{|l|}{40}   & \begin{tabular}[c]{@{}l@{}}12\%\\ (1\%)\end{tabular} &                               &                                          &                               &                          &                               &                                          & \multicolumn{1}{l|}{}         \\
+\multicolumn{1}{|l|}{120}  &                                                      &                               &                                          &                               &                          &                               &                                          & \multicolumn{1}{l|}{}         \\
+\multicolumn{1}{|l|}{480}  &                                                      &                               &                                          &                               &                          &                               &                                          & \multicolumn{1}{l|}{}         \\
+\multicolumn{1}{|l|}{1200} &                                                      &                               &                                          &                               &                          &                               &                                          & \multicolumn{1}{l|}{}         \\
+\multicolumn{1}{|l|}{4800} &                                                      &                               &                                          &                               &                          &                               &                                          & \multicolumn{1}{l|}{}         \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{document}
