@@ -1,0 +1,459 @@
+---
+title: "linear norm plot"
+author: "Joshua"
+date: "15/05/2020"
+output:
+  pdf_document:
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+library('knitr')
+library('kableExtra')
+library('forecast')
+library('smooth')
+library('beanplot')
+library('pastecs')
+library('scales')
+library('ggplot2')
+knitr::opts_chunk$set(echo = FALSE)
+
+load('linear_norm.Rdata')
+
+
+iter<-20000
+```
+
+```{r ppl0.5}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(Reduce("+",re_40_p_l[[1]])[2]/iter,Reduce("+",re_40_p_l[[2]])[2]/iter,
+        Reduce("+",re_40_p_l[[3]])[2]/iter,Reduce("+",re_40_p_l[[4]])[2]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[1]])[2]/iter,Reduce("+",re_120_p_l[[2]])[2]/iter,
+         Reduce("+",re_120_p_l[[3]])[2]/iter,Reduce("+",re_120_p_l[[4]])[2]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[1]])[2]/iter,Reduce("+",re_480_p_l[[2]])[2]/iter,
+         Reduce("+",re_480_p_l[[3]])[2]/iter,Reduce("+",re_480_p_l[[4]])[2]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[1]])[2]/iter,Reduce("+",re_1200_p_l[[2]])[2]/iter,
+          Reduce("+",re_1200_p_l[[3]])[2]/iter,Reduce("+",re_1200_p_l[[4]])[2]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[1]])[2]/iter,Reduce("+",re_4800_p_l[[2]])[2]/iter,
+          Reduce("+",re_4800_p_l[[3]])[2]/iter,Reduce("+",re_4800_p_l[[4]])[2]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(mar=c(par('mar')[1:3], 0)) 
+plot.new()
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","CF"),plot=FALSE, pch=1:4,col=1:4)
+w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n"
+        ,xlab = 'data length',ylab = 'percetage profit loss') 
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("DGP", "DJ","QR","CF"), pch=1:4,col=1:4)
+
+```
+
+```{r ppl0.63}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(Reduce("+",re_40_p_l[[5]])[2]/iter,Reduce("+",re_40_p_l[[6]])[2]/iter,
+        Reduce("+",re_40_p_l[[7]])[2]/iter,Reduce("+",re_40_p_l[[8]])[2]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[5]])[2]/iter,Reduce("+",re_120_p_l[[6]])[2]/iter,
+         Reduce("+",re_120_p_l[[7]])[2]/iter,Reduce("+",re_120_p_l[[8]])[2]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[5]])[2]/iter,Reduce("+",re_480_p_l[[6]])[2]/iter,
+         Reduce("+",re_480_p_l[[7]])[2]/iter,Reduce("+",re_480_p_l[[8]])[2]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[5]])[2]/iter,Reduce("+",re_1200_p_l[[6]])[2]/iter,
+          Reduce("+",re_1200_p_l[[7]])[2]/iter,Reduce("+",re_1200_p_l[[8]])[2]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[5]])[2]/iter,Reduce("+",re_4800_p_l[[6]])[2]/iter,
+          Reduce("+",re_4800_p_l[[7]])[2]/iter,Reduce("+",re_4800_p_l[[8]])[2]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(mar=c(par('mar')[1:3], 0)) 
+plot.new()
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","CF"),plot=FALSE, pch=1:4,col=1:4)
+w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n"
+        ,xlab = 'data length',ylab = 'percetage profit loss') 
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("DGP", "DJ","QR","CF"), pch=1:4,col=1:4)
+
+```
+
+```{r ppl0.3}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(Reduce("+",re_40_p_l[[9]])[2]/iter,Reduce("+",re_40_p_l[[10]])[2]/iter,
+        Reduce("+",re_40_p_l[[11]])[2]/iter,Reduce("+",re_40_p_l[[12]])[2]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[9]])[2]/iter,Reduce("+",re_120_p_l[[10]])[2]/iter,
+         Reduce("+",re_120_p_l[[11]])[2]/iter,Reduce("+",re_120_p_l[[12]])[2]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[9]])[2]/iter,Reduce("+",re_480_p_l[[10]])[2]/iter,
+         Reduce("+",re_480_p_l[[11]])[2]/iter,Reduce("+",re_480_p_l[[12]])[2]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[9]])[2]/iter,Reduce("+",re_1200_p_l[[10]])[2]/iter,
+          Reduce("+",re_1200_p_l[[11]])[2]/iter,Reduce("+",re_1200_p_l[[12]])[2]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[9]])[2]/iter,Reduce("+",re_4800_p_l[[10]])[2]/iter,
+          Reduce("+",re_4800_p_l[[11]])[2]/iter,Reduce("+",re_4800_p_l[[12]])[2]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(mar=c(par('mar')[1:3], 0)) 
+plot.new()
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","CF"),plot=FALSE, pch=1:4,col=1:4)
+w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n"
+        ,xlab = 'data length',ylab = 'percetage profit loss') 
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("DGP", "DJ","QR","CF"), pch=1:4,col=1:4)
+
+```
+
+ 
+```{r inventory_error}
+dgp_0.5<-c(round(Reduce("+",re_40_p_l[[1]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[1]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[1]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[1]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[1]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[1]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[1]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[1]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[1]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[1]], "[[", 1)),2)), ")"))
+dj_0.5<-c(round(Reduce("+",re_40_p_l[[2]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[2]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[2]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[2]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[2]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[2]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[2]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[2]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[2]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[2]], "[[", 1)),2)), ")"))
+qr_0.5<-c(round(Reduce("+",re_40_p_l[[3]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[3]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[3]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[3]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[3]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[3]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[3]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[3]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[3]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[3]], "[[", 1)),2)), ")"))
+cf_0.5<-c(round(Reduce("+",re_40_p_l[[4]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[4]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[4]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[4]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[4]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[4]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[4]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[4]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[4]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[4]], "[[", 1)),2)), ")"))
+dgp_0.63<-c(round(Reduce("+",re_40_p_l[[5]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[5]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[5]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[5]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[5]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[5]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[5]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[5]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[5]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[5]], "[[", 1)),2)), ")"))
+dj_0.63<-c(round(Reduce("+",re_40_p_l[[6]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[6]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[6]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[6]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[6]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[6]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[6]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[6]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[6]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[6]], "[[", 1)),2)), ")"))
+qr_0.63<-c(round(Reduce("+",re_40_p_l[[7]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[7]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[7]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[7]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[7]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[7]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[7]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[7]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[7]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[7]], "[[", 1)),2)), ")"))
+cf_0.63<-c(round(Reduce("+",re_40_p_l[[8]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[8]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[8]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[8]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[8]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[8]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[8]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[8]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[8]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[8]], "[[", 1)),2)), ")"))
+dgp_0.3<-c(round(Reduce("+",re_40_p_l[[9]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[9]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_120_p_l[[9]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[9]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_480_p_l[[9]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[9]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_1200_p_l[[9]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[9]], "[[", 1)),2)), ")")
+            ,round(Reduce("+",re_4800_p_l[[9]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[9]], "[[", 1)),2)), ")"))
+dj_0.3<-c(round(Reduce("+",re_40_p_l[[10]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[10]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_120_p_l[[10]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[10]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_480_p_l[[10]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[10]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_1200_p_l[[10]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[10]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_4800_p_l[[10]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[10]], "[[", 1)),2)), ")"))
+qr_0.3<-c(round(Reduce("+",re_40_p_l[[11]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[11]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_120_p_l[[11]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[11]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_480_p_l[[11]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[11]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_1200_p_l[[11]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[11]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_4800_p_l[[11]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[11]], "[[", 1)),2)), ")"))
+cf_0.3<-c(round(Reduce("+",re_40_p_l[[12]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_40_p_l[[12]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_120_p_l[[12]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_120_p_l[[12]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_480_p_l[[12]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_480_p_l[[12]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_1200_p_l[[12]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_1200_p_l[[12]], "[[", 1)),2)), ")")
+           ,round(Reduce("+",re_4800_p_l[[12]])[1]/iter,2),paste0("(",toString(round(sd(sapply(re_4800_p_l[[12]], "[[", 1)),2)), ")"))
+df<-data.frame(c('40','','120','','480','','1200','','4800','')
+               ,dgp_0.5,dj_0.5,qr_0.5,cf_0.5
+               ,dgp_0.63,dj_0.63,qr_0.63,cf_0.63
+               ,dgp_0.3,dj_0.3,qr_0.3,cf_0.3)
+colnames(df)<-c('Data size','DGP','disjoint','quantile','proposed'
+                ,'DGP','disjoint','quantile','proposed'
+                ,'DGP','disjoint','quantile','proposed')
+kable(df,format='latex', booktabs = T,caption = 'Inventory Error',align = 'c') %>% 
+        add_header_above(c(" ", "Target service level=0.5" = 4, "Target service level=0.63" = 4
+                           ,"Target service level=0.3" = 4),bold = T) %>%
+        kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+```{r sl}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(Reduce("+",re_40_p_l[[1]])[3]/iter,Reduce("+",re_40_p_l[[2]])[3]/iter
+        ,Reduce("+",re_40_p_l[[3]])[3]/iter,Reduce("+",re_40_p_l[[4]])[3]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[1]])[3]/iter,Reduce("+",re_120_p_l[[2]])[3]/iter
+         ,Reduce("+",re_120_p_l[[3]])[3]/iter,Reduce("+",re_120_p_l[[4]])[3]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[1]])[3]/iter,Reduce("+",re_480_p_l[[2]])[3]/iter
+         ,Reduce("+",re_480_p_l[[3]])[3]/iter,Reduce("+",re_480_p_l[[4]])[3]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[1]])[3]/iter,Reduce("+",re_1200_p_l[[2]])[3]/iter
+          ,Reduce("+",re_1200_p_l[[3]])[3]/iter,Reduce("+",re_1200_p_l[[4]])[3]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[1]])[3]/iter,Reduce("+",re_4800_p_l[[2]])[3]/iter
+          ,Reduce("+",re_4800_p_l[[3]])[3]/iter,Reduce("+",re_4800_p_l[[4]])[3]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
+        ,ylab = 'service level')
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("Upper-bound", "DJ","QR","CF"), pch=1:4,col=1:4)
+
+y_40<-c(Reduce("+",re_40_p_l[[5]])[3]/iter,Reduce("+",re_40_p_l[[6]])[3]/iter
+        ,Reduce("+",re_40_p_l[[7]])[3]/iter,Reduce("+",re_40_p_l[[8]])[3]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[5]])[3]/iter,Reduce("+",re_120_p_l[[6]])[3]/iter
+         ,Reduce("+",re_120_p_l[[7]])[3]/iter,Reduce("+",re_120_p_l[[8]])[3]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[5]])[3]/iter,Reduce("+",re_480_p_l[[6]])[3]/iter
+         ,Reduce("+",re_480_p_l[[7]])[3]/iter,Reduce("+",re_480_p_l[[8]])[3]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[5]])[3]/iter,Reduce("+",re_1200_p_l[[6]])[3]/iter
+          ,Reduce("+",re_1200_p_l[[7]])[3]/iter,Reduce("+",re_1200_p_l[[8]])[3]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[5]])[3]/iter,Reduce("+",re_4800_p_l[[6]])[3]/iter
+          ,Reduce("+",re_4800_p_l[[7]])[3]/iter,Reduce("+",re_4800_p_l[[8]])[3]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
+        ,ylab = 'service level')
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("Upper-bound", "DJ","QR","CF"), pch=1:4,col=1:4)
+
+y_40<-c(Reduce("+",re_40_p_l[[9]])[3]/iter,Reduce("+",re_40_p_l[[10]])[3]/iter
+        ,Reduce("+",re_40_p_l[[11]])[3]/iter,Reduce("+",re_40_p_l[[12]])[3]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[9]])[3]/iter,Reduce("+",re_120_p_l[[10]])[3]/iter
+         ,Reduce("+",re_120_p_l[[11]])[3]/iter,Reduce("+",re_120_p_l[[12]])[3]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[9]])[3]/iter,Reduce("+",re_480_p_l[[10]])[3]/iter
+         ,Reduce("+",re_480_p_l[[11]])[3]/iter,Reduce("+",re_480_p_l[[12]])[3]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[9]])[3]/iter,Reduce("+",re_1200_p_l[[10]])[3]/iter
+          ,Reduce("+",re_1200_p_l[[11]])[3]/iter,Reduce("+",re_1200_p_l[[12]])[3]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[9]])[3]/iter,Reduce("+",re_4800_p_l[[10]])[3]/iter
+          ,Reduce("+",re_4800_p_l[[11]])[3]/iter,Reduce("+",re_4800_p_l[[12]])[3]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
+        ,ylab = 'service level')
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("Upper-bound", "DJ","QR","CF"), pch=1:4,col=1:4)
+```
+
+```{r Wilcoxon}
+dgp_w<-c(wilcox.test(sapply(re_1200_p_l[[1]], "[[", 3),sapply(re_4800_p_l[[1]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[5]], "[[", 3),sapply(re_4800_p_l[[5]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[9]], "[[", 3),sapply(re_4800_p_l[[9]], "[[", 3))$p.value)
+dj_w <-c(wilcox.test(sapply(re_1200_p_l[[2]], "[[", 3),sapply(re_4800_p_l[[2]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[6]], "[[", 3),sapply(re_4800_p_l[[6]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[10]], "[[", 3),sapply(re_4800_p_l[[10]], "[[", 3))$p.value)
+qr_w <-c(wilcox.test(sapply(re_1200_p_l[[3]], "[[", 3),sapply(re_4800_p_l[[3]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[7]], "[[", 3),sapply(re_4800_p_l[[7]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[11]], "[[", 3),sapply(re_4800_p_l[[11]], "[[", 3))$p.value)
+cf_w <-c(wilcox.test(sapply(re_1200_p_l[[4]], "[[", 3),sapply(re_4800_p_l[[4]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[8]], "[[", 3),sapply(re_4800_p_l[[8]], "[[", 3))$p.value
+         ,wilcox.test(sapply(re_1200_p_l[[12]], "[[", 3),sapply(re_4800_p_l[[12]], "[[", 3))$p.value)
+df<-data.frame(c('0.5','0.63','0.3'),
+               dgp_w,dj_w,qr_w,cf_w)
+colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed')
+kable(df,'latex', booktabs = T,caption = 'p-value of Wilcoxon Test between data size 1200 and 4800',align = 'c') %>% 
+        kable_styling(latex_options = c("striped"))
+```
+
+
+```{r fr}
+y_40<-c(Reduce("+",re_40_p_l[[1]])[4]/iter,Reduce("+",re_40_p_l[[2]])[4]/iter
+        ,Reduce("+",re_40_p_l[[3]])[4]/iter,Reduce("+",re_40_p_l[[4]])[4]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[1]])[4]/iter,Reduce("+",re_120_p_l[[2]])[4]/iter
+         ,Reduce("+",re_120_p_l[[3]])[4]/iter,Reduce("+",re_120_p_l[[4]])[4]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[1]])[4]/iter,Reduce("+",re_480_p_l[[2]])[4]/iter
+         ,Reduce("+",re_480_p_l[[3]])[4]/iter,Reduce("+",re_480_p_l[[4]])[4]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[1]])[4]/iter,Reduce("+",re_1200_p_l[[2]])[4]/iter
+          ,Reduce("+",re_1200_p_l[[3]])[4]/iter,Reduce("+",re_1200_p_l[[4]])[4]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[1]])[4]/iter,Reduce("+",re_4800_p_l[[2]])[4]/iter
+          ,Reduce("+",re_4800_p_l[[3]])[4]/iter,Reduce("+",re_4800_p_l[[4]])[4]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+mac
+
+y_40<-c(Reduce("+",re_40_p_l[[5]])[4]/iter,Reduce("+",re_40_p_l[[6]])[4]/iter
+        ,Reduce("+",re_40_p_l[[7]])[4]/iter,Reduce("+",re_40_p_l[[8]])[4]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[5]])[4]/iter,Reduce("+",re_120_p_l[[6]])[4]/iter
+         ,Reduce("+",re_120_p_l[[7]])[4]/iter,Reduce("+",re_120_p_l[[8]])[4]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[5]])[4]/iter,Reduce("+",re_480_p_l[[6]])[4]/iter
+         ,Reduce("+",re_480_p_l[[7]])[4]/iter,Reduce("+",re_480_p_l[[8]])[4]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[5]])[4]/iter,Reduce("+",re_1200_p_l[[6]])[4]/iter
+          ,Reduce("+",re_1200_p_l[[7]])[4]/iter,Reduce("+",re_1200_p_l[[8]])[4]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[5]])[4]/iter,Reduce("+",re_4800_p_l[[6]])[4]/iter
+          ,Reduce("+",re_4800_p_l[[7]])[4]/iter,Reduce("+",re_4800_p_l[[8]])[4]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+mac
+
+y_40<-c(Reduce("+",re_40_p_l[[9]])[4]/iter,Reduce("+",re_40_p_l[[10]])[4]/iter
+        ,Reduce("+",re_40_p_l[[11]])[4]/iter,Reduce("+",re_40_p_l[[12]])[4]/iter)
+y_120<-c(Reduce("+",re_120_p_l[[9]])[4]/iter,Reduce("+",re_120_p_l[[10]])[4]/iter
+         ,Reduce("+",re_120_p_l[[11]])[4]/iter,Reduce("+",re_120_p_l[[12]])[4]/iter)
+y_480<-c(Reduce("+",re_480_p_l[[9]])[4]/iter,Reduce("+",re_480_p_l[[10]])[4]/iter
+         ,Reduce("+",re_480_p_l[[11]])[4]/iter,Reduce("+",re_480_p_l[[12]])[4]/iter)
+y_1200<-c(Reduce("+",re_1200_p_l[[9]])[4]/iter,Reduce("+",re_1200_p_l[[10]])[4]/iter
+          ,Reduce("+",re_1200_p_l[[11]])[4]/iter,Reduce("+",re_1200_p_l[[12]])[4]/iter)
+y_4800<-c(Reduce("+",re_4800_p_l[[9]])[4]/iter,Reduce("+",re_4800_p_l[[10]])[4]/iter
+          ,Reduce("+",re_4800_p_l[[11]])[4]/iter,Reduce("+",re_4800_p_l[[12]])[4]/iter)
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 4,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","QR","CF")
+mac
+```
+
+
+
+```{r size0.5}
+dgp_p<-c(Reduce("+",re_40_p_l[[1]])[2]/iter,Reduce("+",re_120_p_l[[1]])[2]/iter
+         ,Reduce("+",re_480_p_l[[1]])[2]/iter,Reduce("+",re_1200_p_l[[1]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[1]])[2]/iter)
+dj_p<-c(Reduce("+",re_40_p_l[[2]])[2]/iter,Reduce("+",re_120_p_l[[2]])[2]/iter
+         ,Reduce("+",re_480_p_l[[2]])[2]/iter,Reduce("+",re_1200_p_l[[2]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[2]])[2]/iter)
+qr_p<-c(Reduce("+",re_40_p_l[[3]])[2]/iter,Reduce("+",re_120_p_l[[3]])[2]/iter
+         ,Reduce("+",re_480_p_l[[3]])[2]/iter,Reduce("+",re_1200_p_l[[3]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[3]])[2]/iter)
+cf_p<-c(Reduce("+",re_40_p_l[[4]])[2]/iter,Reduce("+",re_120_p_l[[4]])[2]/iter
+         ,Reduce("+",re_480_p_l[[4]])[2]/iter,Reduce("+",re_1200_p_l[[4]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[4]])[2]/iter)
+dgp_s<-c(Reduce("+",re_40_p_l[[1]])[3]/iter,Reduce("+",re_120_p_l[[1]])[3]/iter
+         ,Reduce("+",re_480_p_l[[1]])[3]/iter,Reduce("+",re_1200_p_l[[1]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[1]])[3]/iter)
+dj_s<-c(Reduce("+",re_40_p_l[[2]])[3]/iter,Reduce("+",re_120_p_l[[2]])[3]/iter
+         ,Reduce("+",re_480_p_l[[2]])[3]/iter,Reduce("+",re_1200_p_l[[2]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[2]])[3]/iter)
+qr_s<-c(Reduce("+",re_40_p_l[[3]])[3]/iter,Reduce("+",re_120_p_l[[3]])[3]/iter
+         ,Reduce("+",re_480_p_l[[3]])[3]/iter,Reduce("+",re_1200_p_l[[3]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[3]])[3]/iter)
+cf_s<-c(Reduce("+",re_40_p_l[[4]])[3]/iter,Reduce("+",re_120_p_l[[4]])[3]/iter
+         ,Reduce("+",re_480_p_l[[4]])[3]/iter,Reduce("+",re_1200_p_l[[4]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[4]])[3]/iter)
+df<-data.frame(c('40','120','480','1200','4800'),
+               percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
+               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
+               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
+               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+colnames(df)<-c('Data size','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
+kable(df,'latex', booktabs = T,caption = 'Size effect (q=50%)',align = 'c') %>% 
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+
+```{r level40}
+dgp_p<-c(Reduce("+",re_40_p_l[[1]])[2]/iter,Reduce("+",re_40_p_l[[5]])[2]/iter
+         ,Reduce("+",re_40_p_l[[9]])[2]/iter)
+dj_p<-c(Reduce("+",re_40_p_l[[2]])[2]/iter,Reduce("+",re_40_p_l[[6]])[2]/iter
+         ,Reduce("+",re_40_p_l[[10]])[2]/iter)
+qr_p<-c(Reduce("+",re_40_p_l[[3]])[2]/iter,Reduce("+",re_40_p_l[[7]])[2]/iter
+         ,Reduce("+",re_40_p_l[[11]])[2]/iter)
+cf_p<-c(Reduce("+",re_40_p_l[[4]])[2]/iter,Reduce("+",re_40_p_l[[8]])[2]/iter
+         ,Reduce("+",re_40_p_l[[12]])[2]/iter)
+dgp_s<-c(Reduce("+",re_40_p_l[[1]])[3]/iter,Reduce("+",re_40_p_l[[5]])[3]/iter
+         ,Reduce("+",re_40_p_l[[9]])[3]/iter)
+dj_s<-c(Reduce("+",re_40_p_l[[2]])[3]/iter,Reduce("+",re_40_p_l[[6]])[3]/iter
+         ,Reduce("+",re_40_p_l[[10]])[3]/iter)
+qr_s<-c(Reduce("+",re_40_p_l[[3]])[3]/iter,Reduce("+",re_40_p_l[[7]])[3]/iter
+         ,Reduce("+",re_40_p_l[[11]])[3]/iter)
+cf_s<-c(Reduce("+",re_40_p_l[[4]])[3]/iter,Reduce("+",re_40_p_l[[8]])[3]/iter
+         ,Reduce("+",re_40_p_l[[12]])[3]/iter)
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
+               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
+               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
+               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+
+colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
+kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=40)',align = 'c') %>% 
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+
+```{r level480}
+dgp_p<-c(Reduce("+",re_480_p_l[[1]])[2]/iter,Reduce("+",re_480_p_l[[5]])[2]/iter
+         ,Reduce("+",re_480_p_l[[9]])[2]/iter)
+dj_p<-c(Reduce("+",re_480_p_l[[2]])[2]/iter,Reduce("+",re_480_p_l[[6]])[2]/iter
+         ,Reduce("+",re_480_p_l[[10]])[2]/iter)
+qr_p<-c(Reduce("+",re_480_p_l[[3]])[2]/iter,Reduce("+",re_480_p_l[[7]])[2]/iter
+         ,Reduce("+",re_480_p_l[[11]])[2]/iter)
+cf_p<-c(Reduce("+",re_480_p_l[[4]])[2]/iter,Reduce("+",re_480_p_l[[8]])[2]/iter
+         ,Reduce("+",re_480_p_l[[12]])[2]/iter)
+dgp_s<-c(Reduce("+",re_480_p_l[[1]])[3]/iter,Reduce("+",re_480_p_l[[5]])[3]/iter
+         ,Reduce("+",re_480_p_l[[9]])[3]/iter)
+dj_s<-c(Reduce("+",re_480_p_l[[2]])[3]/iter,Reduce("+",re_480_p_l[[6]])[3]/iter
+         ,Reduce("+",re_480_p_l[[10]])[3]/iter)
+qr_s<-c(Reduce("+",re_480_p_l[[3]])[3]/iter,Reduce("+",re_480_p_l[[7]])[3]/iter
+         ,Reduce("+",re_480_p_l[[11]])[3]/iter)
+cf_s<-c(Reduce("+",re_480_p_l[[4]])[3]/iter,Reduce("+",re_480_p_l[[8]])[3]/iter
+         ,Reduce("+",re_480_p_l[[12]])[3]/iter)
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
+               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
+               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
+               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+
+colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
+kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=480)',align = 'c') %>% 
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+
+```{r level4800}
+dgp_p<-c(Reduce("+",re_4800_p_l[[1]])[2]/iter,Reduce("+",re_4800_p_l[[5]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[9]])[2]/iter)
+dj_p<-c(Reduce("+",re_4800_p_l[[2]])[2]/iter,Reduce("+",re_4800_p_l[[6]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[10]])[2]/iter)
+qr_p<-c(Reduce("+",re_4800_p_l[[3]])[2]/iter,Reduce("+",re_4800_p_l[[7]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[11]])[2]/iter)
+cf_p<-c(Reduce("+",re_4800_p_l[[4]])[2]/iter,Reduce("+",re_4800_p_l[[8]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[12]])[2]/iter)
+dgp_s<-c(Reduce("+",re_4800_p_l[[1]])[3]/iter,Reduce("+",re_4800_p_l[[5]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[9]])[3]/iter)
+dj_s<-c(Reduce("+",re_4800_p_l[[2]])[3]/iter,Reduce("+",re_4800_p_l[[6]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[10]])[3]/iter)
+qr_s<-c(Reduce("+",re_4800_p_l[[3]])[3]/iter,Reduce("+",re_4800_p_l[[7]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[11]])[3]/iter)
+cf_s<-c(Reduce("+",re_4800_p_l[[4]])[3]/iter,Reduce("+",re_4800_p_l[[8]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[12]])[3]/iter)
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
+               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
+               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
+               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+
+colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
+kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=4800)',align = 'c') %>% 
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        kable_styling(latex_options = c("striped", "scale_down"))
+```
