@@ -293,7 +293,7 @@ We expect to see the performance of both the proposed method and benchmark metho
 \label{fig:ppl0.5}
 \end{figure}
 
-The results are presented in tables and figures. In Figure \ref{fig:ppl0.5}, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. This figure represents the performance of methods regarding to percentage profit loss in the situation where the target service level $=0.5$. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Besides, when the data size is small, the disjoint method can capture the structure faster than quantile regression method, which is also slightly faster than the proposed method. In figure \ref{fig:sl0.5}, however, the disjoint method performed poorly when the data size is small. More details about the mean and variance of the size effect can be seen in Table \ref{size_effect0.5}.
+The results are presented in tables and figures. In Figure \ref{fig:ppl0.5}, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. This figure represents the performance of methods regarding to percentage profit loss in the situation where the target service level $=0.5$. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Besides, when the data size is small, the disjoint method can capture the structure faster than quantile regression method, which is also slightly faster than the proposed method. In figure \ref{fig:sl0.5}, however, the disjoint method performed poorly when the data size is small. More details about the size effect can be seen in Table \ref{size_effect0.5}.
 \begin{figure}[h]
 \centering
 \includegraphics{sl-1.pdf}
@@ -320,13 +320,9 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \end{tabular}} 
 \end{table}
 
-Figure is the beanplot of absolute inventory error with data length equal to 480. We choose this particular data length since all methods are stabled when length equal or bigger than it as we can see from Figure. Actually, the plot looks similar in other data lengths, but we don't show them all in line. We can see all methods perform similarly on the metric of absolute inventory error either in mean value or distribution shape. 
+We can also compare the methods' performance regarding to different target service levels while fix the data size. 
 
 
-
-Regarding to service level, we can see that, in Figure, the trend is similar to the one we observed in 'percentage profit loss'. Both the proposed method and the quantile regression method become stable when data length grows to a 'normal' value. The disjoint method, on the other hand, seems not to be very sensitive to the data length. However, if we pay attention to the scale, the different is not too much, and we can say that all methods generated acceptable results.
-
-However, the service level only present if the demand was meet or not, but it doesn't show how how big the gap is if the demand was not successfully meet. For this propose, we can use the beanplot of fill rate at data length equal to 480 to see that (see Figure ). Once again, the plot looks similar in other data lengths. It is clear that the disjoint method has smaller mean fill rate, which is in line with the observation we have from Figure . Besides, the beanplot also demonstrates that given the circumstance demand was not meet, the proposed method is more likely to have a smaller gap than the disjoint method.  
 \subsection{Nonlinear profit function}
 In this subsection, we consider the simulation where, as before, the error term of the demand follows normal distribution, and we know the model of the data generating process, but the underlying profit function is nonlinear\footnote{$
         \pi(Q,y)=
