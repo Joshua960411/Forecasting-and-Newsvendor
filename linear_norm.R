@@ -8,7 +8,7 @@ comb <- function(x, ...) {
   lapply(seq_along(x),
          function(i) c(x[[i]], lapply(list(...), function(y) y[[i]])))
 }
-iter<-50000
+iter<-30000
 #dgp
 
 ##ar
