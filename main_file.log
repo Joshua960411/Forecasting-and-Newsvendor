@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.2)  4 JUN 2020 09:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.2)  4 JUN 2020 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -517,20 +517,20 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 No file main_file.aux.
 \openout1 = `main_file.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -579,8 +579,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main_file.bbl' found.
 
 (./main_file.bbl)
-Package biblatex Info: Reference section=0 on input line 30.
-Package biblatex Info: Reference segment=0 on input line 30.
+Package biblatex Info: Reference section=0 on input line 31.
+Package biblatex Info: Reference segment=0 on input line 31.
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -608,286 +608,298 @@ Package: `refcheck' v1.9.1 <2013/02/14>
 options: showrefs, showcites, msgs, chckunlbld
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
 
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 
-32.
+33.
 
 (/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/omscmtt.fd
 File: omscmtt.fd 
 )
 LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--32
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
 [][]\OT1/cmr/m/n/8 Department of Man-age-ment Sci-ence, Lan-caster Uni-ver-sity
 , Lan-caster LA1 4YX, UK. Email:
  []
 
 
-LaTeX Warning: Citation 'Po02' on page 1 undefined on input line 44.
+LaTeX Warning: Citation 'Po02' on page 1 undefined on input line 45.
 
 
-LaTeX Warning: Citation 'SPP98' on page 1 undefined on input line 44.
+LaTeX Warning: Citation 'SPP98' on page 1 undefined on input line 45.
 
 
-LaTeX Warning: Citation 'Zi00' on page 1 undefined on input line 44.
+LaTeX Warning: Citation 'Zi00' on page 1 undefined on input line 45.
 
 
-LaTeX Warning: Citation 'AHM51' on page 1 undefined on input line 46.
+LaTeX Warning: Citation 'AHM51' on page 1 undefined on input line 47.
 
 
-LaTeX Warning: Citation 'MK51' on page 1 undefined on input line 46.
+LaTeX Warning: Citation 'MK51' on page 1 undefined on input line 47.
 
 
-LaTeX Warning: Citation 'Sc58' on page 1 undefined on input line 46.
+LaTeX Warning: Citation 'Sc58' on page 1 undefined on input line 47.
 
 
-LaTeX Warning: Citation 'BT06' on page 1 undefined on input line 50.
+LaTeX Warning: Citation 'BT06' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation 'BM12' on page 1 undefined on input line 50.
+LaTeX Warning: Citation 'BM12' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation 'Ka94' on page 1 undefined on input line 50.
+LaTeX Warning: Citation 'Ka94' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation 'KT96' on page 1 undefined on input line 50.
+LaTeX Warning: Citation 'KT96' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation 'KTB20' on page 1 undefined on input line 50.
+LaTeX Warning: Citation 'KTB20' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation 'Br16' on page 1 undefined on input line 56.
+LaTeX Warning: Citation 'Br16' on page 1 undefined on input line 57.
 
 
-LaTeX Warning: Citation 'Hu19' on page 1 undefined on input line 56.
+LaTeX Warning: Citation 'Hu19' on page 1 undefined on input line 57.
 
 [1
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: Reference `se:lit' on page 2 undefined on input line 62.
+LaTeX Warning: Reference `se:lit' on page 2 undefined on input line 63.
 
 
-LaTeX Warning: Reference `se:new' on page 2 undefined on input line 62.
+LaTeX Warning: Reference `se:new' on page 2 undefined on input line 63.
 
 
-LaTeX Warning: Reference `se:results' on page 2 undefined on input line 62.
+LaTeX Warning: Reference `se:results' on page 2 undefined on input line 63.
 
 
-LaTeX Warning: Reference `se:end' on page 2 undefined on input line 62.
+LaTeX Warning: Reference `se:end' on page 2 undefined on input line 63.
 
 
-Package refcheck Warning: Unused label `se:lit' on input line 65.
+Package refcheck Warning: Unused label `se:lit' on input line 66.
 
 
-LaTeX Warning: Citation 'Ch12' on page 2 undefined on input line 67.
+LaTeX Warning: Citation 'Ch12' on page 2 undefined on input line 68.
 
 
-LaTeX Warning: Citation 'Po02' on page 2 undefined on input line 67.
+LaTeX Warning: Citation 'Po02' on page 2 undefined on input line 68.
 
 
-LaTeX Warning: Citation 'SPP98' on page 2 undefined on input line 67.
+LaTeX Warning: Citation 'SPP98' on page 2 undefined on input line 68.
 
 
-LaTeX Warning: Citation 'Zi00' on page 2 undefined on input line 67.
+LaTeX Warning: Citation 'Zi00' on page 2 undefined on input line 68.
 
 
-LaTeX Warning: Citation 'Ch12' on page 2 undefined on input line 71.
+LaTeX Warning: Citation 'Ch12' on page 2 undefined on input line 72.
 
 
-LaTeX Warning: Citation 'AHM51' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'AHM51' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'MK51' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'MK51' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'HW63' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'HW63' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'LL96' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'LL96' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'MS00' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'MS00' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'Kh95' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'Kh95' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'EGS95' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'EGS95' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'BAA99' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'BAA99' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'HOS12' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'HOS12' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'KWH15' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'KWH15' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'KC62' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'KC62' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'Mi59' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'Mi59' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 94.
+LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 95.
 
 
-LaTeX Warning: Citation 'BT06' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'BT06' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'HOS12' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'HOS12' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'HN16' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'HN16' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'KC62' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'KC62' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'Kh95' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'Kh95' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'KK18' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'KK18' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'Mi59' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'Mi59' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'PSC15' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'PSC15' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 96.
+LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 97.
 
 
-LaTeX Warning: Citation 'KK18' on page 2 undefined on input line 108.
+LaTeX Warning: Citation 'KK18' on page 2 undefined on input line 109.
 
 
-LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 108.
+LaTeX Warning: Citation 'PD99' on page 2 undefined on input line 109.
 
 
-LaTeX Warning: Citation 'RK02' on page 2 undefined on input line 108.
+LaTeX Warning: Citation 'RK02' on page 2 undefined on input line 109.
 
 [2]
 
-LaTeX Warning: Citation 'BT06' on page 3 undefined on input line 122.
+LaTeX Warning: Citation 'BT06' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'Br16' on page 3 undefined on input line 122.
+LaTeX Warning: Citation 'Br16' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'CS19' on page 3 undefined on input line 122.
+LaTeX Warning: Citation 'CS19' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'HNS15' on page 3 undefined on input line 122.
+LaTeX Warning: Citation 'HNS15' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 122.
+LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 129.
+LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 130.
 
 
-LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 129.
+LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 130.
 
 
-LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 129.
+LaTeX Warning: Citation 'Hu19' on page 3 undefined on input line 130.
 
 
-LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 129.
+LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 130.
 
 
-LaTeX Warning: Citation 'CS19' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'CS19' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'OST20' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'OST20' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'RV19' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'Guo11' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'Guo11' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'GM14' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'GM14' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'Ma19' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'Ma19' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'Guo11' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'Guo11' on page 3 undefined on input line 134.
 
 
-LaTeX Warning: Citation 'Ma19' on page 3 undefined on input line 133.
+LaTeX Warning: Citation 'Ma19' on page 3 undefined on input line 134.
 
 
-Package refcheck Warning: Unused label `se:new' on input line 136.
+Package refcheck Warning: Unused label `se:new' on input line 137.
 
 [3]
 
-LaTeX Warning: Citation 'HKO08' on page 4 undefined on input line 183.
+LaTeX Warning: Citation 'HKO08' on page 4 undefined on input line 184.
 
 
-LaTeX Warning: Reference `app:A' on page 4 undefined on input line 188.
+LaTeX Warning: Reference `app:A' on page 4 undefined on input line 189.
 
 
-LaTeX Warning: Citation 'Koe05' on page 4 undefined on input line 200.
+LaTeX Warning: Citation 'Koe05' on page 4 undefined on input line 201.
 
 
-LaTeX Warning: Citation 'KM99' on page 4 undefined on input line 200.
+LaTeX Warning: Citation 'KM99' on page 4 undefined on input line 201.
 
 
-LaTeX Warning: Citation 'KHM05' on page 4 undefined on input line 200.
+LaTeX Warning: Citation 'KHM05' on page 4 undefined on input line 201.
 
 
-LaTeX Warning: Reference `app:B' on page 4 undefined on input line 203.
+LaTeX Warning: Reference `app:B' on page 4 undefined on input line 204.
 
 [4]
 
-Package refcheck Warning: Unused label `se:results' on input line 268.
+Package refcheck Warning: Unused label `se:results' on input line 269.
 
 <./images/ppl0.5-1.pdf, id=43, 464.73625pt x 251.94125pt>
 File: ./images/ppl0.5-1.pdf Graphic file (type pdf)
 <use ./images/ppl0.5-1.pdf>
-Package pdftex.def Info: ./images/ppl0.5-1.pdf  used on input line 289.
-(pdftex.def)             Requested size: 270.00275pt x 146.3759pt.
+Package pdftex.def Info: ./images/ppl0.5-1.pdf  used on input line 291.
+(pdftex.def)             Requested size: 314.99863pt x 170.77188pt.
 
-Package refcheck Warning: Unused label `fig:ppl0.5' on input line 292.
-
-
-LaTeX Warning: Reference `fig:ppl0.5' on page 5 undefined on input line 294.
-
-
-LaTeX Warning: Reference `se:new' on page 5 undefined on input line 294.
+Package refcheck Warning: Unused label `fig:ppl0.5' on input line 293.
 
 [5]
 
-LaTeX Warning: Citation 'KK18' on page 6 undefined on input line 311.
+LaTeX Warning: Reference `fig:ppl0.5' on page 6 undefined on input line 296.
 
 
-Package refcheck Warning: Unused label `se:end' on input line 315.
+LaTeX Warning: Reference `se:new' on page 6 undefined on input line 296.
 
 
-LaTeX Warning: Empty bibliography on input line 320.
+LaTeX Warning: Reference `fig:sl0.5' on page 6 undefined on input line 296.
 
-[6 <./images/ppl0.5-1.pdf>] [7]
+<./images/sl-1.pdf, id=47, 433.62pt x 251.94125pt>
+File: ./images/sl-1.pdf Graphic file (type pdf)
+<use ./images/sl-1.pdf>
+Package pdftex.def Info: ./images/sl-1.pdf  used on input line 299.
+(pdftex.def)             Requested size: 314.99863pt x 183.02754pt.
 
-Package refcheck Warning: Unused label `app:A' on input line 334.
+Package refcheck Warning: Unused label `fig:sl0.5' on input line 301.
+
+[6 <./images/ppl0.5-1.pdf> <./images/sl-1.pdf>]
+
+LaTeX Warning: Citation 'KK18' on page 7 undefined on input line 335.
 
 
-Package refcheck Warning: Unused label `app:B' on input line 364.
+Package refcheck Warning: Unused label `se:end' on input line 339.
+
+
+LaTeX Warning: Empty bibliography on input line 344.
+
+[7]
+
+Package refcheck Warning: Unused label `app:A' on input line 358.
+
+
+Package refcheck Warning: Unused label `app:B' on input line 388.
 
 [8] (./main_file.aux)
 
@@ -906,13 +918,13 @@ Package logreq Info: Writing requests to 'main_file.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 13277 strings out of 480608
- 230200 string characters out of 5903631
- 884520 words of memory out of 5000000
- 28997 multiletter control sequences out of 15000+600000
+ 13287 strings out of 480608
+ 230380 string characters out of 5903631
+ 884519 words of memory out of 5000000
+ 29006 multiletter control sequences out of 15000+600000
  546909 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,14n,46p,824b,1617s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,14n,46p,1114b,1618s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
@@ -945,10 +957,10 @@ st/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2020/texmf
 -dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2020/texmf-dis
 t/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main_file.pdf (8 pages, 329717 bytes).
+Output written on main_file.pdf (8 pages, 336408 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 119 compressed objects within 2 object streams
+ 173 PDF objects out of 1000 (max. 8388607)
+ 124 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
