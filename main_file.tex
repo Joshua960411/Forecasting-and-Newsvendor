@@ -321,7 +321,59 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \end{table}
 
 We can also compare the methods' performance regarding to different target service levels while fix the data size. 
+\begin{table}
 
+\caption{\label{tab:level40}Target service level effect (n=40)}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{ccccccccc}
+\toprule
+\multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Average service level}} \\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
+Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+\midrule
+\rowcolor{gray!6}  0.5 & 4.91\% & 5.35\% & 5.67\% & 5.51\% & 0.502 & 0.443 & 0.502 & 0.505\\
+0.63 & 14.28\% & 15.25\% & 16.15\% & 15.62\% & 0.671 & 0.586 & 0.601 & 0.609\\
+\rowcolor{gray!6}  0.3 & 5.10\% & 5.63\% & 6.08\% & 5.92\% & 0.247 & 0.245 & 0.326 & 0.333\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:level480}Target service level effect (n=480)}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{ccccccccc}
+\toprule
+\multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Average service level}} \\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
+Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+\midrule
+\rowcolor{gray!6}  0.5 & 4.94\% & 5.05\% & 5.05\% & 5.04\% & 0.498 & 0.492 & 0.498 & 0.498\\
+0.63 & 13.82\% & 14.15\% & 14.10\% & 14.04\% & 0.635 & 0.626 & 0.631 & 0.629\\
+\rowcolor{gray!6}  0.3 & 5.13\% & 5.25\% & 5.25\% & 5.26\% & 0.291 & 0.290 & 0.297 & 0.301\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:level4800}Target service level effect (n=4800)}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{ccccccccc}
+\toprule
+\multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Average service level}} \\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
+Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+\midrule
+\rowcolor{gray!6}  0.5 & 4.92\% & 4.92\% & 4.96\% & 4.96\% & 0.492 & 0.492 & 0.493 & 0.494\\
+0.63 & 14.02\% & 14.04\% & 14.22\% & 14.20\% & 0.626 & 0.626 & 0.626 & 0.624\\
+\rowcolor{gray!6}  0.3 & 5.18\% & 5.19\% & 5.25\% & 5.27\% & 0.298 & 0.296 & 0.299 & 0.302\\
+\bottomrule
+\end{tabular}}
+\end{table}
 
 \subsection{Nonlinear profit function}
 In this subsection, we consider the simulation where, as before, the error term of the demand follows normal distribution, and we know the model of the data generating process, but the underlying profit function is nonlinear\footnote{$

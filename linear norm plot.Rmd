@@ -393,8 +393,7 @@ cf_s<-c(Reduce("+",re_40_p_l[[4]])[3]/iter,Reduce("+",re_40_p_l[[8]])[3]/iter
          ,Reduce("+",re_40_p_l[[12]])[3]/iter)
 df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
                ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
-               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=40)',align = 'c') %>% 
@@ -422,8 +421,7 @@ cf_s<-c(Reduce("+",re_480_p_l[[4]])[3]/iter,Reduce("+",re_480_p_l[[8]])[3]/iter
          ,Reduce("+",re_480_p_l[[12]])[3]/iter)
 df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
                ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
-               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=480)',align = 'c') %>% 
@@ -451,8 +449,7 @@ cf_s<-c(Reduce("+",re_4800_p_l[[4]])[3]/iter,Reduce("+",re_4800_p_l[[8]])[3]/ite
          ,Reduce("+",re_4800_p_l[[12]])[3]/iter)
 df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
                ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,percent(dgp_s,accuracy = 0.01),percent(dj_s,accuracy = 0.01)
-               ,percent(qr_s,accuracy = 0.01),percent(cf_s,accuracy = 0.01))
+               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=4800)',align = 'c') %>% 
