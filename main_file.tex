@@ -293,7 +293,7 @@ We expect to see the performance of both the proposed method and benchmark metho
 \label{fig:ppl0.5}
 \end{figure}
 
-The results are presented in tables and figures. In Figure \ref{fig:ppl0.5}, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. This figure represents the performance of methods regarding to percentage profit loss in the situation where the target service level $=0.5$. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Besides, when the data size is small, the disjoint method can capture the structure faster than quantile regression method, which is also slightly faster than the proposed method. In figure \ref{fig:sl0.5}, however, the disjoint method performed poorly when the data size is small. More details about the mean and variance of the size effect can be seen in Table
+The results are presented in tables and figures. In Figure \ref{fig:ppl0.5}, DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. This figure represents the performance of methods regarding to percentage profit loss in the situation where the target service level $=0.5$. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Besides, when the data size is small, the disjoint method can capture the structure faster than quantile regression method, which is also slightly faster than the proposed method. In figure \ref{fig:sl0.5}, however, the disjoint method performed poorly when the data size is small. More details about the mean and variance of the size effect can be seen in Table \ref{size_effect0.5}.
 \begin{figure}[h]
 \centering
 \includegraphics{sl-1.pdf}
@@ -301,8 +301,9 @@ The results are presented in tables and figures. In Figure \ref{fig:ppl0.5}, DGP
 \label{fig:sl0.5}
 \end{figure}
 
-\begin{table}
+\begin{table}[h]
 \caption{Size effect on percentage profit loss and service level at 0.5 target service level}
+\label{size_effect0.5}
 \centering \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{ccccccccc}
 \toprule
