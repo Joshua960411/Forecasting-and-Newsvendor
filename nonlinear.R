@@ -27,7 +27,7 @@ profit_function_nonlinear_t<-function(order,demand,sed){
   return(profit)
 }
 
-order<-seq(-600,600,1)
+order<-seq(-3,3,0.1)
 quan_list<-c()
 for (k in 1:50){
   list<-c()
@@ -36,7 +36,7 @@ for (k in 1:50){
     precord<-0
     meanprofit<-0
     for (j in 1:500){
-      de<-rnorm(1,0,200)
+      de<-rnorm(1,0,1)
       profit<-profit_function_nonlinear(i,de)
       precord<-precord+profit
     }
