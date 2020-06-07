@@ -1,0 +1,38 @@
+---
+title: "linear solution"
+output:   
+  pdf_document:
+    keep_tex: true
+---
+
+```{r plot, echo=FALSE}
+profit_function_linear<-function(order,demand){
+  profit<-(order>=demand)*(17*demand-7*order)+(order<demand)*(3*order+7*demand)
+  return(profit)
+}
+
+order<-seq(0,10,0.01)
+list<-c()
+for (i in order){
+  precord<-0
+  meanprofit<-0
+  for (j in 1:1000){
+    de<-rnorm(1,5,1)
+    profit<-profit_function_linear(i,de)
+    precord<-precord+profit
+  }
+meanprofit<-precord/1000
+list<-c(list,meanprofit)
+}
+plot.new()
+plot.window(xlim=range(order), ylim=range(list)) 
+lines(order, list)
+abline(v=4.48, lty=2,col='blue')
+abline(h=40, lty=2,col='red')
+axis(1)
+axis(2)
+box()
+title(xlab='order')
+title(ylab='mean profit')
+
+```

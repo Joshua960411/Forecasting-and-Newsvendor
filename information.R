@@ -238,8 +238,8 @@ re_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_k_l<-ppl_l(series[i],a_40[[1]][[i]])
   arima_u1_l<-ppl_l(series[i],a_40[[2]][[i]])
   arima_u2_l<-ppl_l(series[i],a_40[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_40[[5]][[i]])
-  cf_l2<-ppl_l(series[i],a_40[[6]][[i]])
+  cf_l1<-ppl_l(series[i],a_40[[4]][[i]])
+  cf_l2<-ppl_l(series[i],a_40[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -250,8 +250,8 @@ re_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_k_l<-ppl_l(series[i],a_120[[1]][[i]])
   arima_u1_l<-ppl_l(series[i],a_120[[2]][[i]])
   arima_u2_l<-ppl_l(series[i],a_120[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_120[[5]][[i]])
-  cf_l2<-ppl_l(series[i],a_120[[6]][[i]])
+  cf_l1<-ppl_l(series[i],a_120[[4]][[i]])
+  cf_l2<-ppl_l(series[i],a_120[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -262,8 +262,8 @@ re_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_k_l<-ppl_l(series[i],a_480[[1]][[i]])
   arima_u1_l<-ppl_l(series[i],a_480[[2]][[i]])
   arima_u2_l<-ppl_l(series[i],a_480[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_480[[5]][[i]])
-  cf_l2<-ppl_l(series[i],a_480[[6]][[i]])
+  cf_l1<-ppl_l(series[i],a_480[[4]][[i]])
+  cf_l2<-ppl_l(series[i],a_480[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -274,8 +274,8 @@ re_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   arima_k_l<-ppl_l(series[i],a_1200[[1]][[i]])
   arima_u1_l<-ppl_l(series[i],a_1200[[2]][[i]])
   arima_u2_l<-ppl_l(series[i],a_1200[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_1200[[5]][[i]])
-  cf_l2<-ppl_l(series[i],a_1200[[6]][[i]])
+  cf_l1<-ppl_l(series[i],a_1200[[4]][[i]])
+  cf_l2<-ppl_l(series[i],a_1200[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -286,8 +286,8 @@ re_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   arima_k_l<-ppl_l(series[i],a_4800[[1]][[i]])
   arima_u1_l<-ppl_l(series[i],a_4800[[2]][[i]])
   arima_u2_l<-ppl_l(series[i],a_4800[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_4800[[5]][[i]])
-  cf_l2<-ppl_l(series[i],a_4800[[6]][[i]])
+  cf_l1<-ppl_l(series[i],a_4800[[4]][[i]])
+  cf_l2<-ppl_l(series[i],a_4800[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
