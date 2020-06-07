@@ -270,13 +270,14 @@ In the case of NVP, the proposed estimator has following useful statistical prop
 
 \subsection{Simulation design}
 
-In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$, and the simulation will be performed base on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear
-, the error term of the demand follows normal distribution, and we know the model of the data generating process. To further explore the method, we consider five data lengths (40,120,480,1200,4800) in order to see how does the proposed method performed when the learning period varies.
+In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$ and constant level $=500$. The simulation will be performed base on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear, the error term of the demand follows normal distribution $U(0,100^2)$, and we know the model of the data generating process. Specifically, we consider three profit functions whose optimal order solutions denote three different target service level (0.5, 0.63 and 0.3).
 
-In the experiment, we consider two benchmark methods to compare performance with:
+To further explore the method, we consider five data lengths (40,120,480,1200,4800) in order to see how does the proposed method performed when the learning period varies.
+
+In the experiment, we use seasonal dummies and lag term 1 and 4 as explanatory variables for the proposed method. Besides, two benchmark methods are selected to compare performance with:
 \begin{itemize}
     \item Disjoint method that use ARIMA $(1,0,0)(1,0,0)_4$ to forecast in the first phase and determine the optimal quantile from the profit function in the second phase,
-    \item Integrated method that use Quantile Regression with seasonal dummies and lag term 1 and 4 as independent variables.
+    \item Integrated method that use Quantile Regression with seasonal dummies and lag term 1 and 4 as explanatory variables.
 \end{itemize}
 Moreover, we use the exact model and parameters from data generating process to be our upper bound. We build the proposed method and benchmark methods based on the given data set, and compare their performance on the $1$-step ahead forecast. The comparison of performance includes:
 \begin{enumerate}
@@ -285,11 +286,8 @@ Moreover, we use the exact model and parameters from data generating process to 
     \item Service Level ($SL=\mathbb {I}_{(\hat{Q}_{s+1}>y_{s+1})}$),
     \item Fill Rate ($MFR=\frac{\min\{\hat{Q}_{s+1},y_{s+1}\}}{y_{s+1}}$).
 \end{enumerate}
-We expect to see the performance of both the proposed method and benchmark methods converge to this upper bound when data length increases, and we also investigate the differences of their performance when data is insufficient.
 
-The results are presented in tables and figures. In Figure \ref{fig:ppl0.3}, average percentage profit loss are calculated based on iterations. Particularly, this figure represents the average performance of methods regarding to percentage profit loss in the situation where the target service level $=0.3$. DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. Regarding the percentage profit loss, when the data size is small, the disjoint method performed slightly better than the quantile regression method than the proposed method. In Figure \ref{fig:sl0.3}, every points represent the proportion of iterations that the demand is satisfied (e.g. 0.5 means the demand are satisfied in 10,000 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the different mechanisms of the disjoint method and integrated method. 
-
-More details about the size effect can be seen in Table \ref{tab:size_effect0.5}.
+The results are presented in tables and figures. In Figure \ref{fig:ppl0.3}, average percentage profit loss are calculated based on iterations. Particularly, this figure represents the average performance of methods regarding to percentage profit loss in the situation where the target service level $=0.3$. DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. However, when the data size is small, the disjoint method performed slightly better than the quantile regression method than the proposed method. 
 
 \begin{figure}[h]
 \centering
@@ -297,6 +295,10 @@ More details about the size effect can be seen in Table \ref{tab:size_effect0.5}
 \caption{Percentage profit loss vs. data size at 0.3 target service level}
 \label{fig:ppl0.3}
 \end{figure}
+
+In Figure \ref{fig:sl0.3}, every points represent the proportion of iterations that the demand is satisfied (e.g. 0.32 means the demand are satisfied in 6,400 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the different mechanisms of the disjoint method and integrated method. The disjoint method forecasts the mean and variance of the demand distribution in the first phase. When the data size is small, the forecasted variance will be bigger than the true variance. Therefore, the solution of the optimal quantity in second phase will be 'far away' from 0.5, which leads to lower service level when data size is small. On the other hand, the proposed method approaches the true optimal quantity by applying the optimisation algorithm directly on total profit.  
+
+More details about the size effect can be seen in Table \ref{tab:size_effect0.5}.
 
 \begin{figure}[h]
 \centering
