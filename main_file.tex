@@ -296,9 +296,7 @@ The results are presented in tables and figures. In Figure \ref{fig:ppl0.3}, ave
 \label{fig:ppl0.3}
 \end{figure}
 
-In Figure \ref{fig:sl0.3}, every points represent the proportion of iterations that the demand is satisfied (e.g. 0.32 means the demand are satisfied in 6,400 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the different mechanisms of the disjoint method and integrated method. The disjoint method forecasts the mean and variance of the demand distribution in the first phase. When the data size is small, the forecasted variance will be bigger than the true variance. Therefore, the solution of the optimal quantity in second phase will be 'far away' from 0.5, which leads to lower service level when data size is small. On the other hand, the proposed method approaches the true optimal quantity by applying the optimisation algorithm directly on total profit.  
-
-More details about the size effect can be seen in Table \ref{tab:size_effect0.5}.
+In Figure \ref{fig:sl0.3}, every points represent the proportion of iterations that the demand is satisfied (e.g. 0.32 means the demand are satisfied in 6,400 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the different mechanisms of the disjoint method and integrated method. The disjoint method forecasts the mean and variance of the demand distribution in the first phase. When the data size is small, the forecasted variance will be bigger than the true variance. Therefore, the solution of the optimal quantity in second phase will be 'far away' from 0.5, which leads to lower service level when data size is small. On the other hand, the integrated method approaches the true optimal quantity by applying the optimisation algorithm directly on total profit. Therefore, even if there are two quantity value that have equal distance from the optimal quantity, the algorithm will always favor the one with better profit. In this particular profit function, the algorithm will always favor the quantity leads to higher service level.
 
 \begin{figure}[h]
 \centering
@@ -306,6 +304,8 @@ More details about the size effect can be seen in Table \ref{tab:size_effect0.5}
 \caption{Service level vs. data size at 0.3 target service level}
 \label{fig:sl0.3}
 \end{figure}
+
+By fixing the target service level, we can compare the performance of methods in different data size in Table \ref{tab:size_effect0.5}.
 
 \begin{table}[h]
 \caption{Size effect on percentage profit loss and service level at 0.5 target service level}
