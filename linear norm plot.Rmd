@@ -339,37 +339,37 @@ mac
 
 
 
-```{r size0.5}
-dgp_p<-c(Reduce("+",re_40_p_l[[1]])[2]/iter,Reduce("+",re_120_p_l[[1]])[2]/iter
-         ,Reduce("+",re_480_p_l[[1]])[2]/iter,Reduce("+",re_1200_p_l[[1]])[2]/iter
-         ,Reduce("+",re_4800_p_l[[1]])[2]/iter)
-dj_p<-c(Reduce("+",re_40_p_l[[2]])[2]/iter,Reduce("+",re_120_p_l[[2]])[2]/iter
-         ,Reduce("+",re_480_p_l[[2]])[2]/iter,Reduce("+",re_1200_p_l[[2]])[2]/iter
-         ,Reduce("+",re_4800_p_l[[2]])[2]/iter)
-qr_p<-c(Reduce("+",re_40_p_l[[3]])[2]/iter,Reduce("+",re_120_p_l[[3]])[2]/iter
-         ,Reduce("+",re_480_p_l[[3]])[2]/iter,Reduce("+",re_1200_p_l[[3]])[2]/iter
-         ,Reduce("+",re_4800_p_l[[3]])[2]/iter)
-cf_p<-c(Reduce("+",re_40_p_l[[4]])[2]/iter,Reduce("+",re_120_p_l[[4]])[2]/iter
-         ,Reduce("+",re_480_p_l[[4]])[2]/iter,Reduce("+",re_1200_p_l[[4]])[2]/iter
-         ,Reduce("+",re_4800_p_l[[4]])[2]/iter)
-dgp_s<-c(Reduce("+",re_40_p_l[[1]])[3]/iter,Reduce("+",re_120_p_l[[1]])[3]/iter
-         ,Reduce("+",re_480_p_l[[1]])[3]/iter,Reduce("+",re_1200_p_l[[1]])[3]/iter
-         ,Reduce("+",re_4800_p_l[[1]])[3]/iter)
-dj_s<-c(Reduce("+",re_40_p_l[[2]])[3]/iter,Reduce("+",re_120_p_l[[2]])[3]/iter
-         ,Reduce("+",re_480_p_l[[2]])[3]/iter,Reduce("+",re_1200_p_l[[2]])[3]/iter
-         ,Reduce("+",re_4800_p_l[[2]])[3]/iter)
-qr_s<-c(Reduce("+",re_40_p_l[[3]])[3]/iter,Reduce("+",re_120_p_l[[3]])[3]/iter
-         ,Reduce("+",re_480_p_l[[3]])[3]/iter,Reduce("+",re_1200_p_l[[3]])[3]/iter
-         ,Reduce("+",re_4800_p_l[[3]])[3]/iter)
-cf_s<-c(Reduce("+",re_40_p_l[[4]])[3]/iter,Reduce("+",re_120_p_l[[4]])[3]/iter
-         ,Reduce("+",re_480_p_l[[4]])[3]/iter,Reduce("+",re_1200_p_l[[4]])[3]/iter
-         ,Reduce("+",re_4800_p_l[[4]])[3]/iter)
+```{r size0.3}
+dgp_p<-c(Reduce("+",re_40_p_l[[9]])[2]/iter,Reduce("+",re_120_p_l[[9]])[2]/iter
+         ,Reduce("+",re_480_p_l[[9]])[2]/iter,Reduce("+",re_1200_p_l[[9]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[9]])[2]/iter)
+dj_p<-c(Reduce("+",re_40_p_l[[10]])[2]/iter,Reduce("+",re_120_p_l[[10]])[2]/iter
+         ,Reduce("+",re_480_p_l[[10]])[2]/iter,Reduce("+",re_1200_p_l[[10]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[10]])[2]/iter)
+qr_p<-c(Reduce("+",re_40_p_l[[11]])[2]/iter,Reduce("+",re_120_p_l[[11]])[2]/iter
+         ,Reduce("+",re_480_p_l[[11]])[2]/iter,Reduce("+",re_1200_p_l[[11]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[11]])[2]/iter)
+cf_p<-c(Reduce("+",re_40_p_l[[12]])[2]/iter,Reduce("+",re_120_p_l[[12]])[2]/iter
+         ,Reduce("+",re_480_p_l[[12]])[2]/iter,Reduce("+",re_1200_p_l[[12]])[2]/iter
+         ,Reduce("+",re_4800_p_l[[12]])[2]/iter)
+dgp_s<-c(Reduce("+",re_40_p_l[[9]])[3]/iter,Reduce("+",re_120_p_l[[9]])[3]/iter
+         ,Reduce("+",re_480_p_l[[9]])[3]/iter,Reduce("+",re_1200_p_l[[9]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[9]])[3]/iter)
+dj_s<-c(Reduce("+",re_40_p_l[[10]])[3]/iter,Reduce("+",re_120_p_l[[10]])[3]/iter
+         ,Reduce("+",re_480_p_l[[10]])[3]/iter,Reduce("+",re_1200_p_l[[10]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[10]])[3]/iter)
+qr_s<-c(Reduce("+",re_40_p_l[[11]])[3]/iter,Reduce("+",re_120_p_l[[11]])[3]/iter
+         ,Reduce("+",re_480_p_l[[11]])[3]/iter,Reduce("+",re_1200_p_l[[11]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[11]])[3]/iter)
+cf_s<-c(Reduce("+",re_40_p_l[[12]])[3]/iter,Reduce("+",re_120_p_l[[12]])[3]/iter
+         ,Reduce("+",re_480_p_l[[12]])[3]/iter,Reduce("+",re_1200_p_l[[12]])[3]/iter
+         ,Reduce("+",re_4800_p_l[[12]])[3]/iter)
 df<-data.frame(c('40','120','480','1200','4800'),
                percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
                ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
                ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
 colnames(df)<-c('Data size','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
-kable(df,'latex', booktabs = T,caption = 'Size effect (q=50%)',align = 'c') %>% 
+kable(df,'latex', booktabs = T,caption = 'Size effect (q=30%)',align = 'c') %>% 
         add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
         kable_styling(latex_options = "scale_down")
 ```
