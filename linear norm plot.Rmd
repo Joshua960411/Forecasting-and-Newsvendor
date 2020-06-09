@@ -385,7 +385,7 @@ df<-data.frame(c('40','120','480','1200','4800'),
 colnames(df)<-c('Data size','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed'
                 ,'DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Size effect (q=30%)',align = 'c') %>% 
-        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Service level" = 4
                            , "Fill rate" = 4),bold = T) %>%
         kable_styling(latex_options = "scale_down")
 ```
@@ -408,13 +408,13 @@ qr_s<-c(Reduce("+",re_40_p_l[[3]])[3]/iter,Reduce("+",re_40_p_l[[7]])[3]/iter
          ,Reduce("+",re_40_p_l[[11]])[3]/iter)
 cf_s<-c(Reduce("+",re_40_p_l[[4]])[3]/iter,Reduce("+",re_40_p_l[[8]])[3]/iter
          ,Reduce("+",re_40_p_l[[12]])[3]/iter)
-df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
-               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.1),percent(dj_p,accuracy = 0.1)
+               ,percent(qr_p,accuracy = 0.1),percent(cf_p,accuracy = 0.1)
+               ,round(dgp_s,2),round(dj_s,2),round(qr_s,2),round(cf_s,2))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=40)',align = 'c') %>% 
-        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Service level" = 4),bold = T) %>%
         kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
@@ -436,13 +436,13 @@ qr_s<-c(Reduce("+",re_480_p_l[[3]])[3]/iter,Reduce("+",re_480_p_l[[7]])[3]/iter
          ,Reduce("+",re_480_p_l[[11]])[3]/iter)
 cf_s<-c(Reduce("+",re_480_p_l[[4]])[3]/iter,Reduce("+",re_480_p_l[[8]])[3]/iter
          ,Reduce("+",re_480_p_l[[12]])[3]/iter)
-df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
-               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.1),percent(dj_p,accuracy = 0.1)
+               ,percent(qr_p,accuracy = 0.1),percent(cf_p,accuracy = 0.1)
+               ,round(dgp_s,2),round(dj_s,2),round(qr_s,2),round(cf_s,2))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=480)',align = 'c') %>% 
-        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Service level" = 4),bold = T) %>%
         kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
@@ -464,12 +464,12 @@ qr_s<-c(Reduce("+",re_4800_p_l[[3]])[3]/iter,Reduce("+",re_4800_p_l[[7]])[3]/ite
          ,Reduce("+",re_4800_p_l[[11]])[3]/iter)
 cf_s<-c(Reduce("+",re_4800_p_l[[4]])[3]/iter,Reduce("+",re_4800_p_l[[8]])[3]/iter
          ,Reduce("+",re_4800_p_l[[12]])[3]/iter)
-df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.01),percent(dj_p,accuracy = 0.01)
-               ,percent(qr_p,accuracy = 0.01),percent(cf_p,accuracy = 0.01)
-               ,round(dgp_s,3),round(dj_s,3),round(qr_s,3),round(cf_s,3))
+df<-data.frame(c('0.5','0.63','0.3'),percent(dgp_p,accuracy = 0.1),percent(dj_p,accuracy = 0.1)
+               ,percent(qr_p,accuracy = 0.1),percent(cf_p,accuracy = 0.1)
+               ,round(dgp_s,2),round(dj_s,2),round(qr_s,2),round(cf_s,2))
 
 colnames(df)<-c('Target service level','DGP','disjoint','quantile','proposed','DGP','disjoint','quantile','proposed')
 kable(df,'latex', booktabs = T,caption = 'Target service level effect (n=4800)',align = 'c') %>% 
-        add_header_above(c(" ", "Percentage profit loss" = 4, "Average service level" = 4),bold = T) %>%
+        add_header_above(c(" ", "Percentage profit loss" = 4, "Service level" = 4),bold = T) %>%
         kable_styling(latex_options = c("striped", "scale_down"))
 ```
