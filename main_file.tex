@@ -372,13 +372,23 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{table}
 
 \subsection{Misleading information}
-In this subsection, we consider the performance of our proposed method, compares with disjoint method, in the scenario where the we possess misleading model information. The data is still generated from ARIMA $(1,0,0)(1,0,0)_4$ model, while two misleading model are considered, AR$(1)$ and ARIMA $(2,0,0)(1,0,0)_4$. To fairly compare performance with those two disjoint model, we use lag term 1 as explanatory variable for the proposed method in first model and lag term 1, 2, 4 as explanatory variable for the proposed method in second model. As in the previous scenario, the error term of the demand follows normal distribution. In this experiment, we use a linear profit function where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$, and fix the target service level to be 0.3. The percentage profit loss of different data size for the first misleading model can be seen in Figure \ref{fig:ar1}.
+In this subsection, we consider the performance of our proposed method, compares with disjoint method, in the scenario where the we possess misleading model information. The data is still generated from ARIMA $(1,0,0)(1,0,0)_4$ model, while two misleading model are considered, AR$(1)$ and ARIMA $(2,0,0)(1,0,0)_4$. To fairly compare performance with those two disjoint model, we use lag term 1 as explanatory variable for the proposed method in first model and lag term 1, 2, 4 as explanatory variable for the proposed method in second model. As in the previous scenario, the error term of the demand follows normal distribution. In this experiment, we use a linear profit function where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$, and fix the target service level to be 0.3. The percentage profit loss of different data size for the misleading model can be seen in Figure \ref{fig:mis}.
 
 \begin{figure}[ht]
 \centering
-\caption{Percentage profit loss vs. data size in misleading model AR$(1)$}
-\includegraphics{information-plot_files/figure-latex/AR(1)-1.pdf}
-\label{fig:ar1}
+\caption{Percentage profit loss vs. data size in misleading model}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)-1.pdf}
+\caption{misleading model AR$(1)$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4-1.pdf}
+\caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
+\end{subfigure}
+\label{fig:mis}
 \end{figure}
 
 
