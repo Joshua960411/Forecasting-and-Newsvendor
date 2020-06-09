@@ -270,7 +270,14 @@ In the case of NVP, the proposed estimator has following useful statistical prop
 
 \subsection{Simulation design}
 
-In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$ and constant level $=500$. The simulation will be performed base on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear, the error term of the demand follows normal distribution $U(0,100^2)$, and we know the model of the data generating process. Specifically, we consider three profit functions whose optimal order solutions denote three different target service level (0.5, 0.63 and 0.3).
+In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$ and constant level $=500$. The simulation will be performed base on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear, the error term of the demand follows normal distribution $U(0,100^2)$, and we know the model of the data generating process. Specifically, we consider three profit functions \footnote{
+The parameters of three profit functions are:
+\begin{enumerate}
+    \item $p=20$, $v=8$, $c_h=-3$, $c_s=-7$
+    \item $p=20$, $v=8$, $c_h=3$, $c_s=7$
+    \item $p=20$, $v=10$, $c_h=-3$, $c_s=-7$
+\end{enumerate}
+} whose optimal order solutions denote three different target service level (0.5, 0.63 and 0.3).
 
 To further explore the method, we consider five data lengths (40,120,480,1200,4800) in order to see how does the proposed method performed when the learning period varies.
 
@@ -289,25 +296,25 @@ Moreover, we use the exact model and parameters from data generating process to 
 
 The results are presented in tables and figures. In Figure \ref{fig:ppl0.3}, average percentage profit loss are calculated based on iterations. Particularly, this figure represents the average performance of methods regarding to percentage profit loss in the situation where the target service level $=0.3$. DGP denotes the exact ARIMA model from data generating process as out upper bound, DJ denotes the disjoint method, QR denotes the quantile regression method, and CF denotes our proposed method. We can see both the proposed method and the benchmark methods converge to the upper bound when data length grows. Besides, the performance of our proposed method and quantile regression is very similar. This is exactly what we expected base on the transformation property we proved in Section \ref{se:new}. However, when the data size is small, the disjoint method performed slightly better than the quantile regression method than the proposed method. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
-\includegraphics{ppl0.3-1.pdf}
 \caption{Percentage profit loss vs. data size at 0.3 target service level}
+\includegraphics{ppl0.3-1.pdf}
 \label{fig:ppl0.3}
 \end{figure}
 
 In Figure \ref{fig:sl0.3}, every points represent the proportion of iterations that the demand is satisfied (e.g. 0.32 means the demand are satisfied in 6,400 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the different mechanisms of the disjoint method and integrated method. The disjoint method forecasts the mean and variance of the demand distribution in the first phase. When the data size is small, the forecasted variance will be bigger than the true variance. Therefore, the solution of the optimal quantity in second phase will be 'far away' from 0.5, which leads to lower service level when data size is small. On the other hand, the integrated method approaches the true optimal quantity by applying the optimisation algorithm directly on total profit. Therefore, even if there are two quantity value that have equal distance from the optimal quantity, the algorithm will always favor the one with better profit. In this particular profit function, the algorithm will always favor the quantity leads to higher service level.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
-\includegraphics{sl-3.pdf}
 \caption{Service level vs. data size at 0.3 target service level}
+\includegraphics{sl-3.pdf}
 \label{fig:sl0.3}
 \end{figure}
 
 By fixing the target service level, we can compare the performance of methods in different data size in Table \ref{tab:size_effect0.3}. The value in columns of percentage profit loss and average service level are in line with Figure \ref{fig:ppl0.3} and Figure \ref{fig:sl0.3}. The columns of fill rate, on the other hand, provides us more information about demand fulfilment. The service level represents the proportion of iterations that the demand is successfully meet, while the fill rate provides not only the demand is meet or not, but in what percentage the demand was filled. In that case, we can see that the proposed method maintains a very high fill rate in all data size. 
 
-\begin{table}[h]
+\begin{table}[ht]
 \caption{Size effect on percentage profit loss and service level at 0.3 target service level}
 \label{tab:size_effect0.3}
 \centering \resizebox{\linewidth}{!}{
@@ -326,9 +333,9 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \end{tabular}} 
 \end{table}
 
-On the other hand, we can also compare the methods' performance regarding to different target service levels while fix the data size in Table \ref{tab:level_effect40} and \ref{tab:level_effect4800}. When data size is big enough, as in Table \ref{tab:level_effect4800}, different target service level doesn't make too much influence on the performance of methods. However, it is worth noticing that when the data size is small, in Table \ref{tab:level_effect40}, the disjoint method performed very differently from other methods.
+On the other hand, we can also compare the methods' performance regarding to different target service levels while fix the data size in Table \ref{tab:level_effect40} and Table \ref{tab:level_effect4800}. We can see that in both Tables, the percentage profit loss of all methods is particular high at 0.63 target service level. It is due to the opportunity cost is different in each profit function. In the function at 0.63 target service level, the 'underage' cost is 19 and the 'overage' cost is 11. However, in the function at 0.5 target service level, those costs are both 5. This high opportunity cost leads to severe percentage profit loss.
 
-\begin{table}[h]
+\begin{table}[ht]
 \caption{Target service level effect on percentage profit loss and service level at 40 data size}
 \label{tab:level_effect40}
 \centering
@@ -346,7 +353,7 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{tabular}}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \caption{Target service level effect on percentage profit loss and service level at 4800 data size}
 \label{tab:level_effect4800}
 \centering
