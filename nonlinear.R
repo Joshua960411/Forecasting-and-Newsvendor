@@ -1,5 +1,5 @@
 rm(list=ls())
-gs()
+gc()
 library('forecast')
 library('smooth')
 library('quantreg')
