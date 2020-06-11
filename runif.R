@@ -1,4 +1,5 @@
 rm(list=ls())
+gc()
 library('forecast')
 library('greybox')
 library('smooth')
