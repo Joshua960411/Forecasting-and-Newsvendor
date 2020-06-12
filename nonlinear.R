@@ -28,27 +28,8 @@ profit_function_nonlinear_t<-function(order,demand,sed){
   return(profit)
 }
 
-order<-seq(900,2100,1)
-quan_list<-c()
-for (k in 1:100){
-  list<-c()
-  quan<-0
-  for (i in order){
-    precord<-0
-    meanprofit<-0
-    for (j in 1:500){
-      de<-rnorm(1,1500,200)
-      profit<-profit_function_nonlinear(i,de)
-      precord<-precord+profit
-    }
-    meanprofit<-precord/500
-    list<-c(list,meanprofit)
-  }
-  quan<-pnorm(order[which.max(list)],1500,200)
-  quan_list<-c(quan_list,quan)
-}
-requan<-mean(quan_list)
 
+requan<-0.58
 
 
 ##estimator
