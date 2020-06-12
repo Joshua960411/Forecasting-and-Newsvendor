@@ -29,7 +29,7 @@ profit_function_nonlinear_t<-function(order,demand,sed){
 }
 
 
-requan<-0.58
+requan<-0.56
 
 
 ##estimator
