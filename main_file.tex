@@ -378,13 +378,14 @@ The results can be seen in Figure \ref{fig:non}. We can see that the percentage 
 
 \subsection{Error term misspecification}
 In this subsection, we are interested in explore the behavior of our proposed method in the scenario where the error term is misspecified. Particularly, we generate our data from ARIMA $(1,0,0)(1,0,0)_4$ with error term follows Laplace$(0,141)$. Therefore, the mean and variance will be as same as $\mathcal{N}(0,200^2)$. As before, we assume that the model of the data generating process is known, and the underlying profit function is linear where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$. However, we fail to know the true distribution of the error term, and still assume it follows normal distribution $\mathcal{N}(0,200^2)$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Concluding Remarks} \label{se:end}
-This paper presents the framework of a new integrated approach to NVPs. The method is flexible, and doesn't make assumptions about demand distribution. Therefore, it could generate stable outcomes even in the case we possess misleading information or make wrong assumptions.
+This paper presents the framework of a new integrated approach to NVPs. The method is flexible, and doesn't make assumptions about demand distribution nor the solution of profit function. It could generate stable outcomes even in the case we possess misleading information or make wrong assumptions.
 
-We illustrate and compare the proposed method in computational experiments. As expected, the proposed method can achieve as same level of performance as disjoint method in classic NVPs, while provides marvelous results when the scenario become complicated. The results of experiment also backup our proof on the transformation property between proposed method and quantile regression in the linear profit function case. Besides, the proposed method behaves well in the nonlinear profit function case where the quantile regression is no longer functional.
+We illustrate and compare the proposed method with conventional disjoint method in computational experiments. As expected, the proposed method can achieve as same level of performance as disjoint method in classic NVPs, while provides marvelous results when the scenario become complicated. The results of experiment also backup our proof on the transformation property between proposed method and quantile regression in the linear profit function case. Besides, the proposed method behaves well in the nonlinear profit function case where the quantile regression is no longer functional.
 
-For future research, more scenarios of experiment should be considered and tested 
+For future research, more scenarios of experiment should be considered and tested. Only a few particular examples are used in our paper. In order to provide more robust conclusion, more examples in each scenario are also requested. Moreover, it is interested to consider using a nonlinear form of regression model to estimate the order quantity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \printbibliography
 
