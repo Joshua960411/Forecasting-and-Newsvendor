@@ -75,7 +75,7 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   arima_p_n<-forecast(arima_p,test_length,interval="parametric",level=requan*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'L-BFGS-B', data = set_data)$par
+  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'BFGS', data = set_data)$par
   cf_n<-cf_n_par[1]+cf_n_par[2]*1+cf_n_par[3]*0+cf_n_par[4]*0+cf_n_par[5]*data[40]+cf_n_par[6]*data[37]
   ##list
   list(arima_k_n,arima_p_n,cf_n)
@@ -105,7 +105,7 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_p_n<-forecast(arima_p,test_length,interval="parametric",level=requan*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'L-BFGS-B', data = set_data)$par
+  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'BFGS', data = set_data)$par
   cf_n<-cf_n_par[1]+cf_n_par[2]*1+cf_n_par[3]*0+cf_n_par[4]*0+cf_n_par[5]*data[120]+cf_n_par[6]*data[117]
   ##list
   list(arima_k_n,arima_p_n,cf_n)
@@ -136,7 +136,7 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_p_n<-forecast(arima_p,test_length,interval="parametric",level=requan*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'L-BFGS-B', data = set_data)$par
+  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'BFGS', data = set_data)$par
   cf_n<-cf_n_par[1]+cf_n_par[2]*1+cf_n_par[3]*0+cf_n_par[4]*0+cf_n_par[5]*data[480]+cf_n_par[6]*data[477]
   ##list
   list(arima_k_n,arima_p_n,cf_n)
@@ -167,7 +167,7 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_p_n<-forecast(arima_p,test_length,interval="parametric",level=requan*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'L-BFGS-B', data = set_data)$par
+  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'BFGS', data = set_data)$par
   cf_n<-cf_n_par[1]+cf_n_par[2]*1+cf_n_par[3]*0+cf_n_par[4]*0+cf_n_par[5]*data[1200]+cf_n_par[6]*data[1197]
   ##list
   list(arima_k_n,arima_p_n,cf_n)
@@ -198,7 +198,7 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_p_n<-forecast(arima_p,test_length,interval="parametric",level=requan*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'L-BFGS-B', data = set_data)$par
+  cf_n_par<-optim(par = coe, fn = mini_nonlinear,method = 'BFGS', data = set_data)$par
   cf_n<-cf_n_par[1]+cf_n_par[2]*1+cf_n_par[3]*0+cf_n_par[4]*0+cf_n_par[5]*data[4800]+cf_n_par[6]*data[4797]
   ##list
   list(arima_k_n,arima_p_n,cf_n)
