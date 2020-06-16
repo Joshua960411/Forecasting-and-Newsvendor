@@ -68,7 +68,7 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'SANN', data = set_data)$par
+  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
   cf_l<-cf_l_par[1]+cf_l_par[2]*1+cf_l_par[3]*0+cf_l_par[4]*0+cf_l_par[5]*data[40]+cf_l_par[6]*data[37]
   ##list
   list(arima_k_l,arima_p_l,cf_l)
@@ -99,7 +99,7 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'SANN', data = set_data)$par
+  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
   cf_l<-cf_l_par[1]+cf_l_par[2]*1+cf_l_par[3]*0+cf_l_par[4]*0+cf_l_par[5]*data[120]+cf_l_par[6]*data[117]
   ##list
   list(arima_k_l,arima_p_l,cf_l)
@@ -130,7 +130,7 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'SANN', data = set_data)$par
+  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
   cf_l<-cf_l_par[1]+cf_l_par[2]*1+cf_l_par[3]*0+cf_l_par[4]*0+cf_l_par[5]*data[480]+cf_l_par[6]*data[477]
   ##list
   list(arima_k_l,arima_p_l,cf_l)
@@ -161,7 +161,7 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'SANN', data = set_data)$par
+  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
   cf_l<-cf_l_par[1]+cf_l_par[2]*1+cf_l_par[3]*0+cf_l_par[4]*0+cf_l_par[5]*data[1200]+cf_l_par[6]*data[1197]
   ##list
   list(arima_k_l,arima_p_l,cf_l)
@@ -191,7 +191,7 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
-  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'SANN', data = set_data)$par
+  cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
   cf_l<-cf_l_par[1]+cf_l_par[2]*1+cf_l_par[3]*0+cf_l_par[4]*0+cf_l_par[5]*data[4800]+cf_l_par[6]*data[4797]
   ##list
   list(arima_k_l,arima_p_l,cf_l)
