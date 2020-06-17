@@ -44,7 +44,7 @@ rownames(mac)<-c('40','120','480','1200','4800')
 colnames(mac)<-c("DGP", "DJ","QR","CF")
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("Data generating process", "Disjoint method","Quantile regression","Proposed method"),plot=FALSE, pch=1:4,col=1:4)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","PM"),plot=FALSE, pch=1:4,col=1:4)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
@@ -52,7 +52,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 
 ```
 
@@ -75,7 +75,7 @@ rownames(mac)<-c('40','120','480','1200','4800')
 colnames(mac)<-c("DGP", "DJ","QR","CF")
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("Data generating process", "Disjoint method","Quantile regression","Proposed method"),plot=FALSE, pch=1:4,col=1:4)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","PM"),plot=FALSE, pch=1:4,col=1:4)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
@@ -83,7 +83,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 
 ```
 
@@ -106,7 +106,7 @@ rownames(mac)<-c('40','120','480','1200','4800')
 colnames(mac)<-c("DGP", "DJ","QR","CF")
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("Data generating process", "Disjoint method","Quantile regression","Proposed method"),plot=FALSE, pch=1:4,col=1:4)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","QR","PM"),plot=FALSE, pch=1:4,col=1:4)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
@@ -114,7 +114,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",yaxt = "n"
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 
 ```
 
@@ -215,7 +215,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
         ,ylab = 'service level')
 axis(1, at=1:5, labels=x_axis)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 
 y_40<-c(Reduce("+",re_40_p_l[[5]])[3]/iter,Reduce("+",re_40_p_l[[6]])[3]/iter
         ,Reduce("+",re_40_p_l[[7]])[3]/iter,Reduce("+",re_40_p_l[[8]])[3]/iter)
@@ -237,7 +237,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
         ,ylab = 'service level')
 axis(1, at=1:5, labels=x_axis)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 
 y_40<-c(Reduce("+",re_40_p_l[[9]])[3]/iter,Reduce("+",re_40_p_l[[10]])[3]/iter
         ,Reduce("+",re_40_p_l[[11]])[3]/iter,Reduce("+",re_40_p_l[[12]])[3]/iter)
@@ -260,7 +260,7 @@ matplot(mac, type = c("b"),pch=1:4,col = 1:4,xaxt = "n",xlab = 'data length'
 abline(h=0.3,lty=2,col='black')
 axis(1, at=1:5, labels=x_axis)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Quantile regression","Proposed method"), pch=1:4,col=1:4)
+       ,c("DGP", "DJ","QR","PM"), pch=1:4,col=1:4)
 ```
 
 ```{r Wilcoxon}

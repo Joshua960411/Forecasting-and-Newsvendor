@@ -60,7 +60,7 @@ colnames(var)<-c("DGP", "DJ","CF")
 var
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("Data generating process", "Disjoint method","Proposed method"),plot=FALSE, pch=1:3,col=1:3)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
@@ -68,7 +68,7 @@ matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Proposed method"), pch=1:3,col=1:3)
+       ,c("DGP", "DJ","PM"), pch=1:3,col=1:3)
 
 ```
 
@@ -111,7 +111,7 @@ colnames(var)<-c("DGP", "DJ","CF")
 var
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("Data generating process", "Disjoint method","Proposed method"),plot=FALSE, pch=1:3,col=1:3)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
@@ -119,7 +119,7 @@ matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("Data generating process", "Disjoint method","Proposed method"), pch=1:3,col=1:3)
+       ,c("DGP", "DJ","PM"), pch=1:3,col=1:3)
 
 ```
 
