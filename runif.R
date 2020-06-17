@@ -63,9 +63,9 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=TRUE)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = sd(arima_k$residuals)/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
@@ -94,9 +94,9 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=TRUE)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = sd(arima_k$residuals)/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
@@ -125,9 +125,9 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=TRUE)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = sd(arima_k$residuals)/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
@@ -156,9 +156,9 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=TRUE)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = sd(arima_k$residuals)/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
@@ -186,9 +186,9 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=TRUE)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = sd(arima_k$residuals)/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear*2-1)$upper
+  arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_l_par<-optim(par = coe, fn = mini_linear, method = 'L-BFGS-B', data = set_data)$par
