@@ -324,27 +324,6 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{tabular}}
 \end{table}
 
-\subsection{Misleading model information}
-In this subsection, we consider the performance of our proposed method, compared with the disjoint method, in the scenario where we possess misleading model information. The data is still generated from ARIMA $(1,0,0)(1,0,0)_4$ model, while two misleading model are considered, AR$(1)$ and ARIMA $(2,0,0)(1,0,0)_4$. To fairly compare performance with those two disjoint model, we use lag term 1 as explanatory variable for the proposed method in first model and lag term 1, 2, 4 as explanatory variable for the proposed method in second model. As in the previous scenario, the error term of the demand follows normal distribution. In this experiment, we use a linear profit function where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$, and fix the target service level to be 0.3. The percentage profit loss of different data size for the misleading model can be seen in Figure \ref{fig:mis}. It is clear that both the disjoint method and our proposed integrated method generate high percentage profit loss in all data size when the misleading model is AR$(1)$. Obviously, short of explanatory variables makes the forecasting less accurate. In the case where misleading model is ARIMA $(2,0,0)(1,0,0)_4$, our forecasting methods can capture the structure when data is sufficient. However, we can see that when data size is small, the misleading information still has some influence on the performance. Moreover, disjoint method performs slightly better than the proposed method at small data size. Though the explanatory variables are chosen to be same for both methods, the misleading information not only make the structure of demand hard to capture, but also make locating the optimal quantile more challenging for integrated method. Therefore, the disjoint method still has advantage in this scenario.
-
-\begin{figure}[ht]
-\centering
-\caption{Percentage profit loss vs. data size in misleading model}
-\begin{subfigure}[b]{0.48\textwidth}
-\centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)-1.pdf}
-\caption{misleading model AR$(1)$}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.48\textwidth}
-\centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4-1.pdf}
-\caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
-\end{subfigure}
-\label{fig:mis}
-\end{figure}
-
-
 \subsection{Complex profit function}
 In this subsection, we consider the scenario where the error term of the demand follows normal distribution, and the model of the data generating process is known, but the underlying profit function is nonlinear\footnote{$
         \pi(Q,y)=
@@ -374,24 +353,46 @@ The results can be seen in Figure \ref{fig:non}. We can see that the percentage 
 \end{figure}
 
 
-\subsection{Error term misspecification}
-In this subsection, we are interested in explore the behavior of our proposed method in the scenario where the error term is misspecified. Particularly, we generate our data from ARIMA $(1,0,0)(1,0,0)_4$ with error term follows Laplace$(0,141)$. Therefore, the mean and variance will be as same as $\mathcal{N}(0,200^2)$. As before, we assume that the model of the data generating process is known, and the underlying profit function is linear where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$. However, we fail to know the true distribution of the error term, and still assume it follows normal distribution $\mathcal{N}(0,200^2)$.
+\subsection{Misleading information}
+In this subsection, we consider the performance of our proposed method, compared with the disjoint method, in the scenario where we possess misleading information. 
+
+
+We first consider misleading DGP model, where the data is still generated from ARIMA $(1,0,0)(1,0,0)_4$ model, but two misleading model information are given, AR$(1)$ and ARIMA $(2,0,0)(1,0,0)_4$. To fairly compare performance with those two disjoint model, we use lag term 1 as explanatory variable for the proposed method in first model and lag term 1, 2, 4 as explanatory variable for the proposed method in second model. As in the previous scenario, the error term of the demand follows normal distribution. In this experiment, we use a linear profit function where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$, and fix the target service level to be 0.3. The percentage profit loss of different data size for the misleading model can be seen in Figure \ref{fig:mis}. It is clear that both the disjoint method and our proposed integrated method generate high percentage profit loss in all data size when the misleading model is AR$(1)$. Obviously, short of explanatory variables makes the forecasting less accurate. In the case where misleading model is ARIMA $(2,0,0)(1,0,0)_4$, our forecasting methods can capture the structure when data is sufficient. However, we can see that when data size is small, the misleading information still has some influence on the performance. Moreover, disjoint method performs slightly better than the proposed method at small data size. Though the explanatory variables are chosen to be same for both methods, the misleading information not only make the structure of demand hard to capture, but also make locating the optimal quantile more challenging for integrated method. Therefore, the disjoint method still has advantage in this scenario.
+
+\begin{figure}[ht]
+\centering
+\caption{Percentage profit loss vs. data size in misleading model}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)-1.pdf}
+\caption{misleading model AR$(1)$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4-1.pdf}
+\caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
+\end{subfigure}
+\label{fig:mis}
+\end{figure}
+
+Furthermore, we explore the behavior of our proposed method in the scenario where the error term is misspecified. Particularly, we generate our data from ARIMA $(1,0,0)(1,0,0)_4$ with error term follows Laplace$(0,141)$. Therefore, the mean and variance will be as same as $\mathcal{N}(0,200^2)$. As before, we assume that the model of the data generating process is known, and the underlying profit function is linear where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$. However, we fail to know the true distribution of the error term, and still assume it follows normal distribution $\mathcal{N}(0,200^2)$. As presented in Figure \ref{fig:err}, both the proposed method and the disjoint method can still managed to achieve relative low percentage profit loss when learning data is abundant. However, it is worth noticing that the proposed method converge to the target service level 0.3, yet the disjoint method fail to do so and yield a unsatisfied result. This phenomenon suggests an evidence that the disjoint method rely strongly on the correctness of obtaining underlying distribution, while the proposed method is more flexible. 
 
 \begin{figure}[ht]
 \centering
 \caption{Performance vs. data size with Laplace distributed error term}
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{runif-plot_files/figure-latex/unnamed-chunk-1-1.pdf}
+\includegraphics[width=\textwidth]{runif-plot_files/figure-latex/ppl-1.pdf}
 \caption{percentage profit loss vs. data size}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{}
+\includegraphics[width=\textwidth]{runif-plot_files/figure-latex/sl-1.pdf}
 \caption{service level vs. data size}
 \end{subfigure}
-\label{fig:non}
+\label{fig:err}
 \end{figure}
 
 \section{Concluding Remarks} \label{se:end}
