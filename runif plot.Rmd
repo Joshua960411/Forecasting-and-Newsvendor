@@ -2,7 +2,9 @@
 title: "runif"
 author: "Joshua"
 date: "25/05/2020"
-output: pdf_document
+output:
+  pdf_document:
+    keep_tex: true
 ---
 
 ```{r setup, include=TRUE}
@@ -24,7 +26,7 @@ iter<-20000
 
 ## ppl vs length
 
-```{r}
+```{r ppl}
 x_axis<-c(40,120,480,1200,4800)
 y_40<-c(mean(sapply(re_40[[1]], "[[", 1)),mean(sapply(re_40[[2]], "[[", 1)),
         mean(sapply(re_40[[3]], "[[", 1)))
@@ -73,7 +75,7 @@ legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
 
 ## sl vs length
 
-```{r}
+```{r sl}
 x_axis<-c(40,120,480,1200,4800)
 y_40<-c(mean(sapply(re_40[[1]], "[[", 2)),mean(sapply(re_40[[2]], "[[", 2)),
         mean(sapply(re_40[[3]], "[[", 2)))
