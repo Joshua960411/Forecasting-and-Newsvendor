@@ -31,7 +31,7 @@ Lancaster University, Lancaster LA1 4YX, UK.
 Email: {\tt \{c.liu19,a.n.letchford,i.svetunkov\}@lancaster.ac.uk}}
 \and Adam N.\ Letchford$^*$ \and Ivan Svetunkov$^*$} % end author list
 
-\date{Draft, 18th June 2020}
+\date{Draft, 21st June 2020}
 
 \begin{document}
 
@@ -226,7 +226,7 @@ normality \cite{KHM05}.
 
 \subsection{Simulation design}
 
-In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$ and constant level $=500$. The simulation will be performed on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear, the error term of the data generating process (DGP) follows normal distribution $\mathcal{N}(0,200^2)$, and we know the model of DGP. Specifically, we consider three profit functions \footnote{
+In this section, we conduct the simulation experiment in order to demonstrate the performance of the proposed method. The data are simulated from ARIMA $(1,0,0)(1,0,0)_4$ with $\theta=0.3,\Theta=0.5$ and constant level $=500$, and the simulation will be performed on 20,000 iterations. We consider the simplest scenario in the beginning, where the underlying profit function is linear, the error term of the data generating process (DGP) follows normal distribution $\mathcal{N}(0,200^2)$, and the model of DGP is known. Specifically, we consider three profit functions \footnote{
 The parameters of three profit functions are:
 \begin{enumerate}
     \item $p=20$, $v=8$, $c_h=-3$, $c_s=-7$
@@ -256,7 +256,7 @@ The results are presented in tables and figures.\footnote{See appendix for figur
 \label{fig:ppl0.3}
 \end{figure}
 
-Figure \ref{fig:sl0.3} represents the proportion of iterations that the demand is satisfied (e.g. 0.32 means the demand are satisfied in 6,400 of the 20,000 iterations). We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from lower side while the proposed method and the quantile regression approach it from upper side. This phenomenon could be explained by the difference in mechanisms of the disjoint method and integrated method. The disjoint method estimates the mean and variance of the demand distribution in the first phase. When the data size is small, the estimated variance will be much bigger than the true variance. The variance, however, plays important role in determining quantile in the second phase. Therefore, big variance makes the solution of the optimal quantity 'far away' from 0.5, which leads to lower service level than target. On the other hand, the integrated method approaches the true optimal quantity by applying the optimisation/heuristic algorithm directly on total profit. Therefore, even if there are two quantities that equally distanced from the optimal quantity, the algorithm will always favor the one with better profit. In this particular profit function, the algorithm will always favor the quantity with higher service level.
+Figure \ref{fig:sl0.3} represents the proportion of iterations that the demand is satisfied. We can see that both the three methods and the DGP converge to the target service level 0.3 when data length grows. Yet, the disjoint method approaches the target service level from down side while the proposed method and the quantile regression approach it from up side. This phenomenon could be explained by the difference in mechanisms of the disjoint method and integrated method. The disjoint method estimates the mean and variance of the demand distribution in the first phase. When the data size is small, the estimated variance will be much bigger than the true variance. The variance, however, plays important role in determining quantile in the second phase. Therefore, big variance makes the solution of the optimal quantity 'far away' from 0.5, which leads to lower service level than target. On the other hand, the integrated method approaches the true optimal quantity by applying the optimisation/heuristic algorithm directly on total profit. Therefore, even if there are two quantities that equally distanced from the optimal quantity, the algorithm will always favor the one with better profit. In this particular profit function, the algorithm will always favor the quantity with higher service level.
 
 \begin{figure}[ht]
 \centering
