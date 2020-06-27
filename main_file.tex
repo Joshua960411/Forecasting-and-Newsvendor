@@ -260,7 +260,7 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
     \item Fill Rate ($FR=\frac{\min\{\hat{Q}_{s+1},y_{s+1}\}}{y_{s+1}}$).
 \end{enumerate}
 
- Figure \ref{fig:ppl0.3} shows the average percentage profit loss obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the data size grows. It is also apparent that PM and QR have very similar performance. This is to be expected, given that PM is equivalent to QR in the linear case.
+ Figure \ref{fig:ppl0.3} shows the average PPL obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the data size grows. It is also apparent that PM and QR have very similar performance. This is to be expected, given that PM is equivalent to QR in the linear case.
 
 \begin{figure}
 \centering
@@ -269,9 +269,6 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
 \label{fig:ppl0.3}
 \end{figure}
 
-Figure \ref{fig:sl0.3} represents the average service level, i.e., the proportion of iterations in which the demand was satisfied in the simulation.
-We see that all four methods converge to the desired target of 0.3 as the data length grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the costs of under- and over-stocking into account. For the given cost parameters, over-stocking is less costly than under-stocking.
-
 \begin{figure}[ht]
 \centering
 \caption{Service level vs. data size at 0.3 target service level}
@@ -279,7 +276,10 @@ We see that all four methods converge to the desired target of 0.3 as the data l
 \label{fig:sl0.3}
 \end{figure}
 
-Figure \ref{fig:fr0.3} represents the average fill rate. As one might expect, the average fill rate follows a similar pattern to the service level. Moreover, the fill rate is very high for all methods and all data sizes. The full results for a target of 0.3 can be found in Table \ref{tab:size_effect0.3}.
+Figure \ref{fig:sl0.3} represents the average SL, i.e., the proportion of iterations in which the demand was satisfied in the simulation.
+We see that all four methods converge to the desired target of 0.3 as the data length grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the costs of under- and over-stocking into account. For the given cost parameters, over-stocking is less costly than under-stocking.
+
+Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate follows a similar pattern to the service level. Moreover, the fill rate is very high for all methods and all data sizes. The full results for a target of 0.3 can be found in Table \ref{tab:size_effect0.3}.
 
 \begin{figure}[ht]
 \centering
@@ -310,7 +310,7 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \noindent
 {\bf ENGLISH CHECKED UP TO HERE.}\\
 \\
-On the other hand, we can also compare the methods' performance regarding to different target service levels while fixing the data size as in Table \ref{tab:level_effect40} and Table \ref{tab:level_effect4800}, which represent the case data is insufficient and the case data is abundant, respectively. We can see that in both tables, the percentage profit loss of all methods is particular high at 0.63 target service level. It is due to the opportunity cost is different in each profit function. In the function with 0.63 target service level, the 'underage' cost is 19 and the 'overage' cost is 11. However, in the function with 0.3 target service level, those costs are 3 and 7. Those high opportunity costs lead to severe overstock/understock punishment, and affects percentage profit loss. As we can see in Table \ref{tab:level_effect4800}, all methods perform similarly when data is sufficient. This result is in line with Figure \ref{fig:ppl0.3} and Figure \ref{fig:sl0.3} where target service level is 0.3. In Table \ref{tab:level_effect40}, where the data size is small, we can see that both the proposed method and benchmarks methods generate acceptable percentage profit loss compared with DGP. Yet, the service level of disjoint method is very poor in all cases. This result is in line with the findings from Figure \ref{fig:sl0.3}.
+We can also compare the performance while fixing the data size as in Table \ref{tab:level_effect40} and Table \ref{tab:level_effect4800}, which represent the case data is insufficient and the case data is abundant, respectively. One may find the PPL is particular high at target service level 0.63. This can be explained by the difference in overstock/understock costs in profit functions. For the three given functions, the one with target service level 0.63 happens to have highest overstock/understock costs.
 
 \begin{table}[ht]
 \caption{Target service level effect on percentage profit loss and service level at 40 data size}
@@ -352,13 +352,17 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 
 \subsection{Nonlinear cost functions} \label{sub:exp2}
 
-In this subsection, we consider the scenario where the error term of the demand follows normal distribution, and the model of the data generating process is known, but the underlying profit function is nonlinear\footnote{$
-        \pi(Q,y)=
-        \begin{cases}
-            20y-8Q-4(Q-y)+5\E[\min \{(Q-y),u\}],& \text{if } Q\geq y\\
-            20Q-8Q-0.01(y-Q)^2,& \text{if } Q< y,
-        \end{cases}$ and $u\sim \mathcal{N}(30,5^2)$} (solution see \cite{KK18}).
-In this scenario, we explore how the performance changes on both the proposed method and the disjoint method when we use complex profit function. We don't have to make any change on the proposed method to fit in the experiment, since it makes no assumption to the solution of profit function. However, we need to design a method to solve the optimal quantity of the profit function numerically for the disjoint method. In this case, a simulation algorithm is used and the optimal quantile is approximated to be 0.56. In the experiment, both the percentage profit loss and the service level will be concerned. The data will still be generated from ARIMA $(1,0,0)(1,0,0)_4$ process, and we use the performance of DGP to compare with both methods. 
+In this subsection, we consider the scenario where the error term of the demand follows normal distribution, and the model of the data generating process is known, but the underlying profit function is nonlinear:
+\[
+    \pi(Q,y)=
+    \begin{cases}
+        20y-8Q-4(Q-y)+5\E[\min \{(Q-y),u\}],& \text{if } Q\geq y\\
+        20Q-8Q-0.01(y-Q)^2,& \text{if } Q< y,
+    \end{cases}
+\]
+where $u\sim \mathcal{N}(30,5^2)$. One can use technique mentioned in \cite{KK18} or other numerical approaches to find the target service level of this function to be 0.56.
+
+In the experiment, both the percentage profit loss and the service level will be concerned. The data will still be generated from ARIMA $(1,0,0)(1,0,0)_4$ process, and we use the performance of DGP to compare with both methods. 
 
 The results can be seen in Figure \ref{fig:non}. We can see that the percentage profit loss of the proposed method is very similar to that of the disjoint method in every data size. Regarding to the service level, the proposed method can easily approach the target service level when the data size is small, while the disjoint method needs more data to reach the target service level. Moreover, the proposed method doesn't need any numerical approaches or simulation methods to solve for the optimal quantity solution of the profit function. Therefore, it generally requires less computational time.
 
