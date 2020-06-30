@@ -63,12 +63,12 @@ plot.new()
 l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
-matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
+matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n",yaxt = "n"
         ,xlab = 'data length',ylab = 'percetage profit loss') 
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("DGP", "DJ","PM"), pch=1:3,col=1:3)
+       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
 
 ```
 
@@ -114,12 +114,12 @@ plot.new()
 l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
-matplot(mac, type = c("b"),pch=1:3,col = 1:3,xaxt = "n",yaxt = "n"
+matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n",yaxt = "n"
         ,xlab = 'data length',ylab = 'percetage profit loss') 
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("DGP", "DJ","PM"), pch=1:3,col=1:3)
+       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
 
 ```
 
