@@ -31,7 +31,7 @@ Lancaster University, Lancaster LA1 4YX, UK.
 Email: {\tt \{c.liu19,a.n.letchford,i.svetunkov\}@lancaster.ac.uk}}
 \and Adam N.\ Letchford$^*$ \and Ivan Svetunkov$^*$} % end author list
 
-\date{Draft, 25th June 2020}
+\date{Draft, 10th July 2020}
 
 \begin{document}
 
@@ -235,14 +235,12 @@ deals with the case in which the profit function is nonlinear, and Subsection \r
 
 In our first experiment, we consider the classical NVP with quarterly demand data, and we assume that the DGP for demand is known. In more detail, we assume that the DGP is a seasonal ARIMA $(1,0,0)(1,0,0)_4$ process with $\theta=0.3$, $\Theta=0.5$, and constant level $500$. We also assume that the error term of the DGP follows a normal distribution $\mathcal{N}(0,200^2)$.
 
-We also consider three (linear) profit functions:
-\begin{enumerate}
-    \item $p=20$, $v=8$, $c_h=-3$, $c_s=-7$
-    \item $p=20$, $v=8$, $c_h=3$, $c_s=7$
+Initially, we chose the following parameters for our (linear) profit function:
+\begin{itemize}
     \item $p=20$, $v=10$, $c_h=-3$, $c_s=-7$.
-\end{enumerate}
-One can check that, for these, the target service level evaluates to
-$0.5$, $0.63$ and $0.3$, respectively.
+\end{itemize}
+One can check that the corresponding pair $\big( c_u,c_o \big)$ is $(3,7)$, and the target service level evaluates to $0.3$. (We explore the effect of varying
+the parameters below.)
 
 We begin by simulating 20,000 sets of demand data, each consisting of 4800 time periods. From each set, we also extract subsequences of length 40, 120, 480 and 1200. These will be used to explore how the amount of data available affects the performance of each method.
 
@@ -277,7 +275,7 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
 \end{figure}
 
 Figure \ref{fig:sl0.3} represents the average SL, i.e., the proportion of iterations in which the demand was satisfied in the simulation.
-We see that all four methods converge to the desired target of 0.3 as the data length grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the costs of under- and over-stocking into account. For the given cost parameters, over-stocking is less costly than under-stocking.
+We see that all four methods converge to the desired target of 0.3 as the data length grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the underage and overage costs into account. For the given cost parameters, over-stocking is less costly than under-stocking.
 
 Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate follows a similar pattern to the service level. Moreover, the fill rate is very high for all methods and all data sizes. The full results for a target of 0.3 can be found in Table \ref{tab:size_effect0.3}.
 
@@ -307,13 +305,18 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \end{tabular}} 
 \end{table}
 
-\noindent
-{\bf ENGLISH CHECKED UP TO HERE.}\\
-\\
-We can also compare the performance while fixing the data size as in Table \ref{tab:level_effect40} and Table \ref{tab:level_effect4800}, which represent the case data is insufficient and the case data is abundant, respectively. One may find the PPL is particular high at target service level 0.63. This can be explained by the difference in overstock/understock costs in profit functions. For the three given functions, the one with target service level 0.63 happens to have highest overstock/understock costs.
+Next, we explored whether the target service level has a significant effect on the performance of the methods. Specifically, we considered the following two alternative parameter settings:
+\begin{itemize}
+    \item $p=20$, $v=8$, $c_h=-3$, $c_s=-7$
+    \item $p=20$, $v=8$, $c_h=3$, $c_s=7$.
+\end{itemize}
+One can check that the corresponding pairs $\big( c_u,c_o \big)$ are $(5,5)$ and $(19,11)$, respectively. Thus, the target service level evaluates to $0.5$ and $0.63$, respectively.
 
-\begin{table}[ht]
-\caption{Target service level effect on percentage profit loss and service level at 40 data size}
+The relevant data is given in Tables \ref{tab:level_effect40} and \ref{tab:level_effect4800}, for the cases $s=40$
+and $s=4800$, respectively. Generally speaking, the picture is similar, regardless of the target service level. An exception is that the PPL is particular high with a target service level of 0.63. This is probably due, however, merely to the relatively large overage and underage costs in that case.
+
+\begin{table}
+\caption{Target service level effect on percentage profit loss and service level with 40 data points}
 \label{tab:level_effect40}
 \centering
 \resizebox{\linewidth}{!}{
@@ -330,8 +333,8 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{tabular}}
 \end{table}
 
-\begin{table}[ht]
-\caption{Target service level effect on percentage profit loss and service level at 4800 data size}
+\begin{table}
+\caption{Target service level effect on percentage profit loss and service level with 4800 data points}
 \label{tab:level_effect4800}
 \centering
 \resizebox{\linewidth}{!}{
@@ -348,11 +351,9 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{tabular}}
 \end{table}
 
-\footnote{See appendix for figures that not included here.}
-
 \subsection{Nonlinear cost functions} \label{sub:exp2}
 
-In this subsection, we consider the scenario where the error term of the demand follows normal distribution, and the model of the data generating process is known, but the underlying profit function is nonlinear:
+In this subsection, we examine the relative performance of the methods when applied to the nonlinear newsvendor problem. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function:
 \[
     \pi(Q,y)=
     \begin{cases}
@@ -360,13 +361,13 @@ In this subsection, we consider the scenario where the error term of the demand 
         20Q-8Q-0.01(y-Q)^2,& \text{if } Q< y,
     \end{cases}
 \]
-where $u\sim \mathcal{N}(30,5^2)$. One can use technique mentioned in \cite{KK18} or other numerical approaches to find the target service level of this function to be 0.56.
+where $u\sim \mathcal{N}(30,5^2)$. One can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that the target service level of this function is 0.56.
 
-In the experiment, both the percentage profit loss and the service level will be concerned. The data will still be generated from ARIMA $(1,0,0)(1,0,0)_4$ process, and we use the performance of DGP to compare with both methods. 
+Since the nonlinearity makes QR hard to apply, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
 
-The results can be seen in Figure \ref{fig:non}. We can see that the percentage profit loss of the proposed method is very similar to that of the disjoint method in every data size. Regarding to the service level, the proposed method can easily approach the target service level when the data size is small, while the disjoint method needs more data to reach the target service level. Moreover, the proposed method doesn't need any numerical approaches or simulation methods to solve for the optimal quantity solution of the profit function. Therefore, it generally requires less computational time.
+Figure \ref{fig:non} shows the PPL and SL of each method, for each data size. It is apparent that both methods perform rather well in terms of PPL, with very similar values for all data sizes. The picture is very different with SL. Indeed, we were surprised to find that the SL of the proposed method is very close to the the target service level even when the data size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below.
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
 \caption{Performance vs. data size with nonlinear profit function}
 \begin{subfigure}[b]{0.48\textwidth}
@@ -383,15 +384,23 @@ The results can be seen in Figure \ref{fig:non}. We can see that the percentage 
 \label{fig:non}
 \end{figure}
 
+We would like to stress that, even for the NNVP, the proposed method doesn't need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. Indeed, we found that, for these instances, it typically required less computing time than the disjoint method. (For brevity,
+we do not present detailed computing times.)
+ 
+\subsection{The effect of misspecification} \label{sub:exp3}
 
-\subsection{Misleading information} \label{sub:exp3}
+We now return to the linear case, and examine the effect of
+\emph{model misspecification} on the performance of the disjoint method,
+DJ, and our proposed method, PM.
 
-In this subsection, we consider the performance of our proposed method, compared with the disjoint method, in the scenario where we possess misleading information. 
+We first consider the case in which our model of the DGP is too simple.
+In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we ignore seasonality when solving the NVP. In other words, when estimating the optimal order quantity, we use the incorrect assumption that the DGP is merely an AR$(1)$ process. As in Subsection \ref{sub:exp1}, we assume that the error term of the demand follows a normal distribution, and we use the linear profit function with target service level
+$=0.3$.
 
+The percentage profit losses for this case can be seen in Figure
+\ref{fig:mis} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur a small additional loss in profit. This loss does not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making ``one-step ahead" forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches.
 
-We first consider misleading DGP model. The data is still generated from ARIMA $(1,0,0)(1,0,0)_4$ model, but two misleading model information are given, AR$(1)$ and ARIMA $(2,0,0)(1,0,0)_4$. To fairly compare performance with those two disjoint model, we use lag term 1 as explanatory variable for the proposed method in first model and lag term 1, 2, 4 as explanatory variable for the proposed method in second model. As in the previous scenario, the error term of the demand follows normal distribution. In this experiment, we use a linear profit function where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$ with target service level $=0.3$. The percentage profit loss of different data size for the misleading model can be seen in Figure \ref{fig:mis}. It is clear that both the disjoint method and our proposed integrated method generate high percentage profit loss in all data size when the misleading model is AR$(1)$. Obviously, short of explanatory variables makes the forecasting less accurate. In the case where misleading model is ARIMA $(2,0,0)(1,0,0)_4$, our forecasting methods can capture the structure when data is sufficient. However, we can see that when data size is small, the misleading information still has some influence on the performance. Moreover, disjoint method performs slightly better than the proposed method at small data size. Though the explanatory variables are chosen to be same for both methods, the misleading information not only make the structure of demand hard to capture, but also make locating the optimal quantile more challenging for integrated method. Therefore, the disjoint method still has advantage in this scenario.
-
-\begin{figure}[ht]
+\begin{figure}
 \centering
 \caption{Percentage profit loss vs. data size in misleading model}
 \begin{subfigure}[b]{0.48\textwidth}
@@ -408,9 +417,18 @@ We first consider misleading DGP model. The data is still generated from ARIMA $
 \label{fig:mis}
 \end{figure}
 
-Furthermore, we explore the behavior of our proposed method in the scenario where the error term is misspecified. Particularly, we generate our data from ARIMA $(1,0,0)(1,0,0)_4$ with error term follows Laplace$(0,141)$. Therefore, the mean and variance will be as same as $\mathcal{N}(0,200^2)$. As before, we assume that the model of the data generating process is known, and the underlying profit function is linear where $p=20$, $v=10$, $c_h=-3$, $c_s=-7$. However, we fail to know the true distribution of the error term, and still assume it follows normal distribution $\mathcal{N}(0,200^2)$. As presented in Figure \ref{fig:err}, both the proposed method and the disjoint method can still managed to achieve relative low percentage profit loss when learning data is abundant. However, it is worth noticing that the proposed method converges to the target service level 0.3, yet the disjoint method fails to do so and yields a unsatisfied result. This phenomenon suggests an evidence that the disjoint method rely strongly on the correctness of obtaining underlying distribution, while the proposed method is more flexible. 
+Next, we consider the opposite situation, in which our model of the DGP is too
+complicated. The data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we use a $(2,0,0)(1,0,0)_4$ model when solving the NVP. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases as the data length increases. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the data length increased.
 
-\begin{figure}[ht]
+Figure \ref{fig:mis} (b) also reveals that, for this case, our method is slightly worse than the disjoint method for all data lengths. We do not have a convincing explanation for this phenomenon.
+
+Finally, we explore the effect on DJ and PM when the \emph{error term} (or ``noise") is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and standard deviation 200. (We remark that the Laplace distribution has ``fat tails", or, more formally, much higher kurtosis than the normal distribution.) When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution with the same mean and variance.
+
+The results for this scenario are presented in Figure \ref{fig:err}.
+By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit.
+When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, PM rapidly converges to the target service level (0.3) from above. DJ, on the other hand, gives a rather poor service level, and this drawback is not remedied by an increase in the data length. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
+
+\begin{figure}
 \centering
 \caption{Performance vs. data size with Laplace distributed error term}
 \begin{subfigure}[b]{0.48\textwidth}
@@ -428,9 +446,10 @@ Furthermore, we explore the behavior of our proposed method in the scenario wher
 \end{figure}
 
 \section{Concluding Remarks} \label{se:end}
+
 This paper presents the framework of a new integrated approach to NVPs. The method is flexible, and doesn't make assumptions about demand distribution nor the solution of profit function. It could generate stable outcomes even in the case we possess misleading information or make wrong assumptions.
 
-We illustrate and compare the proposed method with conventional disjoint method in computational experiments. As expected, the proposed method can achieve as same level of performance as disjoint method in classic NVPs, while generates marvelous results when the scenario become complicated. Specifically, in the case we possess misleading information, our proposed method performs well, while the disjoint method converge to the wrong target. Besides, the proposed method behaves well in the nonlinear profit function case where the quantile regression is no longer functional. It takes less learning data for the proposed method to converge to target than for the disjoint method. The results of experiment also backup our proof on the transformation property between proposed method and quantile regression in the linear profit function case.
+We illustrate and compare the performance of proposed method with conventional disjoint method in computational experiments. As expected, the proposed method can achieve as same level of performance as disjoint method in classic NVPs, while generates marvelous results when the scenario becomes complicated. Specifically, in the case we possess misleading information, our proposed method still performs well, while the disjoint method converge to the wrong target. Besides, the proposed method generates stable results in the nonlinear profit function case where the quantile regression is no longer functional. Moreover, it takes less learning data for the proposed method to converge to target than for the disjoint method. The results of experiment also backup our proof on the transformation property between proposed method and quantile regression in the linear profit function case.
 
 For future research, it is interesting to consider using a nonlinear form of regression model to estimate the order quantity. Besides, this paper only considers the retailing of single product. In future study, multi-product case can be considered, along with the substitution effect and more.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
