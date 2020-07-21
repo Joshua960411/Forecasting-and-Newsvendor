@@ -16,6 +16,7 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{graphicx}
+\usepackage{csquotes}
 \setkeys{Gin}{width=.6\textwidth}
 \graphicspath{ {./images/} }
 
@@ -31,14 +32,14 @@ Lancaster University, Lancaster LA1 4YX, UK.
 Email: {\tt \{c.liu19,a.n.letchford,i.svetunkov\}@lancaster.ac.uk}}
 \and Adam N.\ Letchford$^*$ \and Ivan Svetunkov$^*$} % end author list
 
-\date{Draft, 10th July 2020}
+\date{Draft, 20th July 2020}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Newsvendor problems form a classical and important family of stochastic optimisation problems. The standard solution approach decomposes the problem into two steps: estimation of the demand distribution, then determination of the optimal production quantity (or quantities) for the given distribution. We propose a new, integrated solution approach, which estimates the optimal production quantity directly from the data. Our approach can be used even when the demand distribution is not stationary. Some encouraging computational results are given. 
+Newsvendor problems form a classical and important family of stochastic optimisation problems. The standard solution approach decomposes the problem into two steps: estimation of the demand distribution, then determination of the optimal production quantity (or quantities) for the given distribution. We propose a new, integrated solution approach, which estimates the optimal production quantity directly from the data. We conduct simulations in order to show that the approach performs similar to the conventional ones on the well-behaved data if the forecasting model is correctly specified and outperforms the others, when the wrong model is applied to the data. It also demonstrates advantages, when applied to the non-linear newsvendor problem.% Our approach can be used even when the demand distribution is not stationary. Some encouraging computational results are given. 
 \\*[2mm]
 {\bf Keywords:} newsvendor problems, forecasting, data-driven optimisation, sales and operations planning
 \end{abstract}
@@ -47,10 +48,10 @@ Newsvendor problems form a classical and important family of stochastic optimisa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-Inventory control is a classical and important topic in Operations Research and Operations Management (see, e.g., the books \cite{Po02,SPP98,Zi00}). In this paper, we focus on \emph{Newsvendor Problem} (NVP), which referrs to a \emph{single-period} \emph{stochastic} inventory control problem.
+Inventory control is a classical and important topic in Operations Research and Operations Management (see, e.g., the books \cite{Po02,SPP98,Zi00}). In this paper, we focus on \emph{Newsvendor Problem} (NVP), which refers to a \emph{single-period} \emph{stochastic} inventory control problem.
 
-In early works on NVP \cite{AHM51,MK51}, it is assumed that the demand in each time period comes from a known probability distribution. Of course, in practice, this is not the case --- a fact already noted in 1958 by Scarf \cite{Sc58}. Assuming that historical demand data is available, one can attempt to address this difficulty by decomposing the problem into an estimation / forecasting phase and an optimisation phase.
-In the first phase, one makes some assumption (e.g., normality) regarding the underlying data generating process, and uses the past data to estimate the parameters of the process.
+In early works on NVP \cite{AHM51,MK51}, it is assumed that the demand in each time period comes from a known probability distribution. Of course, in practice, this is not the case --- a fact already noted in 1958 by Scarf \cite{Sc58}. Assuming that historical demand data is available, one can attempt to address this issue by decomposing the problem into an estimation / forecasting and an optimisation phases.
+In the first phase, one makes some assumptions (e.g., normality) regarding the underlying data generating process, and uses the past data to estimate the parameters of the model.
 In the second phase, one determines the order quantity (or quantities) based on the estimated parameter values.
 
 Throughout this paper, we will call this two-phase approach the \emph{disjoint} approach. An advantage of the disjoint approach is that forecasting and optimisation experts can operate independently within an organisation. This makes things easier to manage. On the other hand, as noticed by several authors \cite{BT06,BM12,Ka94,KT96,KTB20}, there are two disadvantages:
@@ -59,18 +60,18 @@ Throughout this paper, we will call this two-phase approach the \emph{disjoint} 
 \item If the forecasting model is misspecified, and/or there is substantial noise in the data, the effect on the optimisation phase is very hard to predict. In particular, upside and downside errors may have very different effects on expected profit.
 \end{itemize}
 
-An alternative to the disjoint approach is to use a single, \textit{integrated} approach, in which the order quantities are determined directly from the data. A simple example of an integrated approach is \emph{quantile regression} \cite{Br16,Hu19}. A nice feature of quantile regression is that it makes no assumptions about the demand distribution. Unfortunately, it can only be applied to relatively simple NVPs, for which one can express the optimal order quantities in terms of quantiles of demand.
+An alternative to the disjoint approach is to use a single, \textit{integrated} approach, in which the order quantities are determined directly from the data. A simple example of an integrated approach is \emph{quantile regression} \cite{Br16,Hu19}, which does not make assumptions about the demand distribution. Unfortunately, it can only be applied to relatively simple NVPs, for which one can express the optimal order quantities in terms of quantiles of demand.
 
-In this paper, we introduce a new integrated approach. It is very flexible, and can be applied to a wide variety of NVPs, with complex profit functions. Roughly speaking, it involves forecasting the optimal order quantities instead of the demand. Moreover, instead of determining parameter values that minimise some function of the forecasting errors, our approach attempts to maximise the expected profit directly.
+In this paper, we introduce a new integrated approach. It is very flexible, and can be applied to a wide variety of NVPs, with complex profit functions. Roughly speaking, it involves forecasting the optimal order quantities instead of the demand, which is done via the maximisation of the expected profit instead of estimating parameters via the minimisation of a function of forecast errors.
 
-After explaining our approach formally, we show that it reduces to quantile regression in the case of the simplest NVP (with only one product, stationary demand, and linear profit functions).  We then perform extensive computational experiments, on several different NVPs. The results show that our method performs well, in comparison with the disjoint approach, according to several different measures of quality.
+We demonstrate in this paper that the proposed approach reduces to quantile regression in the case of the simplest NVP. We then perform extensive computational experiments, on several different NVPs, the results of which show that our method performs at least as good as the disjoint approach, according to several different measures of quality.
 
 The rest of the paper is organized as follows. Section \ref{se:lit} provides a brief review of the relevant literature. Section \ref{se:new} presents the new method and shows that it is a generalisation of quantile regression. In Section \ref{se:results}, we present and discuss the computational results. Finally, Section \ref{se:end} gives some insights, remarks and suggestions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Literature Review} \label{se:lit}
 
-Since the literature on NVPs is vast, we mention here only works of direct relevance. The reader looking for more information is directed to the books \cite{Ch12,Po02,SPP98,Zi00}.
+Since the literature on NVPs is vast, we mention here only works of direct relevance. The reader looking for more information is directed to the books on the subject \cite{Ch12,Po02,SPP98,Zi00}.
 
 \subsection{The classical newsvendor problem} %\label{sub:lit1}
 
@@ -98,7 +99,7 @@ $c_u/(c_o+c_u)$ as a ``target service level".
 
 \subsection{More complex newsvendor problems} %\label{sub:lit2}
 
-Since the NVP was introduced in the 1950s \cite{AHM51,MK51}, researchers have considered several extensions of the problem, including variants with multiple product types \cite{HW63,LL96,MS00}, quantity discounts \cite{Kh95}, different risk measures \cite{EGS95}, product substitution \cite{BAA99}, nonlinear cost functions \cite{HOS12}, non-stationary demand \cite{KWH15}, and price setting \cite{KC62,Mi59,PD99}.
+Since the introduction of NVPin the 1950s \cite{AHM51,MK51}, researchers have considered several extensions of the problem, including variants with multiple product types \cite{HW63,LL96,MS00}, quantity discounts \cite{Kh95}, different risk measures \cite{EGS95}, product substitution \cite{BAA99}, nonlinear cost functions \cite{HOS12}, non-stationary demand \cite{KWH15}, and price setting \cite{KC62,Mi59,PD99}.
 
 For the purpose of what follows, we now explain one variant, the `Nonlinear Newsvendor Problem' (NNVP), in detail (see also \cite{BT06,HOS12,HN16,KC62,Kh95,KK18,Mi59,PSC15,PD99}). In the NNVP, the profit function takes the form:
 \[
@@ -112,7 +113,7 @@ where $V$, $P$, $C_h$ and $C_s$ are now \emph{functions} rather than constants.
 
 If $\pi(Q,y)$ has a particularly simple form (e.g., if it is piecewise-linear), then it may be possible to  use calculus to express the optimal order quantity as a quantile. In general, however, a closed-form expression as a quantile is unlikely to exist.
 
-We now review one particular NNVP, taken from \cite{KK18,PD99,RK02}, that we are going to use in our numerical experiments. The purchase cost $v$ and selling price $p$ are constants, but $C_h$ and $C_s$ are functions. Overstock items incur a fixed unit penalty $\alpha > 0$, but they can be sold in a salvage market with fixed unit sales price $\beta$, with $0<\beta<v$. The demand in the salvage market is itself a random variable, with known distribution, which we denote by $u$. That is, we have:
+We now review one particular example of NNVP, taken from \cite{KK18,PD99,RK02}, that we are going to use in our numerical experiments. The purchase cost $v$ and selling price $p$ are fixed, but $C_h$ and $C_s$ are functions. Overstock items incur a constant unit penalty $\alpha > 0$, but they can be sold in a salvage market with fixed unit sales price $\beta$, with $0<\beta<v$. The demand in the salvage market is itself a random variable, with known distribution, which we denote by $u$. That is, we have:
 \[
     C_h(Q,y) \, = \, \alpha[Q-y]^{+} - \beta \E \Big[ \min \big\{ [Q-y]^{+},u \big\} \Big].
 \]
@@ -126,14 +127,16 @@ for some constant $\zeta > 0$.
 
 Returning to the classical NVP, we now consider the (more realistic) case in which the demand distribution is unknown, but we have historical demands $y_1,y_2,\dots,y_s$.
 For this case, \emph{quantile regression}
-has proven to perform rather well. The basic idea is as follows \cite{BT06,Br16,CS19,HNS15,Hu19}:
+has proven to perform well. The basic idea is as follows \cite{BT06,Br16,CS19,HNS15,Hu19}:
 \begin{enumerate}
 \item Compute the value of $\tau$ that maximises expected profit;
 \item Use quantile regression to compute an estimate of the $\tau$\textsuperscript{th} quantile of the demand in the next time period, which we denote by $\hat{y}_{s+1}^{(\tau)}$;
 \item Set the order quantity $\hat{Q}_{s+1}$ to $\hat{y}_{s+1}^{(\tau)}$.
 \end{enumerate}
 
-Unfortunately, quantile regression is efficient only on large samples \cite{Hu19,RV19}. Another drawback is that the performance of this approach depends crucially on the underlying target service level. In the experiments of Huber \cite{Hu19} and Rudin \cite{RV19}, the benefit of using the quantile regression method is limited to target service levels smaller than 0.8.
+Unfortunately, quantile regression is efficient only on large samples \cite{Hu19,RV19}. Another drawback is that the performance of this approach depends crucially on the underlying target service level. Huber \cite{Hu19} and Rudin \cite{RV19} demonstrated that the benefit of using the quantile regression method is limited to target service levels smaller than 0.8. If the target service level is higher than much more data is needed in order to correctly estimate specific quantile.
+
+While quantile regression can be used efficiently for the classical NVP given enough historical data, it fails in case of non-linear NVP. This is because the specific demand quantiles do not necessarily propagate correctly to the correct orders.
 
 \subsection{Other integrated approaches} %\label{sub:lit4}
 
@@ -142,13 +145,14 @@ There exist other integrated methods. One approach is to use machine learning te
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Proposed Estimator for NVPs} \label{se:new}
 
-We have seen that, while quantile regression can be an attractive integrated approach, it has some drawbacks. In particular, for most non-trivial NVPs, it is very hard to express the optimal order quantity as a demand quantile \emph{a priori}. In order to overcome this limitation, we propose an alternative integrated method, based on a regression model with a specialised loss function.
+%We have seen that, while quantile regression can be an attractive integrated approach, it has some drawbacks. In particular, for most non-trivial NVPs, it is very hard to express the optimal order quantity as a demand quantile \emph{a priori}.
+In order to overcome the limitations of quantile regression, we propose an alternative integrated method, based on a regression model with a specialised loss function.
 
-For each historical period $t\in [1,s]$, we assume that the observed demand $y_t$ was a realisation of a random variable $Y_t$. Then, in principle, there exists an order quantity, say $Q_t^*$, that maximises the expected profit given $Y_t$ and $\Pi$. Thus, if we had set $Q_t$ to $Q_t^*$ prior to observing the true demand $y_t$, we would have maximised our expected profit in period $t$. Putting it another way, if we could somehow uncover the hidden structure of the time series $\big\{ Q_1^*,\dots,Q_s^* \big\}$, we would be able to estimate $Q_{s+1}^*$ directly.
+For each historical period $t\in [1,s]$, we assume that the observed demand $y_t$ is a realisation of a random variable $Y_t$. Then, in principle, there exists an order quantity, say $Q_t^*$, that maximises the expected profit given $Y_t$. Thus, if we had set $Q_t$ to $Q_t^*$ prior to observing the true demand $y_t$, we would have maximised our expected profit in period $t$. Putting it another way, if we could somehow uncover the structure of the unobserved time series $\big\{ Q_1^*,\dots,Q_s^* \big\}$, we would be able to estimate $Q_{s+1}^*$ directly.
 
-Of course, in practice, the distributions $Y_t$ are unknown, and the values $Q_t^*$ are not observable. So we approximate the $Q_t^*$ values using a linear regression model. For each $t$, the regression model yields an estimate of $Q^*_t$, which we denote by $\hat{Q}_t$. The estimate $\hat{Q}_{s+1}$ can then be used as the order quantity in the next time period.
+Of course, in practice, the distribution of $Y_t$ is unknown, and the values $Q_t^*$ are not observable. So we approximate the $Q_t^*$ values using a linear regression model. For each $t$, the regression model yields an estimate of $Q^*_t$, which we denote by $\hat{Q}_t$. The estimate $\hat{Q}_{s+1}$ can then be used as the order quantity in the next time period.
 
-The crucial feature of our approach is that, instead of using the standard least-squares loss function to estimates the regression parameters, we choose the parameters that maximise the empirical expected profit function $\sum_{t=1}^s{\pi \big( \hat{Q}_t,y_t \big)}$. In more detail, we wish to compute the vector
+The crucial feature of our approach is that, instead of using the standard loss functions (such as least squares or maximum likelihood) to estimates the regression parameters, we find the parameters that maximise the empirical expected profit function $\sum_{t=1}^s{\pi \big( \hat{Q}_t,y_t \big)}$. This can be expressed as:
 \[
     \hat{\boldsymbol{\beta}}=\text{argmax}_{\boldsymbol{\beta}\in \mathbb{R}^{p+1}}\displaystyle\sum_{t=1}^s{\pi(\hat{Q}_t,y_t)},
 \]
@@ -187,12 +191,11 @@ where
         \beta_{p}
     \end{pmatrix}.
 \]
-Here, $\mathbf{x}_t^{\mathsf{T}}$ is the $t$th row of matrix $\mathbf{X}$,
-and $p$ is the number of explanatory variables.
+Here, $\mathbf{x}_t^{\mathsf{T}}$ is the $t$-th row of the matrix $\mathbf{X}$, and $p$ is the number of explanatory variables.
 
-After estimating the model, we can set our next order quantity to $\hat{Q}_{s+1}$. We remark that, while we focus on the linear regression model in this paper, dynamic models, such as ARIMA or ETS \cite{HKO08}, could be used instead just as efficiently. 
+After estimating the model, we can set our next order quantity to $\hat{Q}_{s+1}$. We remark that, while we focus on the linear regression model in this paper, dynamic models, such as ARIMA or ETS \cite{HKO08}, could be used instead just as efficiently.
 
-It turns out that, in the case of the classical NVP, the proposed estimator has the following statistical properties:
+It can be shown that in the case of the classical NVP, the proposed estimator has the following statistical properties:
 \begin{proposition}[Scale and shift invariance]
 For any $a>0$, $\gamma\in \mathbb{R}^{p+1}$, we have
 \[
@@ -217,7 +220,7 @@ Given any $(p+1)\times (p+1)$ non-singular matrix $A$, we have
 See Appendix \ref{app:B}.
 \end{proof}
 
-Another interesting feature of our method is that it reduces to quantile regression in the case of the classical NVP. For a proof, see Appendix \ref{app:C}. Therefore, again in the classical case, our estimator
+Another interesting feature of our method is that it reduces to quantile regression in the case of the classical NVP (see Appendix \ref{app:C}). Therefore, again in the classical case, our estimator
 inherits the desirable properties of quantile regression, such as
 consistency \cite{Koe05}, efficiency \cite{KM99} and asymptotic
 normality \cite{KHM05}.
@@ -225,40 +228,36 @@ normality \cite{KHM05}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Computational Experiments} \label{se:results}
 
-In this section, we report on some extensive computational experiments
-that we conducted, in order to gain insight into the strengths and weakness of our approach relative to existing approaches. Subsection \ref{sub:exp1}
-concerns the simplest case, in which the profit function is linear and the
-underlying data generation process (DGP) is known. Subsection \ref{sub:exp2}
-deals with the case in which the profit function is nonlinear, and Subsection \ref{sub:exp3} examines the case in which the model is misspecified.
+In order to asses the performance of the method and understand its strengths and weakness, we conduct a simulation experiment. We start with subsection \ref{sub:exp1}, where the simplest case is considered, in which the profit function is linear and the underlying data generation process (DGP) is known. We evaluate how the model estimation influences the order quantity in terms of the selected error measures. Next, in subsection \ref{sub:exp2} we discuss the case in which the profit function is nonlinear. Finally, we consider the case, when the model is misspecified in subsection \ref{sub:exp3}.
 
-\subsection{Linear case} \label{sub:exp1}
+\subsection{When the true model is known}
+\subsubsection{Linear case} \label{sub:exp1}
 
-In our first experiment, we consider the classical NVP with quarterly demand data, and we assume that the DGP for demand is known. In more detail, we assume that the DGP is a seasonal ARIMA $(1,0,0)(1,0,0)_4$ process with $\theta=0.3$, $\Theta=0.5$, and constant level $500$. We also assume that the error term of the DGP follows a normal distribution $\mathcal{N}(0,200^2)$.
+In our first experiment, we consider the classical NVP with quarterly demand data, and we assume that the DGP for demand is known. In our experiment, we assume that the DGP is a seasonal ARIMA$(1,0,0)(1,0,0)_4$ process with $\theta=0.3$, $\Theta=0.5$, and constant level $500$. We also assume that the error term of the DGP follows a normal distribution $\mathcal{N}(0,200^2)$.
 
-Initially, we chose the following parameters for our (linear) profit function:
+Initially, we choose the following parameters for our (linear) profit function:
 \begin{itemize}
     \item $p=20$, $v=10$, $c_h=-3$, $c_s=-7$.
 \end{itemize}
-One can check that the corresponding pair $\big( c_u,c_o \big)$ is $(3,7)$, and the target service level evaluates to $0.3$. (We explore the effect of varying
-the parameters below.)
+One can check that the corresponding pair $\big( c_u,c_o \big)$ is $(3,7)$, and the target service level evaluates to $0.3$. (We explore the effect of varying the parameters below.)
 
-We begin by simulating 20,000 sets of demand data, each consisting of 4800 time periods. From each set, we also extract subsequences of length 40, 120, 480 and 1200. These will be used to explore how the amount of data available affects the performance of each method.
+We begin by simulating 20,000 sets of demand data, each consisting of 4800 time periods. From each set, we extract sequences of length 40, 120, 480 and 1200. These will be used to explore how the amount of data available affects the performance of each method.
 
-In our proposed method (``PM"), we use seasonal dummies and 1st and 4th lags as explanatory variables. Moreover, we use limited-memory BFGS \cite{LN89} as the optimisation algorithm for the computation of $\hat{\boldsymbol{\beta}}$. Besides the proposed method, two benchmark methods are also considered:
+In our proposed method (``PM"), we use seasonal dummies and 1st and 4th lags as explanatory variables. Moreover, we use limited-memory BFGS \cite{LN89} as the optimisation algorithm for the estimation of $\hat{\boldsymbol{\beta}}$. Besides the proposed method, three benchmark methods are also considered:
 \begin{itemize}
-    \item A disjoint method (``DJ"), that estimates the parameters of the ARIMA $(1,0,0)(1,0,0)_4$ process in the first phase, and determine the optimal order quantity in the second phase.
+    \item A disjoint method (``DJ"), that estimates the parameters of the ARIMA$(1,0,0)(1,0,0)_4$ process in the first phase, and determine the optimal order quantity in the second phase.
     \item An integrated method that use Quantile Regression (``QR"), with seasonal dummies and 1st and 4th lags as explanatory variables.
+    \item Finally, we use the exact model and parameters from the DGP to perform a forecast, and determine the order quantity accordingly. This last method is an ``idealised" method since, in real life, one would not know the model or parameters precisely. We call this last method ``DGP".
 \end{itemize}
-Moreover, we consider a fourth method, in which we use the exact model and parameters from the DGP to perform a forecast, and determine the order quantity accordingly. (This last method is an ``idealised" method since, in real life, one would not know the model or parameters precisely.) We call this last method ``DGP".
 
-For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-step ahead forecast. We then computed the following three quantities:
+For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-step ahead forecast of orders. We then computed the following three quantities:
 \begin{enumerate}
-    \item Percentage Profit Loss ($PPL=\frac{\pi(y_{s+1},y_{s+1})-\pi(\hat{Q}_{s+1},y_{s+1})}{\pi(y_{s+1},y_{s+1})}$),
-    \item Service Level ($SL=\mathbb {I}_{(\hat{Q}_{s+1}>y_{s+1})}$),
-    \item Fill Rate ($FR=\frac{\min\{\hat{Q}_{s+1},y_{s+1}\}}{y_{s+1}}$).
+    \item Percentage Profit Loss:  $PPL=\frac{\pi(y_{s+1},y_{s+1})-\pi(\hat{Q}_{s+1},y_{s+1})}{\pi(y_{s+1},y_{s+1})}$, which shows the percentage of profit that will be lost due to using each method instead of using the correct approach. In the ideal situation this should be equal to zero.
+    \item Service Level: $SL=\mathbb {I}_{(\hat{Q}_{s+1}>y_{s+1})}$, which shows the achieved service level. In the ideal situation this should correspond to the target service level.
+    \item Fill Rate: $FR=\frac{\min\{\hat{Q}_{s+1},y_{s+1}\}}{y_{s+1}}$, which shows how the demand is serviced. In the ideal situation it should be equal to one.
 \end{enumerate}
 
- Figure \ref{fig:ppl0.3} shows the average PPL obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the data size grows. It is also apparent that PM and QR have very similar performance. This is to be expected, given that PM is equivalent to QR in the linear case.
+ Figure \ref{fig:ppl0.3} shows the average PPL obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the sample size increases. It is also apparent that PM and QR have very similar performance. This is to be expected, given that PM is equivalent to QR in the linear NVP case.
 
 \begin{figure}
 \centering
@@ -275,9 +274,11 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
 \end{figure}
 
 Figure \ref{fig:sl0.3} represents the average SL, i.e., the proportion of iterations in which the demand was satisfied in the simulation.
-We see that all four methods converge to the desired target of 0.3 as the data length grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the underage and overage costs into account. For the given cost parameters, over-stocking is less costly than under-stocking.
+We see that all four methods converge to the desired target of 0.3 as the sample size grows. Interestingly, DJ approaches the target from below, while PM and QR approach it from above. A possible explanation is as follows. In DJ, the estimated variance tends to be larger than the true variance when the data length is small. This causes the order quantity often to be less than it should be. On the other hand, the integrated methods take the underage and overage costs into account. For the given cost parameters, over-stocking is less costly than under-stocking, as a result the methods achieve higher service level than needed.
 
-Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate follows a similar pattern to the service level. Moreover, the fill rate is very high for all methods and all data sizes. The full results for a target of 0.3 can be found in Table \ref{tab:size_effect0.3}.
+Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate follows a similar pattern to the service level. Moreover, the fill rate is very high for all methods and all data sizes.
+
+The detailed results on performance of methods in terms of the used measures are for the target service level of 0.3 can be found in Table \ref{tab:size_effect0.3}.
 
 \begin{figure}[ht]
 \centering
@@ -305,7 +306,7 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \end{tabular}} 
 \end{table}
 
-Next, we explored whether the target service level has a significant effect on the performance of the methods. Specifically, we considered the following two alternative parameter settings:
+Next, we explore whether the target service level has a significant effect on the performance of the methods. Specifically, we considered the following two alternative parameter settings:
 \begin{itemize}
     \item $p=20$, $v=8$, $c_h=-3$, $c_s=-7$
     \item $p=20$, $v=8$, $c_h=3$, $c_s=7$.
@@ -313,7 +314,7 @@ Next, we explored whether the target service level has a significant effect on t
 One can check that the corresponding pairs $\big( c_u,c_o \big)$ are $(5,5)$ and $(19,11)$, respectively. Thus, the target service level evaluates to $0.5$ and $0.63$, respectively.
 
 The relevant data is given in Tables \ref{tab:level_effect40} and \ref{tab:level_effect4800}, for the cases $s=40$
-and $s=4800$, respectively. Generally speaking, the picture is similar, regardless of the target service level. An exception is that the PPL is particular high with a target service level of 0.63. This is probably due, however, merely to the relatively large overage and underage costs in that case.
+and $s=4800$, respectively. Generally speaking, the picture is similar, regardless of the target service level. An exception is that the PPL is particularly high for all the methods when the target service level is 0.63. This is probably due to the relatively large overage and underage costs in that case.
 
 \begin{table}
 \caption{Target service level effect on percentage profit loss and service level with 40 data points}
@@ -351,9 +352,9 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \end{tabular}}
 \end{table}
 
-\subsection{Nonlinear cost functions} \label{sub:exp2}
+\subsubsection{Nonlinear profit functions} \label{sub:exp2}
 
-In this subsection, we examine the relative performance of the methods when applied to the nonlinear newsvendor problem. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function:
+In this subsection, we examine the relative performance of the methods when applied to the NNVP. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function:
 \[
     \pi(Q,y)=
     \begin{cases}
@@ -361,11 +362,13 @@ In this subsection, we examine the relative performance of the methods when appl
         20Q-8Q-0.01(y-Q)^2,& \text{if } Q< y,
     \end{cases}
 \]
-where $u\sim \mathcal{N}(30,5^2)$. One can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that the target service level of this function is 0.56.
+where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNVP, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it is 0.56.
 
 Since the nonlinearity makes QR hard to apply, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
 
-Figure \ref{fig:non} shows the PPL and SL of each method, for each data size. It is apparent that both methods perform rather well in terms of PPL, with very similar values for all data sizes. The picture is very different with SL. Indeed, we were surprised to find that the SL of the proposed method is very close to the the target service level even when the data size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below.
+Figure \ref{fig:non} shows the PPL and SL of each method, for each data size. It is apparent that both DJ and PM methods perform well in terms of PPL, with very similar values for all data sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the data size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. This is because...
+
+Another thing to note is that with the increase of the sample size, the approaches converge to the DGP values.
 
 \begin{figure}
 \centering
@@ -384,21 +387,20 @@ Figure \ref{fig:non} shows the PPL and SL of each method, for each data size. It
 \label{fig:non}
 \end{figure}
 
-We would like to stress that, even for the NNVP, the proposed method doesn't need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. Indeed, we found that, for these instances, it typically required less computing time than the disjoint method. (For brevity,
-we do not present detailed computing times.)
+We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, ...
  
 \subsection{The effect of misspecification} \label{sub:exp3}
+\subsubsection{Linear case}
 
 We now return to the linear case, and examine the effect of
 \emph{model misspecification} on the performance of the disjoint method,
 DJ, and our proposed method, PM.
 
 We first consider the case in which our model of the DGP is too simple.
-In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we ignore seasonality when solving the NVP. In other words, when estimating the optimal order quantity, we use the incorrect assumption that the DGP is merely an AR$(1)$ process. As in Subsection \ref{sub:exp1}, we assume that the error term of the demand follows a normal distribution, and we use the linear profit function with target service level
-$=0.3$.
+In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we ignore seasonality when solving the NVP. In other words, when estimating the optimal order quantity, we use the incorrect assumption that the DGP is merely an AR$(1)$ process. %As in Subsection \ref{sub:exp1}, we assume that the error term of the demand follows a normal distribution, and we use the linear profit function with target service level $=0.3$.
 
 The percentage profit losses for this case can be seen in Figure
-\ref{fig:mis} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur a small additional loss in profit. This loss does not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making ``one-step ahead" forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches.
+\ref{fig:mis} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur a small additional losses in profit irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches. This could be because the assumptions about the distribution of error term are correct.
 
 \begin{figure}
 \centering
@@ -417,16 +419,14 @@ The percentage profit losses for this case can be seen in Figure
 \label{fig:mis}
 \end{figure}
 
-Next, we consider the opposite situation, in which our model of the DGP is too
-complicated. The data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we use a $(2,0,0)(1,0,0)_4$ model when solving the NVP. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases as the data length increases. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the data length increased.
+Next, we consider the situation, when the applied model is overparameterised and is ARIMA$(2,0,0)(1,0,0)_4$. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by the well-known statistical phenomenon of redundant variables: they lead to less efficient estimates of parameters but do not incur the bias in the estimates as the effect of omitted variables typically does.
 
-Figure \ref{fig:mis} (b) also reveals that, for this case, our method is slightly worse than the disjoint method for all data lengths. We do not have a convincing explanation for this phenomenon.
+Figure \ref{fig:mis} (b) also reveals that, for this case, our method is slightly worse than the disjoint method for all sample sizes. We do not have a convincing explanation for this phenomenon.
 
-Finally, we explore the effect on DJ and PM when the \emph{error term} (or ``noise") is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and standard deviation 200. (We remark that the Laplace distribution has ``fat tails", or, more formally, much higher kurtosis than the normal distribution.) When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution with the same mean and variance.
+Finally, we explore the effect on DJ and PM when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and standard deviation 200. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution with the same mean and variance.
 
 The results for this scenario are presented in Figure \ref{fig:err}.
-By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit.
-When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, PM rapidly converges to the target service level (0.3) from above. DJ, on the other hand, gives a rather poor service level, and this drawback is not remedied by an increase in the data length. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
+By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit for all the assessed methods. When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, PM rapidly converges to the target service level (0.3) from above, while DJ achieves a lower than needed service level, and this drawback is not remedied by an increase in the sample size. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
 
 \begin{figure}
 \centering
@@ -445,13 +445,22 @@ When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture
 \label{fig:err}
 \end{figure}
 
+\subsubsection{Nonlinear case}
+
+
 \section{Concluding Remarks} \label{se:end}
 
-This paper presents the framework of a new integrated approach to NVPs. The method is flexible, and doesn't make assumptions about demand distribution nor the solution of profit function. It could generate stable outcomes even in the case we possess misleading information or make wrong assumptions.
+Newsvendor problem (NVP) is one of the most popular stochastic optimisation problems. It has different forms and can be typically solved either using a disjoint or integrated approaches. In this paper, we present the framework of a new integrated approach to NVP. The method is flexible, and doesn't make assumptions about the demand distribution, reducing the gap between the demand and the orders.%It could generate stable outcomes even in the case we possess misleading information or make wrong assumptions.
+It is easy to understand and can be applied to wide variety of forecasting models.
 
-We illustrate and compare the performance of proposed method with conventional disjoint method in computational experiments. As expected, the proposed method can achieve as same level of performance as disjoint method in classic NVPs, while generates marvelous results when the scenario becomes complicated. Specifically, in the case we possess misleading information, our proposed method still performs well, while the disjoint method converge to the wrong target. Besides, the proposed method generates stable results in the nonlinear profit function case where the quantile regression is no longer functional. Moreover, it takes less learning data for the proposed method to converge to target than for the disjoint method. The results of experiment also backup our proof on the transformation property between proposed method and quantile regression in the linear profit function case.
+We show analytically that the proposed approach is equivalent to quantile regression in simple linear cases of NVP, which makes the estimates of parameters of models in this case consistent, efficient and asymptotically follow normal distribution.
 
-For future research, it is interesting to consider using a nonlinear form of regression model to estimate the order quantity. Besides, this paper only considers the retailing of single product. In future study, multi-product case can be considered, along with the substitution effect and more.
+We then compare the performance of the proposed method with conventional disjoint method and quantile regression in several simulation experiments, considering the situations, when the demand forecasting model is correctly specified and when it is wrong. We find that in the former case the proposed method performs similar to the quantile regression and to the disjoint method in classic NVP in terms of the percentage profit loss, service level and fill rate. When considering the latter case, the proposed method performs in generally robustly, outperforming the disjoint method in some cases of model misspecification in terms of service level, and performing similar in terms of other error measures.
+
+Furthermore, we have tested the methods in the case of nonlinear NVP, and found that the proposed method performs at least as good as the disjoint one in terms of percentage profit loss. However, it achieved the service level closer to the target one even on small samples, something that the disjoint method was not capable of doing in the same situation.
+
+While this paper focused on a specific ARIMA model, we expect that the results could be generalised to such models as regression and ETS. However, we have not yet considered the cases, when the model family is incorrect, which could be considered as a direction for the future work. Another potential direction of future research is multi-product NVP, together with potential substitution effects between the products.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \printbibliography
 
@@ -539,11 +548,11 @@ Define
     
 \section{Equivalence to Quantile Regression}
 \label{app:C}
-We are here to show the loss function used in our proposed method is transformable to the typical loss function of quantile regression. In quantile regression, the loss function is defined as \cite{KH01}:
+Here, we show that the loss function used in the proposed method is transformable to the typical loss function of quantile regression. In quantile regression, the loss function is defined as \cite{KH01}:
 \[
     \hat{\boldsymbol{\beta}}=\text{argmin}_{\boldsymbol{\beta}\in \mathbb{R}^{p+1}}\displaystyle\sum_{t=1}^s\rho_{\tau}(y_t-\mathbf{x}_t^{\mathsf{T}}\boldsymbol{\beta}),
 \]
-where $\displaystyle \rho_{\tau}(u)=u(\tau-\mathbb{I}_{(u<0)})$, and $\mathbb{I}$ is an indicator function. Thus, all we need to do is to prove:
+where $\displaystyle \rho_{\tau}(u)=u(\tau-\mathbb{I}_{(u<0)})$, and $\mathbb{I}$ is an indicator function. Thus, all we need to do is to prove that:
 \[
     \text{max}\displaystyle\sum_{t=1}^s{\pi(\mathbf{x}_t^{\mathsf{T}}\boldsymbol{\beta},y_t)}=\text{min}\displaystyle\sum_{t=1}^s\rho_{\tau}(y_t-\mathbf{x}_t^{\mathsf{T}}\boldsymbol{\beta}).
 \]
