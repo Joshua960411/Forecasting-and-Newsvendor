@@ -355,7 +355,7 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 
 \subsubsection{Nonlinear profit functions} \label{sub:exp2}
 
-In this subsection, we examine the relative performance of the methods when applied to the NNVP. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function:
+In this subsection, we examine the relative performance of the methods when applied to the NNVP. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function \cite{KK18}:
 \[
     \pi(Q,y)=
     \begin{cases}
@@ -365,7 +365,7 @@ In this subsection, we examine the relative performance of the methods when appl
 \]
 where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNVP, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it is 0.56.
 
-Since the nonlinearity makes QR hard to apply, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
+Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
 
 Figure \ref{fig:non} shows the PPL and SL of each method, for each sample size. It is apparent that both DJ and PM methods perform well in terms of PPL, with very similar values for all sample sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the sample size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. This is because...
 
