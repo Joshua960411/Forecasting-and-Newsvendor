@@ -1,4 +1,5 @@
 rm(list=ls())
+gc()
 library('forecast')
 library('smooth')
 library('quantreg')
@@ -28,21 +29,24 @@ quant_linear<-3/10
 test_length=1
 
 mini_linear1<-function(data,par){
-  order<-par[1]+par[2]*data[,5]
+  order<-par[1]+par[2]*data[,2]
   total_profit<-sum(apply(cbind(order,data[,1]),1,function(x) profit_function_linear(x[1],x[2])))
   return(-total_profit)
 }
 
 mini_linear2<-function(data,par){
-  order<-par[1]+par[2]*data[,2]+par[3]*data[,3]+par[4]*data[,4]+par[5]*data[,5]+par[6]*data[,6]+par[7]*data[,8]
+  order<-par[1]+par[2]*data[,2]+par[3]*data[,3]+par[4]*data[,4]
   total_profit<-sum(apply(cbind(order,data[,1]),1,function(x) profit_function_linear(x[1],x[2])))
   return(-total_profit)
 }
 
 
 ##generate function
-ppl_l<-function(series,forecast){
-  ((profit_function_linear(series,series)-profit_function_linear(forecast,series))/profit_function_linear(series,series))
+result_l<-function(series,forecast){
+  ppl<-((profit_function_linear(series,series)-profit_function_linear(forecast,series))/profit_function_linear(series,series))
+  sl<-forecast>=series
+  list<-c(ppl,sl)
+  return(list)
 }
 
 ##40
@@ -52,17 +56,11 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   data<-ts(series[,i],frequency=4)
   length<-length(data)
   test<-ts(data[5:length],frequency=4)
-  rep<-length/4
-  s1<-rep(c(1,0,0,0),rep)
-  s2<-rep(c(0,1,0,0),rep)
-  s3<-rep(c(0,0,1,0),rep)
   L1_data=lag(data,-1)
   L2_data=lag(data,-2)
-  L3_data=lag(data,-3)
   L4_data=lag(data,-4)
-  set_data=cbind(data,s1,s2,s3)
-  set_data=cbind(set_data,L1_data,L2_data,L3_data,L4_data)
-  colnames(set_data)<-c('data','s1','s2','s3','L1','L2','L3','L4')
+  set_data=cbind(data,L1_data,L2_data,L4_data)
+  colnames(set_data)<-c('data','L1','L2','L4')
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
@@ -75,9 +73,9 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   coe1<-lm(data ~ L1, data=set_data)$coefficients
   cf_l1_par<-optim(par = coe1, fn = mini_linear1, method = 'L-BFGS-B', data = set_data)$par
   cf_l1<-cf_l1_par[1]+cf_l1_par[2]*data[40]
-  coe2<-lm(data ~s1+s2+s3+L1+L2+L4, data=set_data)$coefficients
+  coe2<-lm(data ~L1+L2+L4, data=set_data)$coefficients
   cf_l2_par<-optim(par = coe2, fn = mini_linear2, method = 'L-BFGS-B', data = set_data)$par
-  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*1+cf_l2_par[3]*0+cf_l2_par[4]*0+cf_l2_par[5]*data[40]+cf_l2_par[6]*data[39]+cf_l2_par[7]*data[37]
+  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*data[40]+cf_l2_par[3]*data[39]+cf_l2_par[4]*data[37]
   ##list
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
@@ -89,17 +87,11 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   data<-ts(series[,i],frequency=4)
   length<-length(data)
   test<-ts(data[5:length],frequency=4)
-  rep<-length/4
-  s1<-rep(c(1,0,0,0),rep)
-  s2<-rep(c(0,1,0,0),rep)
-  s3<-rep(c(0,0,1,0),rep)
   L1_data=lag(data,-1)
   L2_data=lag(data,-2)
-  L3_data=lag(data,-3)
   L4_data=lag(data,-4)
-  set_data=cbind(data,s1,s2,s3)
-  set_data=cbind(set_data,L1_data,L2_data,L3_data,L4_data)
-  colnames(set_data)<-c('data','s1','s2','s3','L1','L2','L3','L4')
+  set_data=cbind(data,L1_data,L2_data,L4_data)
+  colnames(set_data)<-c('data','L1','L2','L4')
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
@@ -112,9 +104,9 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   coe1<-lm(data ~ L1, data=set_data)$coefficients
   cf_l1_par<-optim(par = coe1, fn = mini_linear1, method = 'L-BFGS-B', data = set_data)$par
   cf_l1<-cf_l1_par[1]+cf_l1_par[2]*data[120]
-  coe2<-lm(data ~s1+s2+s3+L1+L2+L4, data=set_data)$coefficients
+  coe2<-lm(data ~L1+L2+L4, data=set_data)$coefficients
   cf_l2_par<-optim(par = coe2, fn = mini_linear2, method = 'L-BFGS-B', data = set_data)$par
-  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*1+cf_l2_par[3]*0+cf_l2_par[4]*0+cf_l2_par[5]*data[120]+cf_l2_par[6]*data[119]+cf_l2_par[7]*data[117]
+  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*data[120]+cf_l2_par[3]*data[119]+cf_l2_par[4]*data[117]
   ##list
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
@@ -126,17 +118,11 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   data<-ts(series[,i],frequency=4)
   length<-length(data)
   test<-ts(data[5:length],frequency=4)
-  rep<-length/4
-  s1<-rep(c(1,0,0,0),rep)
-  s2<-rep(c(0,1,0,0),rep)
-  s3<-rep(c(0,0,1,0),rep)
   L1_data=lag(data,-1)
   L2_data=lag(data,-2)
-  L3_data=lag(data,-3)
   L4_data=lag(data,-4)
-  set_data=cbind(data,s1,s2,s3)
-  set_data=cbind(set_data,L1_data,L2_data,L3_data,L4_data)
-  colnames(set_data)<-c('data','s1','s2','s3','L1','L2','L3','L4')
+  set_data=cbind(data,L1_data,L2_data,L4_data)
+  colnames(set_data)<-c('data','L1','L2','L4')
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
@@ -149,9 +135,9 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   coe1<-lm(data ~ L1, data=set_data)$coefficients
   cf_l1_par<-optim(par = coe1, fn = mini_linear1, method = 'L-BFGS-B', data = set_data)$par
   cf_l1<-cf_l1_par[1]+cf_l1_par[2]*data[480]
-  coe2<-lm(data ~s1+s2+s3+L1+L2+L4, data=set_data)$coefficients
+  coe2<-lm(data ~L1+L2+L4, data=set_data)$coefficients
   cf_l2_par<-optim(par = coe2, fn = mini_linear2, method = 'L-BFGS-B', data = set_data)$par
-  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*1+cf_l2_par[3]*0+cf_l2_par[4]*0+cf_l2_par[5]*data[480]+cf_l2_par[6]*data[479]+cf_l2_par[7]*data[477]
+  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*data[480]+cf_l2_par[3]*data[39]+cf_l2_par[4]*data[477]
   ##list
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
@@ -163,17 +149,11 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   data<-ts(series[,i],frequency=4)
   length<-length(data)
   test<-ts(data[5:length],frequency=4)
-  rep<-length/4
-  s1<-rep(c(1,0,0,0),rep)
-  s2<-rep(c(0,1,0,0),rep)
-  s3<-rep(c(0,0,1,0),rep)
   L1_data=lag(data,-1)
   L2_data=lag(data,-2)
-  L3_data=lag(data,-3)
   L4_data=lag(data,-4)
-  set_data=cbind(data,s1,s2,s3)
-  set_data=cbind(set_data,L1_data,L2_data,L3_data,L4_data)
-  colnames(set_data)<-c('data','s1','s2','s3','L1','L2','L3','L4')
+  set_data=cbind(data,L1_data,L2_data,L4_data)
+  colnames(set_data)<-c('data','L1','L2','L4')
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
@@ -186,9 +166,9 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   coe1<-lm(data ~ L1, data=set_data)$coefficients
   cf_l1_par<-optim(par = coe1, fn = mini_linear1, method = 'L-BFGS-B', data = set_data)$par
   cf_l1<-cf_l1_par[1]+cf_l1_par[2]*data[1200]
-  coe2<-lm(data ~s1+s2+s3+L1+L2+L4, data=set_data)$coefficients
+  coe2<-lm(data ~L1+L2+L4, data=set_data)$coefficients
   cf_l2_par<-optim(par = coe2, fn = mini_linear2, method = 'L-BFGS-B', data = set_data)$par
-  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*1+cf_l2_par[3]*0+cf_l2_par[4]*0+cf_l2_par[5]*data[1200]+cf_l2_par[6]*data[1199]+cf_l2_par[7]*data[1197]
+  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*data[1200]+cf_l2_par[3]*data[1199]+cf_l2_par[4]*data[1197]
   ##list
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
@@ -200,17 +180,11 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   data<-ts(series[,i],frequency=4)
   length<-length(data)
   test<-ts(data[5:length],frequency=4)
-  rep<-length/4
-  s1<-rep(c(1,0,0,0),rep)
-  s2<-rep(c(0,1,0,0),rep)
-  s3<-rep(c(0,0,1,0),rep)
   L1_data=lag(data,-1)
   L2_data=lag(data,-2)
-  L3_data=lag(data,-3)
   L4_data=lag(data,-4)
-  set_data=cbind(data,s1,s2,s3)
-  set_data=cbind(set_data,L1_data,L2_data,L3_data,L4_data)
-  colnames(set_data)<-c('data','s1','s2','s3','L1','L2','L3','L4')
+  set_data=cbind(data,L1_data,L2_data,L4_data)
+  colnames(set_data)<-c('data','L1','L2','L4')
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
@@ -223,9 +197,9 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   coe1<-lm(data ~ L1, data=set_data)$coefficients
   cf_l1_par<-optim(par = coe1, fn = mini_linear1, method = 'L-BFGS-B', data = set_data)$par
   cf_l1<-cf_l1_par[1]+cf_l1_par[2]*data[4800]
-  coe2<-lm(data ~s1+s2+s3+L1+L2+L4, data=set_data)$coefficients
+  coe2<-lm(data ~L1+L2+L4, data=set_data)$coefficients
   cf_l2_par<-optim(par = coe2, fn = mini_linear2, method = 'L-BFGS-B', data = set_data)$par
-  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*1+cf_l2_par[3]*0+cf_l2_par[4]*0+cf_l2_par[5]*data[4800]+cf_l2_par[6]*data[4799]+cf_l2_par[7]*data[4797]
+  cf_l2<-cf_l2_par[1]+cf_l2_par[2]*data[4800]+cf_l2_par[3]*data[4799]+cf_l2_par[4]*data[4797]
   ##list
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
@@ -235,11 +209,11 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
 series<-arima_series[241,]
 
 re_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),list(),list(),list(),list())) %dopar%{
-  arima_k_l<-ppl_l(series[i],a_40[[1]][[i]])
-  arima_u1_l<-ppl_l(series[i],a_40[[2]][[i]])
-  arima_u2_l<-ppl_l(series[i],a_40[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_40[[4]][[i]])
-  cf_l2<-ppl_l(series[i],a_40[[5]][[i]])
+  arima_k_l<-result_l(series[i],a_40[[1]][[i]])
+  arima_u1_l<-result_l(series[i],a_40[[2]][[i]])
+  arima_u2_l<-result_l(series[i],a_40[[3]][[i]])
+  cf_l1<-result_l(series[i],a_40[[4]][[i]])
+  cf_l2<-result_l(series[i],a_40[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -247,11 +221,11 @@ re_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
 series<-arima_series[321,]
 
 re_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),list(),list(),list(),list())) %dopar%{
-  arima_k_l<-ppl_l(series[i],a_120[[1]][[i]])
-  arima_u1_l<-ppl_l(series[i],a_120[[2]][[i]])
-  arima_u2_l<-ppl_l(series[i],a_120[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_120[[4]][[i]])
-  cf_l2<-ppl_l(series[i],a_120[[5]][[i]])
+  arima_k_l<-result_l(series[i],a_120[[1]][[i]])
+  arima_u1_l<-result_l(series[i],a_120[[2]][[i]])
+  arima_u2_l<-result_l(series[i],a_120[[3]][[i]])
+  cf_l1<-result_l(series[i],a_120[[4]][[i]])
+  cf_l2<-result_l(series[i],a_120[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -259,11 +233,11 @@ re_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
 series<-arima_series[681,]
 
 re_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),list(),list(),list(),list())) %dopar%{
-  arima_k_l<-ppl_l(series[i],a_480[[1]][[i]])
-  arima_u1_l<-ppl_l(series[i],a_480[[2]][[i]])
-  arima_u2_l<-ppl_l(series[i],a_480[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_480[[4]][[i]])
-  cf_l2<-ppl_l(series[i],a_480[[5]][[i]])
+  arima_k_l<-result_l(series[i],a_480[[1]][[i]])
+  arima_u1_l<-result_l(series[i],a_480[[2]][[i]])
+  arima_u2_l<-result_l(series[i],a_480[[3]][[i]])
+  cf_l1<-result_l(series[i],a_480[[4]][[i]])
+  cf_l2<-result_l(series[i],a_480[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -271,11 +245,11 @@ re_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
 series<-arima_series[1401,]
 
 re_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),list(),list(),list(),list())) %dopar%{
-  arima_k_l<-ppl_l(series[i],a_1200[[1]][[i]])
-  arima_u1_l<-ppl_l(series[i],a_1200[[2]][[i]])
-  arima_u2_l<-ppl_l(series[i],a_1200[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_1200[[4]][[i]])
-  cf_l2<-ppl_l(series[i],a_1200[[5]][[i]])
+  arima_k_l<-result_l(series[i],a_1200[[1]][[i]])
+  arima_u1_l<-result_l(series[i],a_1200[[2]][[i]])
+  arima_u2_l<-result_l(series[i],a_1200[[3]][[i]])
+  cf_l1<-result_l(series[i],a_1200[[4]][[i]])
+  cf_l2<-result_l(series[i],a_1200[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 
@@ -283,11 +257,11 @@ re_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
 series<-arima_series[5001,]
 
 re_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),list(),list(),list(),list())) %dopar%{
-  arima_k_l<-ppl_l(series[i],a_4800[[1]][[i]])
-  arima_u1_l<-ppl_l(series[i],a_4800[[2]][[i]])
-  arima_u2_l<-ppl_l(series[i],a_4800[[3]][[i]])
-  cf_l1<-ppl_l(series[i],a_4800[[4]][[i]])
-  cf_l2<-ppl_l(series[i],a_4800[[5]][[i]])
+  arima_k_l<-result_l(series[i],a_4800[[1]][[i]])
+  arima_u1_l<-result_l(series[i],a_4800[[2]][[i]])
+  arima_u2_l<-result_l(series[i],a_4800[[3]][[i]])
+  cf_l1<-result_l(series[i],a_4800[[4]][[i]])
+  cf_l2<-result_l(series[i],a_4800[[5]][[i]])
   list(arima_k_l,arima_u1_l,arima_u2_l,cf_l1,cf_l2)
 }
 

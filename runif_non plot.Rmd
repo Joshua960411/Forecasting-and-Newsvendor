@@ -1,0 +1,124 @@
+---
+title: "runif_non"
+author: "Joshua"
+date: "22/07/2020"
+output:
+  pdf_document:
+    keep_tex: true
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library('forecast')
+library('smooth')
+library('beanplot')
+library('pastecs')
+library('scales')
+library('ggplot2')
+
+load('runif_non.Rdata')
+
+
+iter<-20000
+```
+
+
+## ppl vs length
+
+```{r ppl}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(mean(sapply(re_40[[1]], "[[", 1)),mean(sapply(re_40[[2]], "[[", 1)),
+        mean(sapply(re_40[[3]], "[[", 1)))
+y_120<-c(mean(sapply(re_120[[1]], "[[", 1)),mean(sapply(re_120[[2]], "[[", 1)),
+        mean(sapply(re_120[[3]], "[[", 1)))
+y_480<-c(mean(sapply(re_480[[1]], "[[", 1)),mean(sapply(re_480[[2]], "[[", 1)),
+        mean(sapply(re_480[[3]], "[[", 1)))
+y_1200<-c(mean(sapply(re_1200[[1]], "[[", 1)),mean(sapply(re_1200[[2]], "[[", 1)),
+        mean(sapply(re_1200[[3]], "[[", 1)))
+y_4800<-c(mean(sapply(re_4800[[1]], "[[", 1)),mean(sapply(re_4800[[2]], "[[", 1)),
+        mean(sapply(re_4800[[3]], "[[", 1)))
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 3,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","CF")
+mac
+v_40<-c(sd(sapply(re_40[[1]], "[[", 1)),sd(sapply(re_40[[2]], "[[", 1)),
+        sd(sapply(re_40[[3]], "[[", 1)))
+v_120<-c(sd(sapply(re_120[[1]], "[[", 1)),sd(sapply(re_120[[2]], "[[", 1)),
+        sd(sapply(re_120[[3]], "[[", 1)))
+v_480<-c(sd(sapply(re_480[[1]], "[[", 1)),sd(sapply(re_480[[2]], "[[", 1)),
+        sd(sapply(re_480[[3]], "[[", 1)))
+v_1200<-c(sd(sapply(re_1200[[1]], "[[", 1)),sd(sapply(re_1200[[2]], "[[", 1)),
+        sd(sapply(re_1200[[3]], "[[", 1)))
+v_4800<-c(sd(sapply(re_4800[[1]], "[[", 1)),sd(sapply(re_4800[[2]], "[[", 1)),
+        sd(sapply(re_4800[[3]], "[[", 1)))
+v_axis<-c(v_40,v_120,v_480,v_1200,v_4800)
+var<-matrix(v_axis,nrow = 3,ncol = 5)
+var<-t(var)
+rownames(var)<-c('40','120','480','1200','4800')
+colnames(var)<-c("DGP", "DJ","CF")
+var
+par(mar=c(par('mar')[1:3], 0)) 
+plot.new()
+l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
+w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n",yaxt = "n"
+        ,xlab = 'data length',ylab = 'percetage profit loss') 
+axis(1, at=1:5, labels=x_axis)
+axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
+
+```
+
+## sl vs length
+
+```{r sl}
+x_axis<-c(40,120,480,1200,4800)
+y_40<-c(mean(sapply(re_40[[1]], "[[", 2)),mean(sapply(re_40[[2]], "[[", 2)),
+        mean(sapply(re_40[[3]], "[[", 2)))
+y_120<-c(mean(sapply(re_120[[1]], "[[", 2)),mean(sapply(re_120[[2]], "[[", 2)),
+        mean(sapply(re_120[[3]], "[[", 2)))
+y_480<-c(mean(sapply(re_480[[1]], "[[", 2)),mean(sapply(re_480[[2]], "[[", 2)),
+        mean(sapply(re_480[[3]], "[[", 2)))
+y_1200<-c(mean(sapply(re_1200[[1]], "[[", 2)),mean(sapply(re_1200[[2]], "[[", 2)),
+        mean(sapply(re_1200[[3]], "[[", 2)))
+y_4800<-c(mean(sapply(re_4800[[1]], "[[", 2)),mean(sapply(re_4800[[2]], "[[", 2)),
+        mean(sapply(re_4800[[3]], "[[", 2)))
+y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
+mac<-matrix(y_axis,nrow = 3,ncol = 5)
+mac<-t(mac)
+rownames(mac)<-c('40','120','480','1200','4800')
+colnames(mac)<-c("DGP", "DJ","CF")
+mac
+v_40<-c(sd(sapply(re_40[[1]], "[[", 2)),sd(sapply(re_40[[2]], "[[", 2)),
+        sd(sapply(re_40[[3]], "[[", 2)))
+v_120<-c(sd(sapply(re_120[[1]], "[[", 2)),sd(sapply(re_120[[2]], "[[", 2)),
+        sd(sapply(re_120[[3]], "[[", 2)))
+v_480<-c(sd(sapply(re_480[[1]], "[[", 2)),sd(sapply(re_480[[2]], "[[", 2)),
+        sd(sapply(re_480[[3]], "[[", 2)))
+v_1200<-c(sd(sapply(re_1200[[1]], "[[", 2)),sd(sapply(re_1200[[2]], "[[", 2)),
+        sd(sapply(re_1200[[3]], "[[", 2)))
+v_4800<-c(sd(sapply(re_4800[[1]], "[[", 2)),sd(sapply(re_4800[[2]], "[[", 2)),
+        sd(sapply(re_4800[[3]], "[[", 2)))
+v_axis<-c(v_40,v_120,v_480,v_1200,v_4800)
+var<-matrix(v_axis,nrow = 3,ncol = 5)
+var<-t(var)
+rownames(var)<-c('40','120','480','1200','4800')
+colnames(var)<-c("DGP", "DJ","CF")
+var
+par(mar=c(par('mar')[1:3], 0)) 
+plot.new()
+l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
+w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
+par(omd=c(0, 1-w, 0, 1))
+matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n"
+        ,xlab = 'data length',ylab = 'service level') 
+axis(1, at=1:5, labels=x_axis)
+legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
+       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
+
+```

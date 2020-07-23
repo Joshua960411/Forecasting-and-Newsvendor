@@ -1,0 +1,150 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={information\_non plot},
+  pdfauthor={Joshua},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{information\_non plot}
+\author{Joshua}
+\date{21/07/2020}
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.1256513 0.1514819 0.1523491
+## 120  0.1245376 0.1479154 0.1484778
+## 480  0.1236322 0.1454519 0.1460590
+## 1200 0.1237606 0.1455926 0.1461516
+## 4800 0.1252693 0.1471260 0.1476492
+\end{verbatim}
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.1190909 0.1423003 0.1434539
+## 120  0.1147838 0.1381381 0.1392559
+## 480  0.1155337 0.1388447 0.1396253
+## 1200 0.1132334 0.1360438 0.1368581
+## 4800 0.1157423 0.1401868 0.1411664
+\end{verbatim}
+
+\includegraphics{information_non-plot_files/figure-latex/AR(1)ppl-1.pdf}
+
+\begin{verbatim}
+##          DGP      DJ      CF
+## 40   0.57805 0.55565 0.56080
+## 120  0.55985 0.55465 0.56595
+## 480  0.56360 0.56015 0.57000
+## 1200 0.56665 0.56265 0.57240
+## 4800 0.56180 0.55830 0.56910
+\end{verbatim}
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.4938830 0.4969058 0.4963020
+## 120  0.4964175 0.4970168 0.4956439
+## 480  0.4959509 0.4963812 0.4950881
+## 1200 0.4955503 0.4960719 0.4947428
+## 4800 0.4961785 0.4966019 0.4952146
+\end{verbatim}
+
+\includegraphics{information_non-plot_files/figure-latex/AR(1)sl-1.pdf}
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.1256513 0.1410749 0.1360595
+## 120  0.1245376 0.1291987 0.1286005
+## 480  0.1236322 0.1241400 0.1259145
+## 1200 0.1237606 0.1239317 0.1259258
+## 4800 0.1252693 0.1252982 0.1268562
+\end{verbatim}
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.1190909 0.1251733 0.1263903
+## 120  0.1147838 0.1149938 0.1182529
+## 480  0.1155337 0.1141174 0.1175607
+## 1200 0.1132334 0.1126558 0.1149144
+## 4800 0.1157423 0.1155017 0.1179879
+\end{verbatim}
+
+\includegraphics{information_non-plot_files/figure-latex/SAR(3)(1)_4ppl-1.pdf}
+
+\begin{verbatim}
+##          DGP      DJ      CF
+## 40   0.57805 0.51035 0.55620
+## 120  0.55985 0.53150 0.56025
+## 480  0.56360 0.55430 0.56610
+## 1200 0.56665 0.56085 0.57010
+## 4800 0.56180 0.56080 0.56940
+\end{verbatim}
+
+\begin{verbatim}
+##            DGP        DJ        CF
+## 40   0.4938830 0.4999054 0.4968439
+## 120  0.4964175 0.4990192 0.4963691
+## 480  0.4959509 0.4970552 0.4956239
+## 1200 0.4955503 0.4962959 0.4950740
+## 4800 0.4961785 0.4963020 0.4951726
+\end{verbatim}
+
+\includegraphics{information_non-plot_files/figure-latex/SAR(3)(1)_4sl-1.pdf}
+
+\end{document}
