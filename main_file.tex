@@ -33,7 +33,7 @@ Lancaster University, Lancaster LA1 4YX, UK.
 Email: {\tt \{c.liu19,a.n.letchford,i.svetunkov\}@lancaster.ac.uk}}
 \and Adam N.\ Letchford$^*$ \and Ivan Svetunkov$^*$} % end author list
 
-\date{Draft, 20th July 2020}
+\date{Draft, 23rd July 2020}
 
 \begin{document}
 
@@ -395,22 +395,22 @@ We would like to stress that the proposed method does not need any complicated n
 
 We now return to the linear case, and examine the effect of
 \emph{model misspecification} on the performance of the disjoint method,
-DJ, and our proposed method, PM. As we have shown the QR and PM are equivalent in linear NVP, we don't include QR here.
+DJ, and our proposed method, PM, under the effect of misspecification. As we have shown the QR and PM are equivalent in linear NVP, we don't include QR here.
 
-We first consider the case in which our model of the DGP is too simple.
+We first consider the situation in which our applied model is too simple.
 In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we ignore seasonality when solving the NVP. In other words, when estimating the optimal order quantity, we use the incorrect assumption that the DGP is merely an AR$(1)$ process. %As in Subsection \ref{sub:exp1}, we assume that the error term of the demand follows a normal distribution, and we use the linear profit function with target service level $=0.3$.
 \begin{figure}
 \centering
 \caption{Percentage profit loss vs. data size in misleading model}
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)-1.pdf}
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)ppl-1.pdf}
 \caption{misleading model AR$(1)$}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4-1.pdf}
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4ppl-1.pdf}
 \caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
 \end{subfigure}
 \label{fig:mis}
@@ -418,8 +418,6 @@ In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0
 
 The percentage profit losses for this case can be seen in Figure
 \ref{fig:mis} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur a small additional losses in profit irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches. This could because the assumptions about the distribution of error term are correct.
-
-
 
 \begin{figure}
 \centering
@@ -438,11 +436,11 @@ The percentage profit losses for this case can be seen in Figure
 \label{fig:mis_sl}
 \end{figure}
 
-Next, we consider the situation, when the applied model is overparameterised and is ARIMA$(2,0,0)(1,0,0)_4$. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by the well-known statistical phenomenon of redundant variables: they lead to less efficient estimates of parameters but do not incur the bias in the estimates as the effect of omitted variables typically does.
+Next, we consider the situation where the applied model is overparameterised, ARIMA$(2,0,0)(1,0,0)_4$. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by the well-known statistical phenomenon of redundant variables: they lead to less efficient estimates of parameters but do not incur the bias in the estimates as the effect of omitted variables typically does.
 
-Figure \ref{fig:mis} (b) also reveals that, for this case, our method is slightly worse than the disjoint method for all sample sizes. We do not have a convincing explanation for this phenomenon.
+Besides, the service level for these two situations are presented in Figure \ref{fig:mis_sl}. The trend is similar to the one in Figure \ref{fig:sl0.3}.
 
-Finally, we explore the effect on DJ and PM when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and standard deviation 200. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution with the same mean and variance.
+Finally, we explore the effect on DJ and PM when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and standard deviation 200. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution.
 
 The results for this scenario are presented in Figure \ref{fig:err}.
 By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit for all the assessed methods. When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, PM rapidly converges to the target service level (0.3) from above, while DJ achieves a lower than needed service level, and this drawback is not remedied by an increase in the sample size. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
