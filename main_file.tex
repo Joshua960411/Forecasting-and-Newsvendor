@@ -298,7 +298,7 @@ The relevant data is given in Tables \ref{tab:level_effect40} and \ref{tab:level
 and $s=4800$, respectively. Generally speaking, the picture is similar, regardless of the target service level. An exception is that the PPL is particularly high for all the methods when the target service level is 0.63. This is probably due to the relatively large overage and underage costs in that case.
 
 \begin{table}
-\caption{Target service level effect on percentage profit loss and service level with 40 data points}
+\caption{Target service level effect with $s=40$}
 \label{tab:level_effect40}
 \centering
 \resizebox{\linewidth}{!}{
@@ -308,15 +308,15 @@ and $s=4800$, respectively. Generally speaking, the picture is similar, regardle
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
 Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
 \midrule
-\rowcolor{gray!6}  0.5 & 5.0\% & 5.4\% & 5.4\% & 5.3\% & 0.50 & 0.44 & 0.50 & 0.50 & 95.2\% & 93.5\% & 94.7\% & 94.8\%\\
+0.5 & 5.0\% & 5.4\% & 5.4\% & 5.3\% & 0.50 & 0.44 & 0.50 & 0.50 & 95.2\% & 93.5\% & 94.7\% & 94.8\%\\
 0.63 & 14.1\% & 15.2\% & 15.0\% & 14.8\% & 0.67 & 0.58 & 0.63 & 0.62 & 97.5\% & 95.8\% & 96.6\% & 96.6\%\\
-\rowcolor{gray!6}  0.3 & 5.0\% & 5.6\% & 5.6\% & 5.5\% & 0.25 & 0.25 & 0.31 & 0.31 & 89.7\% & 88.2\% & 90.6\% & 90.8\%\\
+0.3 & 5.0\% & 5.6\% & 5.6\% & 5.5\% & 0.25 & 0.25 & 0.31 & 0.31 & 89.7\% & 88.2\% & 90.6\% & 90.8\%\\
 \bottomrule
 \end{tabular}}
 \end{table}
 
 \begin{table}
-\caption{Target service level effect on percentage profit loss and service level with 4800 data points}
+\caption{Target service level effect with $s=4800$}
 \label{tab:level_effect4800}
 \centering
 \resizebox{\linewidth}{!}{
@@ -326,16 +326,16 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
 Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
 \midrule
-\rowcolor{gray!6}  0.5 & 5.0\% & 5.0\% & 5.0\% & 5.0\% & 0.50 & 0.50 & 0.50 & 0.50 & 95.2\% & 95.2\% & 95.2\% & 95.2\%\\
+0.5 & 5.0\% & 5.0\% & 5.0\% & 5.0\% & 0.50 & 0.50 & 0.50 & 0.50 & 95.2\% & 95.2\% & 95.2\% & 95.2\%\\
 0.63 & 14.0\% & 14.0\% & 14.1\% & 14.1\% & 0.63 & 0.63 & 0.63 & 0.63 & 97.0\% & 96.9\% & 96.9\% & 96.9\%\\
-\rowcolor{gray!6}  0.3 & 5.1\% & 5.1\% & 5.2\% & 5.2\% & 0.30 & 0.30 & 0.30 & 0.30 & 91.0\% & 90.9\% & 90.9\% & 91.0\%\\
+0.3 & 5.1\% & 5.1\% & 5.2\% & 5.2\% & 0.30 & 0.30 & 0.30 & 0.30 & 91.0\% & 90.9\% & 90.9\% & 91.0\%\\
 \bottomrule
 \end{tabular}}
 \end{table}
 
 \subsubsection{Nonlinear profit functions} \label{sub:exp2}
 
-In this subsection, we examine the relative performance of the methods when applied to the NNVP. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function \cite{KK18}:
+In this subsection, we examine the relative performance of the methods when applied to the NNV. As before, we assume that the DGP for the demands is an ARIMA $(1,0,0)(1,0,0)_4$ process, and the error term follows a normal distribution. We use the following nonlinear profit function \cite{KK18}:
 \[
     \pi(Q,y)=
     \begin{cases}
@@ -343,15 +343,15 @@ In this subsection, we examine the relative performance of the methods when appl
         20Q-8Q-0.01(y-Q)^2,& \text{if } Q< y,
     \end{cases}
 \]
-where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNVP, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it is 0.56.
+where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNV, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it approximates to 0.56.
 
 Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
 
 Figure \ref{fig:non} shows the PPL and SL of each method, for each sample size. It is apparent that both DJ and PM methods perform well in terms of PPL, with very similar values for all sample sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the sample size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. The reason is similar to the one we presented in Subsection \ref{sub:exp1}. 
 
-Another thing to note is that with the increase of the sample size, the approaches converge to the DGP values.
+Another thing to note is that with the increase of the sample size, the methods converge to the DGP values.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \caption{Performance vs. data size with nonlinear profit function}
 \begin{subfigure}[b]{0.48\textwidth}
@@ -368,7 +368,7 @@ Another thing to note is that with the increase of the sample size, the approach
 \label{fig:non}
 \end{figure}
 
-We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of time is needed by using our proposed method when sample size is 40 comparing with DJ.
+We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of computing time is needed by using our proposed method comparing with DJ when $s=40$.
  
 \subsection{The effect of misspecification} \label{sub:exp3}
 \subsubsection{Linear case}
@@ -416,7 +416,7 @@ The percentage profit losses for this case can be seen in Figure
 \label{fig:mis_sl}
 \end{figure}
 
-Next, we consider the situation where the applied model is overparameterised, ARIMA$(2,0,0)(1,0,0)_4$. The results for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by the well-known statistical phenomenon of redundant variables: they lead to less efficient estimates of parameters but do not incur the bias in the estimates as the effect of omitted variables typically does.
+We also consider the situation where the applied model is overparameterised, ARIMA$(2,0,0)(1,0,0)_4$. The PPL for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by the well-known statistical phenomenon of redundant variables: they lead to less efficient estimates of parameters but do not incur the bias in the estimates as the effect of omitted variables typically does.
 
 Besides, the service level for these two situations are presented in Figure \ref{fig:mis_sl}. The trend is similar to the one in Figure \ref{fig:sl0.3}.
 
