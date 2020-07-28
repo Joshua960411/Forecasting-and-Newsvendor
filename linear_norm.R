@@ -106,7 +106,7 @@ a_40_1<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear1*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear1,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear1*2-1)$upper
   #qr
@@ -134,7 +134,7 @@ a_40_2<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear2*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear2,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear2*2-1)$upper
   #qr
@@ -162,7 +162,7 @@ a_40_3<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear3*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear3,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear3*2-1)$upper
   #qr
@@ -191,7 +191,7 @@ a_120_1<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear1*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear1,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear1*2-1)$upper
   #qr
@@ -219,7 +219,7 @@ a_120_2<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear2*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear2,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear2*2-1)$upper
   #qr
@@ -247,7 +247,7 @@ a_120_3<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear3*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear3,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear3*2-1)$upper
   #qr
@@ -277,7 +277,7 @@ a_480_1<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear1*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear1,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear1*2-1)$upper
   #qr
@@ -305,7 +305,7 @@ a_480_2<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear2*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear2,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear2*2-1)$upper
   #qr
@@ -333,7 +333,7 @@ a_480_3<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear3*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear3,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear3*2-1)$upper
   #qr
@@ -362,7 +362,7 @@ a_1200_1<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear1*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear1,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear1*2-1)$upper
   #qr
@@ -390,7 +390,7 @@ a_1200_2<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear2*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear2,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear2*2-1)$upper
   #qr
@@ -418,7 +418,7 @@ a_1200_3<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear3*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear3,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear3*2-1)$upper
   #qr
@@ -447,7 +447,7 @@ a_4800_1<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear1*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear1,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear1*2-1)$upper
   #qr
@@ -475,7 +475,7 @@ a_4800_2<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear2*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear2,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear2*2-1)$upper
   #qr
@@ -503,7 +503,7 @@ a_4800_3<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list()
   set_data=ts(set_data[5:length,])
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
-  arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear3*2-1)$upper
+  arima_k_l<-forecast(arima_k,test_length)$mean+qnorm(quant_linear3,0,200)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length,interval="parametric",level=quant_linear3*2-1)$upper
   #qr

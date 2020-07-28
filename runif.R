@@ -57,7 +57,7 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   colnames(set_data)<-c('data','L1','L4')
   set_data=ts(set_data[5:length,])
   #arima
-  arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
+  arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500,mu=0,scale = 200/1.41)
   arima_k_l<-forecast(arima_k,test_length)$mean+qlaplace(quant_linear,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
   arima_p_l<-forecast(arima_p,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_k$residuals))
