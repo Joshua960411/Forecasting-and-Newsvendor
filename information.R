@@ -65,8 +65,8 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
   arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
-  arima_u1<-arima(test,order=c(1,0,0))
-  arima_u1_l<-forecast(arima_u1,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_u1$residuals))
+  arima_u1<-ssarima(test,frequency=4,orders=list(ar=c(1,0)),lags = c(1,4),constant = TRUE)
+  arima_u1_l<-forecast(arima_u1,test_length,interval="parametric",level=quant_linear*2-1)$upper
   arima_u2<-ssarima(test,frequency=4,orders=list(ar=c(2,1)),lags = c(1,4),constant = TRUE)
   arima_u2_l<-forecast(arima_u2,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
@@ -96,8 +96,8 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
   arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
-  arima_u1<-arima(test,order=c(1,0,0))
-  arima_u1_l<-forecast(arima_u1,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_u1$residuals))
+  arima_u1<-ssarima(test,frequency=4,orders=list(ar=c(1,0)),lags = c(1,4),constant = TRUE)
+  arima_u1_l<-forecast(arima_u1,test_length,interval="parametric",level=quant_linear*2-1)$upper
   arima_u2<-ssarima(test,frequency=4,orders=list(ar=c(2,1)),lags = c(1,4),constant = TRUE)
   arima_u2_l<-forecast(arima_u2,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
@@ -127,8 +127,8 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
   arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
-  arima_u1<-arima(test,order=c(1,0,0))
-  arima_u1_l<-forecast(arima_u1,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_u1$residuals))
+  arima_u1<-ssarima(test,frequency=4,orders=list(ar=c(1,0)),lags = c(1,4),constant = TRUE)
+  arima_u1_l<-forecast(arima_u1,test_length,interval="parametric",level=quant_linear*2-1)$upper
   arima_u2<-ssarima(test,frequency=4,orders=list(ar=c(2,1)),lags = c(1,4),constant = TRUE)
   arima_u2_l<-forecast(arima_u2,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
@@ -158,8 +158,8 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
   arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
-  arima_u1<-arima(test,order=c(1,0,0))
-  arima_u1_l<-forecast(arima_u1,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_u1$residuals))
+  arima_u1<-ssarima(test,frequency=4,orders=list(ar=c(1,0)),lags = c(1,4),constant = TRUE)
+  arima_u1_l<-forecast(arima_u1,test_length,interval="parametric",level=quant_linear*2-1)$upper
   arima_u2<-ssarima(test,frequency=4,orders=list(ar=c(2,1)),lags = c(1,4),constant = TRUE)
   arima_u2_l<-forecast(arima_u2,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
@@ -189,8 +189,8 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   #arima
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),constant = 500,mean=0,sd=200)
   arima_k_l<-forecast(arima_k,test_length,interval="parametric",level=quant_linear*2-1)$upper
-  arima_u1<-arima(test,order=c(1,0,0))
-  arima_u1_l<-forecast(arima_u1,test_length)$mean+qnorm(quant_linear,mean=0,sd=sd(arima_u1$residuals))
+  arima_u1<-ssarima(test,frequency=4,orders=list(ar=c(1,0)),lags = c(1,4),constant = TRUE)
+  arima_u1_l<-forecast(arima_u1,test_length,interval="parametric",level=quant_linear*2-1)$upper
   arima_u2<-ssarima(test,frequency=4,orders=list(ar=c(2,1)),lags = c(1,4),constant = TRUE)
   arima_u2_l<-forecast(arima_u2,test_length,interval="parametric",level=quant_linear*2-1)$upper
   #cf
