@@ -345,11 +345,11 @@ In this subsection, we examine the relative performance of the methods when appl
 \]
 where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNV, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it approximates to 0.56.
 
-Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and PM, together with the ``idealised" method based on the DGP.
+Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and PM, together with the ``idealised" method based on the DGP. Moreover, one could verify that the FR plot in all scenarios are similar. Therefore, we don't present this measurement in rest of experiment.
 
 Figure \ref{fig:non} shows the PPL and SL of each method, for each sample size. It is apparent that both DJ and PM methods perform well in terms of PPL, with very similar values for all sample sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the sample size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. The reason is similar to the one we presented in Subsection \ref{sub:exp1}. 
 
-Another thing to note is that with the increase of the sample size, the methods converge to the DGP values.
+Another thing to note is that with the increase of the sample size, the methods converge to the DGP values in both PPL and SL.
 
 \begin{figure}[ht]
 \centering
@@ -368,7 +368,7 @@ Another thing to note is that with the increase of the sample size, the methods 
 \label{fig:non}
 \end{figure}
 
-We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of computing time is needed by using our proposed method comparing with DJ when $s=40$.
+We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of computing time is needed by using our proposed method comparing with DJ when $s=40$. Besides, the PM results presented are generated using limited-memory BFGS, which cannot guarantee global optimum. One can apply other algorithms as to balance between profit achieved and computational time. 
  
 \subsection{The effect of misspecification} \label{sub:exp3}
 
@@ -447,6 +447,26 @@ By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that t
 
 \subsubsection{Nonlinear case}
 
+Now, we explore the case when underlying profit function is nonlinear, as stated in Subsection \ref{sub:exp2}. Again, three scenarios are considered.
+
+\begin{figure}
+\centering
+\caption{Performance vs. data size with under-paramaterised nonlinear model}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information_non-plot_files/figure-latex/AR(1)ppl-1.pdf}
+\caption{percentage profit loss vs. data size}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{information_non-plot_files/figure-latex/AR(1)sl-1.pdf}
+\caption{service level vs. data size}
+\end{subfigure}
+\label{fig:misnon_under}
+\end{figure}
+
+Figure \ref{fig:misnon_under} represents the scenario where our applied model is \emph{too simple}, merely AR(1) process.
 
 \section{Concluding Remarks} \label{se:end}
 
