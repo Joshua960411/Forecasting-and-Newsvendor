@@ -66,7 +66,7 @@ a_40<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),lis
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
   arima_k_n<-forecast(arima_k,test_length)$mean+qlaplace(requan,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_k$residuals))
+  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_p$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_n_par<-optim(par = coe, fn = mini_nonlinear, method = 'L-BFGS-B', data = set_data)$par
@@ -92,7 +92,7 @@ a_120<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
   arima_k_n<-forecast(arima_k,test_length)$mean+qlaplace(requan,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_k$residuals))
+  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_p$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_n_par<-optim(par = coe, fn = mini_nonlinear, method = 'L-BFGS-B', data = set_data)$par
@@ -118,7 +118,7 @@ a_480<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),li
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
   arima_k_n<-forecast(arima_k,test_length)$mean+qlaplace(requan,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_k$residuals))
+  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_p$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_n_par<-optim(par = coe, fn = mini_nonlinear, method = 'L-BFGS-B', data = set_data)$par
@@ -144,7 +144,7 @@ a_1200<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
   arima_k_n<-forecast(arima_k,test_length)$mean+qlaplace(requan,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_k$residuals))
+  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_p$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_n_par<-optim(par = coe, fn = mini_nonlinear, method = 'L-BFGS-B', data = set_data)$par
@@ -169,7 +169,7 @@ a_4800<-foreach(i =1:iter,.combine='comb',.multicombine=TRUE,.init=list(list(),l
   arima_k<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),AR=c(0.3,0.5),loss = 'MAE',constant=500)
   arima_k_n<-forecast(arima_k,test_length)$mean+qlaplace(requan,mu=0,scale = 200/1.41)
   arima_p<-ssarima(test,frequency=4,orders=list(ar=c(1,1)),lags = c(1,4),constant=TRUE)
-  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_k$residuals))
+  arima_p_n<-forecast(arima_p,test_length)$mean+qnorm(requan,mean=0,sd=sd(arima_p$residuals))
   #cf
   coe<-lm(data ~., data=set_data)$coefficients
   cf_n_par<-optim(par = coe, fn = mini_nonlinear, method = 'L-BFGS-B', data = set_data)$par
