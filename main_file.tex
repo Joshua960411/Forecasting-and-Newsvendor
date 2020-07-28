@@ -139,9 +139,9 @@ The biggest advantage of quantile regression is that this method doesn't require
 
 While quantile regression can be used efficiently for the classical NVP given enough historical data, it fails in case of NNV when there doesn't exist a closed-form solution. This is because the specific demand quantiles do not necessarily propagate correctly to the correct orders.
 
-\subsection{Other integrated approaches} %\label{sub:lit4}
+%\subsection{Other integrated approaches} %\label{sub:lit4}
 
-There exist other integrated methods. One approach is to use machine learning techniques, such as neural networks, to estimate the optimal order quantity from historical data. The application of machine learning to NVPs can be seen in \cite{CS19,OST20,RV19}. Another integrated approach is based on so-called \emph{one-shot decision theory} \cite{Guo11,GM14,Ma19}. A numerical example was shown in \cite{Guo11}, and extensions can be found in \cite{Ma19}. For the sake of brevity, we do not describe these alternative integrated methods in detail.
+%There exist other integrated methods. One approach is to use machine learning techniques, such as neural networks, to estimate the optimal order quantity from historical data. The application of machine learning to NVPs can be seen in \cite{CS19,OST20,RV19}. Another integrated approach is based on so-called \emph{one-shot decision theory} \cite{Guo11,GM14,Ma19}. A numerical example was shown in \cite{Guo11}, and extensions can be found in \cite{Ma19}. For the sake of brevity, we do not describe these alternative integrated methods in detail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Proposed Estimator for NVPs} \label{se:new}
@@ -384,44 +384,44 @@ In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0
 
 \begin{figure}
 \centering
-\caption{Percentage profit loss vs. data size in misleading model}
+\caption{Performance vs. data size with under-paramaterised linear model}
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
 \includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)ppl-1.pdf}
-\caption{misleading model AR$(1)$}
+\caption{percentage profit loss vs. data size}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4ppl-1.pdf}
-\caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)sl-1.pdf}
+\caption{service level vs. data size}
 \end{subfigure}
-\label{fig:mis}
+\label{fig:mis_under}
 \end{figure}
 
 The PPLs for this case can be seen in Figure
-\ref{fig:mis} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur small additional losses in profit, irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches. This could be because the assumptions about the distribution of error term are correct.
+\ref{fig:mis_under} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur small additional losses in profit, irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches. This could be because the assumptions about the distribution of error term are correct.
 
 \begin{figure}
 \centering
-\caption{Service level vs. data size in misleading model}
+\caption{Performance vs. data size with over-paramaterised linear model}
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{information-plot_files/figure-latex/AR(1)sl-1.pdf}
-\caption{misleading model AR$(1)$}
+\includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4ppl-1.pdf}
+\caption{percentage profit loss vs. data size}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
 \includegraphics[width=\textwidth]{information-plot_files/figure-latex/SAR(3)(1)_4sl-1.pdf}
-\caption{misleading model ARIMA $(2,0,0)(1,0,0)_4$}
+\caption{service level vs. data size}
 \end{subfigure}
-\label{fig:mis_sl}
+\label{fig:mis_over}
 \end{figure}
 
-We also consider the situation where the applied model is \emph{too complicated} (i.e., over-parameterised). Specifically, we suppose that it is a seasonal ARIMA$(2,0,0)(1,0,0)_4$ model. The PPL for this case can be seen in Figure \ref{fig:mis} (b). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by a well-known statistical phenomenon of redundant variables: they tend to lead to less efficient estimates of parameters but do not usually lead to systematic bias (as omitted variables typically do).
+We also consider the situation where the applied model is \emph{too complicated} (i.e., over-parameterised). Specifically, we suppose that it is a seasonal ARIMA$(2,0,0)(1,0,0)_4$ model. The PPL for this case can be seen in Figure \ref{fig:mis_over} (a). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by a well-known statistical phenomenon of redundant variables: they tend to lead to less efficient estimates of parameters but do not usually lead to systematic bias (as omitted variables typically do).
 
-The service levels for these two situations are presented in Figure \ref{fig:mis_sl}. The trend is similar to the one in Figure \ref{fig:sl0.3}.
+The service levels for these two situations are presented in Figure \ref{fig:mis_under} (b) and Figure \ref{fig:mis_over} (b). The trends of DGP and PM are similar to the ones in Figure \ref{fig:sl0.3}. Yet, one may find the incorrect using of parameters in DJ leads to improvement of SL when sample size is small in both Figures. This can be possibly explain as  Thus, there is a trade-off between PPL and SL when using disjoint method.
 
 Next, we explore the effect on DJ and PM when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and scale 141. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution.
 
