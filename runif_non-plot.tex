@@ -179,13 +179,13 @@
 \NormalTok{mac<-}\KeywordTok{matrix}\NormalTok{(y_axis,}\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{5}\NormalTok{)}
 \NormalTok{mac<-}\KeywordTok{t}\NormalTok{(mac)}
 \KeywordTok{rownames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{'40'}\NormalTok{,}\StringTok{'120'}\NormalTok{,}\StringTok{'480'}\NormalTok{,}\StringTok{'1200'}\NormalTok{,}\StringTok{'4800'}\NormalTok{)}
-\KeywordTok{colnames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"CF"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{)}
 \NormalTok{mac}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##            DGP        DJ        CF
+##            DGP        DJ      IMEO
 ## 40   0.1129055 0.1299996 0.1229783
 ## 120  0.1108858 0.1205064 0.1160361
 ## 480  0.1115579 0.1169199 0.1145362
@@ -209,13 +209,13 @@
 \NormalTok{var<-}\KeywordTok{matrix}\NormalTok{(v_axis,}\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{5}\NormalTok{)}
 \NormalTok{var<-}\KeywordTok{t}\NormalTok{(var)}
 \KeywordTok{rownames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{'40'}\NormalTok{,}\StringTok{'120'}\NormalTok{,}\StringTok{'480'}\NormalTok{,}\StringTok{'1200'}\NormalTok{,}\StringTok{'4800'}\NormalTok{)}
-\KeywordTok{colnames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"CF"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{)}
 \NormalTok{var}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##            DGP        DJ        CF
+##            DGP        DJ      IMEO
 ## 40   0.1886033 0.1903511 0.1925879
 ## 120  0.1745933 0.1776685 0.1769352
 ## 480  0.1658734 0.1671723 0.1672624
@@ -227,7 +227,7 @@
 \begin{Highlighting}[]
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{'mar'}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], }\DecValTok{0}\NormalTok{)) }
 \KeywordTok{plot.new}\NormalTok{()}
-\NormalTok{l <-}\StringTok{ }\KeywordTok{legend}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"PM"}\NormalTok{),}\DataTypeTok{plot=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{l <-}\StringTok{ }\KeywordTok{legend}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{),}\DataTypeTok{plot=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \NormalTok{w <-}\StringTok{ }\KeywordTok{grconvertX}\NormalTok{(l}\OperatorTok{$}\NormalTok{rect}\OperatorTok{$}\NormalTok{w, }\DataTypeTok{to=}\StringTok{'ndc'}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{grconvertX}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{to=}\StringTok{'ndc'}\NormalTok{)}
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{omd=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{w, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \KeywordTok{matplot}\NormalTok{(mac, }\DataTypeTok{type =} \KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{),}\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{xaxt =} \StringTok{"n"}\NormalTok{,}\DataTypeTok{yaxt =} \StringTok{"n"}
@@ -235,7 +235,7 @@
 \KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{labels=}\NormalTok{x_axis)}
 \KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{pretty}\NormalTok{(y_axis), }\DataTypeTok{lab=}\KeywordTok{paste0}\NormalTok{(}\KeywordTok{pretty}\NormalTok{(y_axis) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\StringTok{"%"}\NormalTok{), }\DataTypeTok{las=}\OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{legend}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{'usr'}\NormalTok{)[}\DecValTok{2}\NormalTok{], }\KeywordTok{par}\NormalTok{(}\StringTok{'usr'}\NormalTok{)[}\DecValTok{4}\NormalTok{], }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{, }\DataTypeTok{xpd=}\OtherTok{NA}
-\NormalTok{       ,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"PM"}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+\NormalTok{       ,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -261,13 +261,13 @@
 \NormalTok{mac<-}\KeywordTok{matrix}\NormalTok{(y_axis,}\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{5}\NormalTok{)}
 \NormalTok{mac<-}\KeywordTok{t}\NormalTok{(mac)}
 \KeywordTok{rownames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{'40'}\NormalTok{,}\StringTok{'120'}\NormalTok{,}\StringTok{'480'}\NormalTok{,}\StringTok{'1200'}\NormalTok{,}\StringTok{'4800'}\NormalTok{)}
-\KeywordTok{colnames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"CF"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(mac)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{)}
 \NormalTok{mac}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##          DGP      DJ      CF
+##          DGP      DJ    IMEO
 ## 40   0.56250 0.50810 0.56680
 ## 120  0.56065 0.54860 0.56640
 ## 480  0.55980 0.57880 0.56670
@@ -291,13 +291,13 @@
 \NormalTok{var<-}\KeywordTok{matrix}\NormalTok{(v_axis,}\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{5}\NormalTok{)}
 \NormalTok{var<-}\KeywordTok{t}\NormalTok{(var)}
 \KeywordTok{rownames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{'40'}\NormalTok{,}\StringTok{'120'}\NormalTok{,}\StringTok{'480'}\NormalTok{,}\StringTok{'1200'}\NormalTok{,}\StringTok{'4800'}\NormalTok{)}
-\KeywordTok{colnames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"CF"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(var)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{)}
 \NormalTok{var}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##            DGP        DJ        CF
+##            DGP        DJ      IMEO
 ## 40   0.4960908 0.4999469 0.4955301
 ## 120  0.4963204 0.4976449 0.4955838
 ## 480  0.4964235 0.4937639 0.4955435
@@ -309,7 +309,7 @@
 \begin{Highlighting}[]
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{'mar'}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], }\DecValTok{0}\NormalTok{)) }
 \KeywordTok{plot.new}\NormalTok{()}
-\NormalTok{l <-}\StringTok{ }\KeywordTok{legend}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"PM"}\NormalTok{),}\DataTypeTok{plot=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{l <-}\StringTok{ }\KeywordTok{legend}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{),}\DataTypeTok{plot=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \NormalTok{w <-}\StringTok{ }\KeywordTok{grconvertX}\NormalTok{(l}\OperatorTok{$}\NormalTok{rect}\OperatorTok{$}\NormalTok{w, }\DataTypeTok{to=}\StringTok{'ndc'}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{grconvertX}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{to=}\StringTok{'ndc'}\NormalTok{)}
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{omd=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{w, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \KeywordTok{matplot}\NormalTok{(mac, }\DataTypeTok{type =} \KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{),}\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{xaxt =} \StringTok{"n"}
@@ -317,7 +317,7 @@
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\FloatTok{0.56}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{2}\NormalTok{,}\DataTypeTok{col=}\StringTok{'black'}\NormalTok{)}
 \KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{labels=}\NormalTok{x_axis)}
 \KeywordTok{legend}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{'usr'}\NormalTok{)[}\DecValTok{2}\NormalTok{], }\KeywordTok{par}\NormalTok{(}\StringTok{'usr'}\NormalTok{)[}\DecValTok{4}\NormalTok{], }\DataTypeTok{bty=}\StringTok{'n'}\NormalTok{, }\DataTypeTok{xpd=}\OtherTok{NA}
-\NormalTok{       ,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"PM"}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+\NormalTok{       ,}\KeywordTok{c}\NormalTok{(}\StringTok{"DGP"}\NormalTok{, }\StringTok{"DJ"}\NormalTok{,}\StringTok{"IMEO"}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 

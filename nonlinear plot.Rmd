@@ -43,7 +43,7 @@ y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
 mac<-matrix(y_axis,nrow = 3,ncol = 5)
 mac<-t(mac)
 rownames(mac)<-c('40','120','480','1200','4800')
-colnames(mac)<-c("DGP", "DJ","CF")
+colnames(mac)<-c("DGP", "DJ","IMEO")
 v_40<-c(sd(sapply(re_40[[1]], "[[", 1)),sd(sapply(re_40[[2]], "[[", 1)),
         sd(sapply(re_40[[3]], "[[", 1)))
 v_120<-c(sd(sapply(re_120[[1]], "[[", 1)),sd(sapply(re_120[[2]], "[[", 1)),
@@ -58,10 +58,10 @@ v_axis<-c(v_40,v_120,v_480,v_1200,v_4800)
 var<-matrix(v_axis,nrow = 3,ncol = 5)
 var<-t(var)
 rownames(var)<-c('40','120','480','1200','4800')
-colnames(var)<-c("DGP", "DJ","CF")
+colnames(var)<-c("DGP", "DJ","IMEO")
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","IMEO"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n",yaxt = "n"
@@ -70,7 +70,7 @@ title(ylab = 'percetage profit loss',line=3.3, cex.lab=1.2)
 axis(1, at=1:5, labels=x_axis)
 axis(2, at=pretty(y_axis), lab=paste0(pretty(y_axis) * 100, "%"), las=TRUE)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
+       ,c("DGP", "DJ","IMEO"), pch=c(1,2,4),col=c(1,2,4))
 
 ```
 
@@ -90,7 +90,7 @@ y_axis<-c(y_40,y_120,y_480,y_1200,y_4800)
 mac<-matrix(y_axis,nrow = 3,ncol = 5)
 mac<-t(mac)
 rownames(mac)<-c('40','120','480','1200','4800')
-colnames(mac)<-c("DGP", "DJ","CF")
+colnames(mac)<-c("DGP", "DJ","IMEO")
 v_40<-c(sd(sapply(re_40[[1]], "[[", 2)),sd(sapply(re_40[[2]], "[[", 2)),
         sd(sapply(re_40[[3]], "[[", 2)))
 v_120<-c(sd(sapply(re_120[[1]], "[[", 2)),sd(sapply(re_120[[2]], "[[", 2)),
@@ -105,10 +105,10 @@ v_axis<-c(v_40,v_120,v_480,v_1200,v_4800)
 var<-matrix(v_axis,nrow = 3,ncol = 5)
 var<-t(var)
 rownames(var)<-c('40','120','480','1200','4800')
-colnames(var)<-c("DGP", "DJ","CF")
+colnames(var)<-c("DGP", "DJ","IMEO")
 par(mar=c(par('mar')[1:3], 0)) 
 plot.new()
-l <- legend(0, 0, bty='n',c("DGP", "DJ","PM"),plot=FALSE, pch=1:3,col=1:3)
+l <- legend(0, 0, bty='n',c("DGP", "DJ","IMEO"),plot=FALSE, pch=1:3,col=1:3)
 w <- grconvertX(l$rect$w, to='ndc') - grconvertX(0, to='ndc')
 par(omd=c(0, 1-w, 0, 1))
 matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n"
@@ -116,6 +116,6 @@ matplot(mac, type = c("b"),pch=c(1,2,4),col = c(1,2,4),xaxt = "n"
 abline(h=0.56,lty=2,col='black')
 axis(1, at=1:5, labels=x_axis)
 legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA
-       ,c("DGP", "DJ","PM"), pch=c(1,2,4),col=c(1,2,4))
+       ,c("DGP", "DJ","IMEO"), pch=c(1,2,4),col=c(1,2,4))
 
 ```
