@@ -33,7 +33,7 @@ Lancaster University, Lancaster LA1 4YX, UK.
 Email: {\tt \{c.liu19,a.n.letchford,i.svetunkov\}@lancaster.ac.uk}}
 \and Adam N.\ Letchford$^*$ \and Ivan Svetunkov$^*$} % end author list
 
-\date{Draft, 27th July 2020}
+\date{Draft, 29th July 2020}
 
 \begin{document}
 
@@ -63,11 +63,11 @@ Throughout this paper, we will call this two-phase approach the \emph{disjoint} 
 
 An alternative to the disjoint approach is to use a single, \textit{integrated} approach, in which the order quantities are determined directly from the data. A simple example of an integrated approach is \emph{quantile regression} \cite{Br16,Hu19}, which does not make assumptions about the demand distribution. Unfortunately, it can only be applied to relatively simple NVPs, for which one can express the optimal order quantities in terms of quantiles of demand.
 
-In this paper, we introduce a new integrated approach. It is very flexible, and can be applied to a wide variety of NVPs, with complex profit functions. Roughly speaking, it involves forecasting the optimal order quantities instead of the demand, which is done via the maximisation of the expected profit, instead of estimating parameters via the minimisation of a function of forecast errors.
+In this paper, we introduce a Integrated Method for Estimation and Optimisation (IMEO). It is very flexible, and can be applied to a wide variety of NVPs, with complex profit functions. Roughly speaking, it involves forecasting the optimal order quantities instead of the demand, which is done via the maximisation of the expected profit, instead of estimating parameters via the minimisation of a function of forecast errors.
 
 We demonstrate in this paper that the proposed approach reduces to quantile regression in the case of the simplest NVP. We then perform extensive computational experiments, on several different NVPs, the results of which show that our method performs at least as well as the disjoint approach, according to several different measures of quality.
 
-The rest of the paper is organised as follows. Section \ref{se:lit} provides a brief review of the relevant literature. Section \ref{se:new} presents the new method and shows that it is a generalisation of quantile regression. In Section \ref{se:results}, we present and discuss the computational results. Finally, Section \ref{se:end} gives some insights, remarks and suggestions.
+The rest of the paper is organised as follows. Section \ref{se:lit} provides a brief review of the relevant literature. Section \ref{se:new} presents IMEO and shows that it is a generalisation of quantile regression. In Section \ref{se:results}, we present and discuss the computational results. Finally, Section \ref{se:end} gives some insights, remarks and suggestions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Literature Review} \label{se:lit}
@@ -137,17 +137,17 @@ has proven to perform well, and the basic idea is as follows \cite{BT06,Br16,CS1
 
 The biggest advantage of quantile regression is that this method doesn't require the assumption of a specific demand distribution \cite{Hu19}. However, it is efficient only on large samples \cite{Hu19,RV19}. Another drawback is that the performance of this approach depends crucially on the underlying target service level. Huber \cite{Hu19} and Rudin \cite{RV19} demonstrated that the benefit of using the quantile regression method is limited to target service levels smaller than 0.8. If the target service level is higher, then much more data is needed in order to correctly estimate specific quantile.
 
-While quantile regression can be used efficiently for the classical NVP given enough historical data, it fails in case of NNV when there doesn't exist a closed-form solution. This is because the specific demand quantiles do not necessarily propagate correctly to the correct orders.
+While quantile regression can be used efficiently for the classical NVP given enough historical data, it fails in case of NNV where there doesn't exist a closed-form solution. This is because the specific demand quantiles do not necessarily propagate correctly to the correct orders.
 
 %\subsection{Other integrated approaches} %\label{sub:lit4}
 
 %There exist other integrated methods. One approach is to use machine learning techniques, such as neural networks, to estimate the optimal order quantity from historical data. The application of machine learning to NVPs can be seen in \cite{CS19,OST20,RV19}. Another integrated approach is based on so-called \emph{one-shot decision theory} \cite{Guo11,GM14,Ma19}. A numerical example was shown in \cite{Guo11}, and extensions can be found in \cite{Ma19}. For the sake of brevity, we do not describe these alternative integrated methods in detail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Proposed Estimator for NVPs} \label{se:new}
+\section{Integrated Method for Estimation and Optimisation} \label{se:new}
 
 %We have seen that, while quantile regression can be an attractive integrated approach, it has some drawbacks. In particular, for most non-trivial NVPs, it is very hard to express the optimal order quantity as a demand quantile \emph{a priori}.
-In order to overcome the limitations of quantile regression, we propose an alternative integrated method, based on a regression model with a specialised loss function.
+In order to overcome the limitations of quantile regression, we propose an alternative integrated method, IMEO, based on a regression model with a specialised loss function.
 
 For each historical period $t\in [1,s]$, we assume that the observed demand $y_t$ is a realisation of a random variable $Y_t$. Then, in principle, there exists an order quantity, say $Q_t^*$, that maximises the expected profit given $Y_t$ and $\Pi$. Thus, if we had set $Q_t$ to $Q_t^*$ prior to observing the true demand $y_t$, we would have maximised our expected profit in period $t$. Putting it another way, if we could somehow uncover the structure of the unobservable time series $\big\{ Q_1^*,\dots,Q_s^* \big\}$, we would be able to estimate $Q_{s+1}^*$ directly.
 
@@ -229,7 +229,7 @@ normality \cite{KHM05}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Computational Experiments} \label{se:results}
 
-In order to assess the performance of the method and to understand its strengths and weakness, we conduct a simulation experiment. Subsection \ref{sub:exp1} is concerned with the simplest case, in which the profit function is linear and the underlying data generation process (DGP) is known. Subsection \ref{sub:exp2} concerns the case in which the profit function is nonlinear. Finally, Subsection \ref{sub:exp3} repeats the analysis for the ``misspecified" case, in which the model of the DGP is incorrect.
+In order to assess the performance of IMEO and to understand its strengths and weakness, we conduct a simulation experiment. Subsection \ref{sub:exp1} is concerned with the simplest case, in which the profit function is linear and the underlying data generation process (DGP) is known. Subsection \ref{sub:exp2} concerns the case in which the profit function is nonlinear. Finally, Subsection \ref{sub:exp3} repeats the analysis for the ``misspecified" case, in which the model of the DGP is incorrect.
 
 \subsection{Linear case} \label{sub:exp1}
 
@@ -244,7 +244,7 @@ One can check that the corresponding pair $\big( c_u,c_o \big)$ is $(3,7)$, and 
 
 We begin by simulating 20,000 sets of demand data, each consisting of 4800 time periods. From each set, we extract sequences of length 40, 120, 480 and 1200. These will be used to explore how the amount of data available affects the performance of each method.
 
-In our proposed method (``PM"), we use 1st and 4th lags as explanatory variables to capture the auto-regression feature. Moreover, we use limited-memory BFGS \cite{LN89} as the optimisation algorithm for the estimation of $\hat{\boldsymbol{\beta}}$. Besides the proposed method, three benchmark methods are also considered:
+In our proposed method (``IMEO"), we use 1st and 4th lags as explanatory variables to capture the auto-regression feature. Moreover, we use limited-memory BFGS \cite{LN89} as the optimisation algorithm for the estimation of $\hat{\boldsymbol{\beta}}$. Besides the proposed method, three benchmark methods are also considered:
 \begin{itemize}
     \item A disjoint method (``DJ"), that estimates the parameters of the ARIMA$(1,0,0)(1,0,0)_4$ process in the first phase, and determine the optimal order quantity in the second phase.
     \item An integrated method that use Quantile Regression (``QR"), with 1st and 4th lags as explanatory variables.
@@ -258,7 +258,7 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
     \item Fill Rate: $FR=\frac{\min\{\hat{Q}_{s+1},y_{s+1}\}}{y_{s+1}}$, which shows how the demand is serviced. In the ideal situation it should be equal to one.
 \end{enumerate}
 
- Figure \ref{fig:ppl0.3} shows the average PPL obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the sample size increases. It is also apparent that PM and QR have very similar performance. This is to be expected, given that PM is equivalent to QR in the linear NVP case.
+ Figure \ref{fig:ppl0.3} shows the average PPL obtained when the target service level was set to $0.3$. As one would hope, the losses for all methods converge as the sample size increases. It is also apparent that IMEO and QR have very similar performance. This is to be expected, given that IMEO is equivalent to QR in the linear NVP case.
 
 \begin{figure}[ht]
 \centering
@@ -275,9 +275,9 @@ For each set of demand data and each method, we computed $\hat{Q}_{s+1}$, the 1-
 \end{figure}
 
 Figure \ref{fig:sl0.3} represents the average SL, i.e., the proportion of iterations in which the demand was satisfied in the simulation.
-We see that all four methods converge to the desired target of 0.3 as the sample size grows. Interestingly, DGP and DJ approach the target from below, while PM and QR approach it from above. A possible explanation is as follows. In the first phase of DGP and DJ, the estimated variance tends to be larger than the true variance when the sample size is small. This causes the estimated order quantities in simulation often to be more spread than it should be, and thus leads to low SL. On the other hand, the integrated methods take the underage and overage costs into account. For the given cost parameters, over-stocking is less costly than under-stocking, as a result the methods achieve higher service level than needed.
+We see that all four methods converge to the desired target of 0.3 as the sample size grows. Interestingly, DJ approach the target from below, while IMEO and QR approach it from above. A possible explanation is as follows. In the first phase of DJ, the estimated variance tends to be larger than the true variance when the sample size is small. This causes the estimated order quantities in simulation often to be more spread than it should be, and thus leads to low SL. On the other hand, the integrated methods take the underage and overage costs into account. For the given cost parameters, over-stocking is less costly than under-stocking, as a result the methods achieve higher service level than needed.
 
-Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate gets better as sample size grows in all methods. 
+Figure \ref{fig:fr0.3} represents the average FR. As one might expect, the average fill rate gets better as sample size grows in all methods. Only thing we should mention here is that the DJ requires larger sample size than other integrated methods to achieve same FR.
 
 
 \begin{figure}[ht]
@@ -345,9 +345,9 @@ In this subsection, we examine the relative performance of the methods when appl
 \]
 where $u\sim \mathcal{N}(30,5^2)$. Given that the target service level does not have a closed form in the NNV, one can use the technique mentioned in \cite{KK18}, or other numerical approaches, to verify that it approximates to 0.56.
 
-Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and PM, together with the ``idealised" method based on the DGP. Moreover, one could verify that the FR plot in all scenarios are similar. Therefore, we don't present this measurement in rest of experiment.
+Since the nonlinearity makes QR impossible to apply as we stated in Subsection \ref{sub:lit3}, we present results only for DJ and IMEO, together with the ``idealised" method based on the DGP. Moreover, one could verify that the FR plot in all scenarios are similar. Therefore, we don't present this measurement in rest of experiment.
 
-Figure \ref{fig:non} shows the PPL and SL of each method, for each sample size. It is apparent that both DJ and PM methods perform well in terms of PPL, with very similar values for all sample sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the sample size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. The reason is similar to the one we presented in Subsection \ref{sub:exp1}. 
+Figure \ref{fig:non} shows the PPL and SL of each method, for each sample size. It is apparent that both DJ and IMEO methods perform well in terms of PPL, with very similar values for all sample sizes, but, as expected, they cannot outperform the DGP. However, the picture is very different with SL: the SL of the proposed method is very close to the the target service level even when the sample size is small. By contrast, the disjoint method needs more data to reach the target service level, and it approaches it from below. The reason is similar to the one we presented in Subsection \ref{sub:exp1}. 
 
 Another thing to note is that with the increase of the sample size, the methods converge to the DGP values in both PPL and SL.
 
@@ -368,7 +368,7 @@ Another thing to note is that with the increase of the sample size, the methods 
 \label{fig:non}
 \end{figure}
 
-We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of computing time is needed by using our proposed method comparing with DJ when $s=40$. Besides, the PM results presented are generated by limited-memory BFGS, which cannot guarantee global optimum. One can apply other algorithms so as to balance between profit achieved and computational time. 
+We would like to stress that the proposed method does not need any complicated numerical optimisation or simulation methods to estimate the optimal order quantity. In addition, we have found that, for these instances, it typically required less computing time than the disjoint method. For example, only $\nicefrac{1}{10}$ amount of computing time is needed by using our proposed method comparing with DJ when $s=40$. Besides, the IMEO results presented are generated by limited-memory BFGS, which cannot guarantee global optimum. One can apply other algorithms so as to balance between profit achieved and computational time. 
  
 \subsection{The effect of misspecification} \label{sub:exp3}
 
@@ -377,7 +377,7 @@ Next, we examine the effect of
 
 \subsubsection{Linear case}
 
-Recall that, in the linear case, QR and PM are equivalent. For that reason, we don't include QR here.
+Recall that, in the linear case, QR and IMEO are equivalent. For that reason, we don't include QR here.
 
 We first consider the situation in which our applied model is \emph{too simple} (i.e., under-paramaterised).
 In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0)_4$ model, but we ignore seasonality when solving the NVP. In other words, when estimating the optimal order quantity, we use the incorrect assumption that the DGP is merely an AR$(1)$ process.
@@ -400,7 +400,7 @@ In more detail, the data is still generated from a seasonal ARIMA $(1,0,0)(1,0,0
 \end{figure}
 
 The PPLs for this case can be seen in Figure
-\ref{fig:mis_under} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and PM to incur small additional losses in profit, irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and PM is similar, even though they are very different approaches. This could be because the assumptions about the distribution of error term are correct.
+\ref{fig:mis_under} (a). By comparing with Figure \ref{fig:ppl0.3}, we see that the use of an incorrect model causes both DJ and IMEO to incur small additional losses in profit, irrespective of the sample size. These losses do not significantly improve as the number of data points increases, presumably because seasonality plays a key role when making one-step ahead forecasts. Interestingly, the performance of DJ and IMEO is similar, even though they are very different approaches. This could be because the assumptions about the distribution of error term are correct.
 
 \begin{figure}[ht]
 \centering
@@ -419,14 +419,14 @@ The PPLs for this case can be seen in Figure
 \label{fig:mis_over}
 \end{figure}
 
-We also consider the situation where the applied model is \emph{too complicated} (i.e., over-parameterised). Specifically, we suppose that it is a seasonal ARIMA$(2,0,0)(1,0,0)_4$ model. The PPL for this case can be seen in Figure \ref{fig:mis_over} (a). Both DJ and PM incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and PM, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by a well-known statistical phenomenon of redundant variables: they tend to lead to less efficient estimates of parameters but do not usually lead to systematic bias (as omitted variables typically do).
+We also consider the situation where the applied model is \emph{too complicated} (i.e., over-parameterised). Specifically, we suppose that it is a seasonal ARIMA$(2,0,0)(1,0,0)_4$ model. The PPL for this case can be seen in Figure \ref{fig:mis_over} (a). Both DJ and IMEO incur a loss in profit, as before. Now, however, the loss decreases with the increase of the sample size. Indeed, closer inspection of the regression output revealed that, in both DJ and IMEO, the estimated value of the redundant model parameter tended to zero as the sample size increased. This can be explained by a well-known statistical phenomenon of redundant variables: they tend to lead to less efficient estimates of parameters but do not usually lead to systematic bias (as omitted variables typically do).
 
-The service levels for these two situations are presented in Figure \ref{fig:mis_under} (b) and Figure \ref{fig:mis_over} (b). The trends of DGP and PM are similar to the ones in Figure \ref{fig:sl0.3}. Yet, one may find the incorrect using of parameters in DJ leads to improvement of SL when sample size is small in both Figures. This can be possibly explained as follows. The incorrect using of parameters leads to less accurate forecast, which makes the decision of order quantity more random, and therefore ``drags'' SL toward 0.5.  Thus, there is a trade-off between PPL and SL when using disjoint method at small sample size.
+The service levels for these two situations are presented in Figure \ref{fig:mis_under} (b) and Figure \ref{fig:mis_over} (b). The trends are similar to the ones in Figure \ref{fig:sl0.3}.
 
-Next, we explore the effect on DJ and PM when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and scale 141. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution.
+Next, we explore the effect on DJ and IMEO when the distribution of \emph{error term} is misspecified. In particular, we generate data using a modified version of our seasonal ARIMA$(1,0,0)(1,0,0)_4$ model, in which the error term follows a Laplace distribution with mean 0 and scale 141. We remark that the Laplace distribution has ``fat tails", or, more formally, a higher kurtosis than the normal distribution. When estimating the optimal order quantity, however, we use the incorrect assumption that the error term follows a normal distribution.
 
 The results for this scenario are presented in Figure \ref{fig:err}.
-By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit for all the assessed methods. When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, PM rapidly converges to the target service level (0.3) from above, while DJ achieves a lower than needed service level, and this drawback is not remedied by an increase in the sample size. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
+By comparing Figure \ref{fig:err}(a) with Figure \ref{fig:ppl0.3}, we see that the incorrect model of the noise leads only to a very small loss in profit for all the assessed methods. When we compare Figure \ref{fig:err}(b) with Figure \ref{fig:sl0.3}, the picture is rather different. As before, IMEO rapidly converges to the target service level (0.3) from above, while DJ achieves a lower than needed service level, and this drawback is not remedied by an increase in the sample size. A possible explanation is that our integrated approach works directly with the data, and is therefore, in a sense, ``non-parametric". This makes it more robust than the disjoint approach to deviations from normality.
 
 \begin{figure}[ht]
 \centering
@@ -466,7 +466,7 @@ Now, we explore the case when underlying profit function is nonlinear, as stated
 \label{fig:misnon_under}
 \end{figure}
 
-Figure \ref{fig:misnon_under} represents the scenario where our applied model is \emph{too simple}, merely AR(1) process. Particularly, we can see the PPLs are rather similar in Figure \ref{fig:misnon_under}(a) and Figure \ref{fig:mis_under}(a), and the SL of all three methods converge to our target very fast. In Figure \ref{fig:misnon_over}, on the other hand, we can see the performance of methods in the scenario where our applied model is \emph{too complicated}, seasonal ARIMA$(1,0,0)(1,0,0)_4$ process. The performance is very similar to the one we presented in Figure \ref{fig:mis_over}. However, we can see the DJ method performs poorly with nonlinear profit function when sample size is small, while PM is not influenced by this change.
+Figure \ref{fig:misnon_under} represents the scenario where our applied model is \emph{too simple}, merely AR(1) process. Particularly, we can see the PPLs are rather similar in Figure \ref{fig:misnon_under}(a) and Figure \ref{fig:mis_under}(a), and the SL of all three methods converge to our target very fast. In Figure \ref{fig:misnon_over}, on the other hand, we can see the performance of methods in the scenario where our applied model is \emph{too complicated}, seasonal ARIMA$(1,0,0)(1,0,0)_4$ process. The performance is very similar to the one we presented in Figure \ref{fig:mis_over}. However, we can see the DJ method performs poorly with nonlinear profit function when sample size is small, while IMEO is not influenced by this change.
 
 \begin{figure}[ht]
 \centering
@@ -485,7 +485,7 @@ Figure \ref{fig:misnon_under} represents the scenario where our applied model is
 \label{fig:misnon_over}
 \end{figure}
 
-Moreover, we consider the scenario where the distribution of \emph{error term} is misspecified. The results are presented in Figure \ref{fig:err_non}. One can see, clearly, PM outperform DJ in small sample size, and is more stable than DJ regarding to SL across all sample size. Precisely, on the criteria of SL, the disjoint method is highly unstable.
+Moreover, we consider the scenario where the distribution of \emph{error term} is misspecified. The results are presented in Figure \ref{fig:err_non}. One can see, clearly, IMEO outperform DJ in small sample size, and is more stable than DJ regarding to SL across all sample size. Precisely, on the criteria of SL, the disjoint method is highly unstable.
 
 Again, we should say our proposed method is very robust in complicated scenarios.
 
@@ -508,7 +508,7 @@ Again, we should say our proposed method is very robust in complicated scenarios
 
 \section{Concluding Remarks} \label{se:end}
 
-The Newsvendor Problem (NVP) is one of the most popular kinds of stochastic optimisation problems. It has many different forms, all of which are typically solved using a disjoint approach. In this paper, we presented a new, integrated approach to NVP. The approach is flexible, fairly easy to understand, and doesn't make assumptions about the demand distribution.
+The Newsvendor Problem (NVP) is one of the most popular kinds of stochastic optimisation problems. It has many different forms, all of which are typically solved using a disjoint approach. In this paper, we presented a new, integrated approach, IMEO, to NVP. The approach is flexible, fairly easy to understand, and doesn't make assumptions about the demand distribution.
 
 We showed analytically that the proposed approach is equivalent to quantile regression in the simplest (linear) case.  which makes the estimates of parameters of models in this case consistent, efficient and asymptotically follow normal distribution.
 
