@@ -135,15 +135,14 @@ Target service level & DGP & disjoint & quantile & proposed\\
 \end{tabular}
 \end{table}
 
-\textbackslash begin\{table\}
-
-\textbackslash caption\{\label{tab:size0.3}Size effect (q=30\%)\}
-\centering \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{ccccccccccccc}
+\begin{table}[H]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{ccccccccccccc}
 \toprule
 \multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Service level}} & \multicolumn{4}{c}{\textbf{Fill rate}} \\
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
-Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+Data size & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO\\
 \midrule
 40 & 5.1\% & 5.6\% & 5.6\% & 5.6\% & 0.30 & 0.25 & 0.32 & 0.32 & 91.2\% & 88.4\% & 90.6\% & 90.8\%\\
 120 & 5.1\% & 5.3\% & 5.3\% & 5.3\% & 0.29 & 0.27 & 0.30 & 0.30 & 91.0\% & 89.6\% & 90.8\% & 91.0\%\\
@@ -151,7 +150,8 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 1200 & 5.2\% & 5.3\% & 5.3\% & 5.3\% & 0.30 & 0.30 & 0.30 & 0.31 & 91.1\% & 90.8\% & 91.0\% & 91.1\%\\
 4800 & 5.2\% & 5.2\% & 5.3\% & 5.3\% & 0.30 & 0.30 & 0.30 & 0.30 & 91.1\% & 91.1\% & 91.0\% & 91.1\%\\
 \bottomrule
-\end{tabular}} \textbackslash end\{table\}
+\end{tabular}}
+\end{table}
 
 \begin{table}[H]
 \centering
@@ -160,29 +160,11 @@ Data size & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & p
 \toprule
 \multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Service level}} & \multicolumn{4}{c}{\textbf{Fill rate}} \\
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
-Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+Target service level & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO\\
 \midrule
-\rowcolor{gray!6}  0.5 & 4.9\% & 5.4\% & 5.3\% & 5.3\% & 0.51 & 0.45 & 0.51 & 0.51 & 95.3\% & 93.4\% & 94.8\% & 94.8\%\\
+0.5 & 4.9\% & 5.4\% & 5.3\% & 5.3\% & 0.51 & 0.45 & 0.51 & 0.51 & 95.3\% & 93.4\% & 94.8\% & 94.8\%\\
 0.63 & 13.9\% & 15.2\% & 15.1\% & 14.9\% & 0.64 & 0.58 & 0.63 & 0.63 & 97.1\% & 95.9\% & 96.6\% & 96.6\%\\
-\rowcolor{gray!6}  0.3 & 5.1\% & 5.6\% & 5.6\% & 5.6\% & 0.30 & 0.25 & 0.32 & 0.32 & 91.2\% & 88.4\% & 90.6\% & 90.8\%\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}
-
-\caption{\label{tab:level480}Target service level effect (n=480)}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{ccccccccc}
-\toprule
-\multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Service level}} \\
-\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
-Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
-\midrule
-\rowcolor{gray!6}  0.5 & 4.9\% & 5.0\% & 5.0\% & 5.0\% & 0.50 & 0.49 & 0.50 & 0.50\\
-0.63 & 13.9\% & 14.3\% & 14.2\% & 14.1\% & 0.63 & 0.63 & 0.63 & 0.63\\
-\rowcolor{gray!6}  0.3 & 5.2\% & 5.3\% & 5.3\% & 5.3\% & 0.31 & 0.30 & 0.31 & 0.31\\
+0.3 & 5.1\% & 5.6\% & 5.6\% & 5.6\% & 0.30 & 0.25 & 0.32 & 0.32 & 91.2\% & 88.4\% & 90.6\% & 90.8\%\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -194,11 +176,11 @@ Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & q
 \toprule
 \multicolumn{1}{c}{\textbf{ }} & \multicolumn{4}{c}{\textbf{Percentage profit loss}} & \multicolumn{4}{c}{\textbf{Service level}} & \multicolumn{4}{c}{\textbf{Fill rate}} \\
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
-Target service level & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed & DGP & disjoint & quantile & proposed\\
+Target service level & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO & DGP & DJ & QR & IMEO\\
 \midrule
-\rowcolor{gray!6}  0.5 & 4.9\% & 5.0\% & 5.0\% & 5.0\% & 0.50 & 0.49 & 0.50 & 0.50 & 95.1\% & 95.1\% & 95.1\% & 95.1\%\\
+0.5 & 4.9\% & 5.0\% & 5.0\% & 5.0\% & 0.50 & 0.49 & 0.50 & 0.50 & 95.1\% & 95.1\% & 95.1\% & 95.1\%\\
 0.63 & 13.8\% & 13.8\% & 14.0\% & 14.0\% & 0.63 & 0.63 & 0.63 & 0.63 & 97.1\% & 97.0\% & 97.0\% & 97.0\%\\
-\rowcolor{gray!6}  0.3 & 5.2\% & 5.2\% & 5.3\% & 5.3\% & 0.30 & 0.30 & 0.30 & 0.30 & 91.1\% & 91.1\% & 91.0\% & 91.1\%\\
+0.3 & 5.2\% & 5.2\% & 5.3\% & 5.3\% & 0.30 & 0.30 & 0.30 & 0.30 & 91.1\% & 91.1\% & 91.0\% & 91.1\%\\
 \bottomrule
 \end{tabular}}
 \end{table}
